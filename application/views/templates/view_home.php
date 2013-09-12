@@ -4,9 +4,10 @@
 		</div>
 	</div>
 	<div class="row">
+		
 		<div class="span12">
 			<div class="navbar">
-				<div class="navbar-inner">
+				<div class="navbar-inner new-color-nav">
 					<div class="container-fluid">
 						
 						<div class="nav-collapse collapse navbar-responsive-collapse">
