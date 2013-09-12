@@ -2,6 +2,21 @@
  * All your custom CSS should go into this file
  */
 
-body {
-   padding-top: 15px;
+.new-color-nav{
+
+	background-color: #2F6420;
+	background-color: #e27f12;
+	background-repeat: repeat-x;
+	background-image: -khtml-gradient(linear, left top, left bottom, from(#ff8f15), to(#e27f12));
+	background-image: -moz-linear-gradient(top, #ff8f15, #e27f12);
+	background-image: -ms-linear-gradient(top, #ff8f15, #e27f12);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff8f15), color-stop(100%, #e27f12));
+	background-image: -webkit-linear-gradient(top, #ff8f15, #e27f12);
+	background-image: -o-linear-gradient(top, #ff8f15, #e27f12);
+	background-image: linear-gradient(top, #ff8f15, #e27f12);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff8f15', endColorstr='#e27f12', GradientType=0);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25),inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+
 }
