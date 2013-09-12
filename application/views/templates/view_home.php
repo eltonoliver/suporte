@@ -3,37 +3,38 @@
 		<div class="span12">
 		</div>
 	</div>
-	<div class="row">
-		
-		<div class="span12">
-			<div class="navbar">
-				<div class="navbar-inner new-color-nav">
-					<div class="container-fluid">
-						
-						<div class="nav-collapse collapse navbar-responsive-collapse">
-							<ul class="nav">
-								<li class="active">
-									<a href="#">Home</a>
-								</li>
-								<li>
-									<a href="#">Nova Solicitação</a>
-								</li>
-								<li>
-									<a href="#">Histórico de Solicitações</a>
-								</li>
+	
+		<div class="row">		
+			<div class="span12">
+				<div class="navbar">
+					<div class="navbar-inner new-color-nav">
+						<div class="container-fluid">
 							
-							</ul>
+							<div class="nav-collapse collapse navbar-responsive-collapse">
+								<ul class="nav">
+									<li class="active">
+										<a href="#">Home</a>
+									</li>
+									<li>
+										<a href="#">Nova Solicitação</a>
+									</li>
+									<li>
+										<a href="#">Histórico de Solicitações</a>
+									</li>
+								
+								</ul>
+								
+									</li>
+								</ul>
+							</div>
 							
-								</li>
-							</ul>
 						</div>
-						
 					</div>
+					
 				</div>
-				
 			</div>
 		</div>
-	</div>
+		
 	<div class="row">
 		<div class="span12">
 			<p>
