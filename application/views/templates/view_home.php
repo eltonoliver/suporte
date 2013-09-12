@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="span12">
-			LOGO
+			<img src="<?php echo base_url(); ?>assets/images/topo.png" />
 		</div>
 	</div>
 	
