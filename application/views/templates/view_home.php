@@ -3,8 +3,7 @@
 		<div class="span12">
 			<img src="<?php echo base_url(); ?>assets/images/topo.png" />
 		</div>
-	</div>
-	
+	</div>	
 		<div class="row">		
 			<div class="span12">
 				<div class="navbar">
@@ -23,7 +22,7 @@
 										<a href="#"><i class="icon-search icon-white"></i> &nbsp;Minhas Solicitações</a>
 									</li>
 									<li>
-										<a href="#"><i class="icon-thumbs-up icon-white"></i> &nbsp;Dúvidas Frequentes</a>
+										<a href="#modal-container-95857" data-toggle="modal"><i class="icon-thumbs-up icon-white"></i> &nbsp;Dúvidas Frequentes</a>
 									</li>
 								
 								</ul>
@@ -52,6 +51,33 @@
 			<?php echo br(16); ?>
 		</div>
 	</div>
+	<!-- Window Modal -->
+
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
+					 				
+					<div id="modal-container-95857" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-header">
+							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h3 id="myModalLabel">
+								Título
+							</h3>
+						</div>
+						<div class="modal-body">
+							<p>
+								Texto com descrição da dúvidas
+							</p>
+						</div>
+						<div class="modal-footer">
+							 <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!-- End Window Modal -->
 	<div class="row">
 		<div class="span12">
 			<p style="color-footer">
