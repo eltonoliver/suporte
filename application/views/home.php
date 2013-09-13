@@ -51,9 +51,20 @@
                     <a href="<?php echo base_url(); ?>home/"><i class="icon-home icon-white"></i> &nbsp; Home</a>
                   </li>
                   <!--Drop Nova Solicitação -->
-                  <li>
-                    <a href="<?php echo base_url(); ?>home/solicitacao/"><i class="icon-file icon-white"></i> &nbsp;Nova Solicitação</a>
-                  </li>
+               
+
+                   <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-file icon-white"></i> &nbsp;Nova Solicitação<strong class="caret"></strong></a>
+                         
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a href="#">Problema Em Equipamento de Informática</a>
+                          </li>
+                          <li>
+                            <a href="<?php echo base_url(); ?>home/solicitacao-sistema/">Problema Em Sistema da Instituição</a>
+                          </li>                     
+                        </ul>
+                    </li>
                   <!--End Drop Nova Solicitação -->
 
                   <li>
