@@ -41,6 +41,7 @@
 			<p>
 				<!--<img src="<?php echo base_url(); ?>assets/images/logo.png"> -->
 			</p>
+			<?php echo br(20); ?>
 		</div>
 	</div>
 	<div class="row">

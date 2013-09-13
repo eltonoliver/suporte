@@ -35,22 +35,7 @@
 <body>
 
 
-
-
-
-
-
-
-
-<?php  echo $contents; ?>
-
-
-
-
-
-
-
-
+  <?php  echo $contents; ?>
 
 
 
