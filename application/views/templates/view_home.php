@@ -22,6 +22,9 @@
 									<li>
 										<a href="#"><i class="icon-search icon-white"></i> &nbsp;Minhas Solicitações</a>
 									</li>
+									<li>
+										<a href="#"><i class="icon-thumbs-up icon-white"></i> &nbsp;Dúvidas Frequentes</a>
+									</li>
 								
 								</ul>
 								
