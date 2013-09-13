@@ -38,16 +38,16 @@
 		
 	<div class="row">
 		<div class="span12">
-			<p>
-				<!--<img src="<?php echo base_url(); ?>assets/images/logo.png"> -->
-			</p>
-			<?php echo br(20); ?>
+			
+				<center><img src="<?php echo base_url(); ?>assets/images/logo-suporte.png" width="400"></center>
+				<span class="logo-suporte"><center>  Módulo de Solicitação de Serviço </center></span>	
+			<?php echo br(16); ?>
 		</div>
 	</div>
 	<div class="row">
 		<div class="span12">
 			<p style="color-footer">
-					<strong><center>Todos os direitos reservados para Senac Amazonas</center></strong>
+					<strong><center>Senac Amazonas - Todos os direitos reservados</center></strong>
 			</p>
 		</div>
 	</div>
