@@ -13,6 +13,11 @@ class Home extends CI_Controller{
 		$this->template->load('home','templates/view_home');
 	}
 
+	public function solicitacao(){
+
+		$this->template->load('home','templates/view_frm_solicitacao');
+	}
+
 
 }
 	
