@@ -5,6 +5,8 @@ class Home extends CI_Controller{
 	public function __construct(){
 
 		parent::__construct();
+		$this->load->database();
+		$this->load->library('grocery_CRUD');
 
 	}
 
@@ -19,8 +21,26 @@ class Home extends CI_Controller{
 	}
 
 	public function solicitacaoEquipamento(){
+		try{
+			$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
+			$crud = new grocery_CRUD();
+			
+			$crud->set_theme('datatables');
+			$crud->set_table('user');
+			$crud->set_subject('Nome');
+			$crud->required_fields('nome');
+			$crud->columns('nome','login');
+			
+			$output = $crud->render();
 
-		$this->template->load('home','templates/view_frm_solicitacao_equi');
+			$this->template->load('home','templates/view_frm_solicitacao_equi',$output);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+
+
+		
 	}
 
 
