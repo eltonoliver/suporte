@@ -13,7 +13,8 @@ class Home extends CI_Controller{
 
 	public function home_sisten(){
 
-		$this->template->load('home','templates/view_home');
+		$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
+		$this->template->load('home','templates/view_home',$output);
 	}
 
 	public function solicitacaoSistema(){
@@ -23,26 +24,19 @@ class Home extends CI_Controller{
 
 	public function solicitacaoEquipamento(){
 		try{
-			$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
-			$crud = new grocery_CRUD();
 			
+			$crud = new grocery_CRUD();			
 			$crud->set_theme('datatables');
 			$crud->set_table('user');
-			$crud->columns('nome','login');
-			
+			$crud->columns('nome','login');			
 			$output = $crud->render();
-
-			$this->load->view('templates/view_frm_solicitacao_equi',$output);
+			$this->template->load('home','templates/view_frm_solicitacao_equi',$output);
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
-
-
 		
 	}
-
-
 
 
 }
