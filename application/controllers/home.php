@@ -6,6 +6,7 @@ class Home extends CI_Controller{
 
 		parent::__construct();
 		$this->load->database();
+	
 		$this->load->library('grocery_CRUD');
 
 	}
@@ -27,8 +28,6 @@ class Home extends CI_Controller{
 			
 			$crud->set_theme('datatables');
 			$crud->set_table('user');
-			$crud->set_subject('Nome');
-			$crud->required_fields('nome');
 			$crud->columns('nome','login');
 			
 			$output = $crud->render();
@@ -42,6 +41,8 @@ class Home extends CI_Controller{
 
 		
 	}
+
+
 
 
 }
