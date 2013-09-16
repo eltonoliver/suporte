@@ -20,7 +20,7 @@ class Home extends CI_Controller{
 
 	public function solicitacaoEquipamento(){
 
-		$this->template->load('home','templates/view_frm_solicitacao');
+		$this->template->load('home','templates/view_frm_solicitacao_equi');
 	}
 
 

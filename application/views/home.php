@@ -58,7 +58,7 @@
                          
                         <ul class="dropdown-menu">
                           <li>
-                            <a href="#">Problema Em Equipamento de Informática</a>
+                            <a href="<?php echo base_url(); ?>home/solicitacao-equipamento/">Problema Em Equipamento de Informática</a>
                           </li>
                           <li>
                             <a href="<?php echo base_url(); ?>home/solicitacao-sistema/">Problema Em Sistema da Instituição</a>
