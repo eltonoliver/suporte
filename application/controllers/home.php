@@ -33,7 +33,7 @@ class Home extends CI_Controller{
 			
 			$output = $crud->render();
 
-			$this->template->load('home','templates/view_frm_solicitacao_equi',$output);
+			$this->load->view('templates/view_frm_solicitacao_equi',$output);
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
