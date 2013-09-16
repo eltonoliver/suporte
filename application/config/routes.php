@@ -40,6 +40,7 @@
 
 $route['default_controller'] = "home";
 $route['home'] = "/home/home_sisten/";
+$route['home/solicitacao-sistema'] = "/home/solicitacaoSistema/";
 $route['404_override'] = '';
 
 
