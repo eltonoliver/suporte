@@ -25,7 +25,8 @@ class Home extends CI_Controller{
 	public function solicitacaoEquipamento(){
 		try{
 			
-			$crud = new grocery_CRUD();			
+			$crud = new grocery_CRUD();	
+			$crud->set_model('user_model');		
 			$crud->set_theme('datatables');
 			$crud->set_table('user');
 			$crud->columns('nome','login');			
