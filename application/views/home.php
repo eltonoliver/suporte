@@ -117,7 +117,11 @@
   <?php  echo $contents; ?>
 
   <!-- Window Modal -->
+  <?php 
 
+      $DB1 = $this->load->database('db_portal', TRUE);
+      print_r($DB1->get('usuario_usu')->result());
+   ?>
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span12">

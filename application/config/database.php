@@ -46,6 +46,7 @@
 */
 
 $active_group = 'default';
+
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
@@ -63,6 +64,28 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
+
+
+$db['db_portal']['hostname'] = 'localhost';
+$db['db_portal']['username'] = 'root';
+$db['db_portal']['password'] = '';
+$db['db_portal']['database'] = 'db_base';
+$db['db_portal']['dbdriver'] = 'mysql';
+$db['db_portal']['dbprefix'] = '';
+$db['db_portal']['pconnect'] = TRUE;
+$db['db_portal']['db_debug'] = TRUE;
+$db['db_portal']['cache_on'] = FALSE;
+$db['db_portal']['cachedir'] = '';
+$db['db_portal']['char_set'] = 'utf8';
+$db['db_portal']['dbcollat'] = 'utf8_general_ci';
+$db['db_portal']['swap_pre'] = '';
+$db['db_portal']['autoinit'] = TRUE;
+$db['db_portal']['stricton'] = FALSE;
+
+
+
+
+
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
