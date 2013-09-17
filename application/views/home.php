@@ -29,15 +29,9 @@
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo base_url(); ?>assets/img/apple-touch-icon-114-precomposed.png">
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo base_url(); ?>assets/img/apple-touch-icon-72-precomposed.png">
   <link rel="apple-touch-icon-precomposed" href="<?php echo base_url(); ?>assets/img/apple-touch-icon-57-precomposed.png">
-
-  <?php 
-    foreach($css_files as $file): ?>
-    <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
-    <?php endforeach; ?>
-    <?php foreach($js_files as $file): ?>
-     <script type="text/javascript" src="<?php echo $file; ?>"></script>
-    <?php endforeach; ?>
-    
+   <?php foreach($css_files as $file): ?>
+   <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+   <?php endforeach; ?>    
   
   <style type='text/css'>
     body{
@@ -153,6 +147,12 @@
   </div>
 </div>
 </body>
+
+   
+    <?php foreach($js_files as $file): ?>
+    <script type="text/javascript" src="<?php echo $file; ?>"></script>
+    <?php endforeach; ?>
+
 
  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script> 
