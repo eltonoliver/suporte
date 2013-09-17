@@ -26,14 +26,15 @@ class Home extends CI_Controller{
 		try{
 			
 			$crud = new grocery_CRUD();			
-			$crud->set_theme('datatables');
+			$crud->set_theme('flexigrid');
 			$crud->set_table('solicitacao_equi');
 			$crud->set_relation('suporte_id','usuarios','nome');
 			$crud->set_relation('prioridade_id','prioridade','nome');
 			$crud->set_relation('situacao_id','situacao','nome');
-			$crud->set_subject('Solicitação');
-			
-			 $crud->set_field_upload('anexo','assets/uploads/files');	
+
+			$crud->field_type('data_solicitacao', 'date');
+			$crud->set_subject('Solicitação');			
+			$crud->set_field_upload('anexo','assets/arquivos/anexo_solicitacao');
 			$output = $crud->render();
 			$this->template->load('home','templates/view_frm_solicitacao_equi',$output);
 
