@@ -34,10 +34,10 @@ class Examples extends CI_Controller {
 		try{
 			$crud = new grocery_CRUD();
 
-			$crud->set_theme('datatables');
-			$crud->set_table('user');
-			
-			$crud->columns('nome','login');
+			//$crud->set_theme('datatables');
+			$crud->set_table('solicitacao_equi');			
+			//$crud->columns('nome','login');
+			$crud->set_field_upload('anexo','assets/uploads/files');
 
 			$output = $crud->render();
 
