@@ -25,11 +25,15 @@ class Home extends CI_Controller{
 	public function solicitacaoEquipamento(){
 		try{
 			
-			$crud = new grocery_CRUD();	
-			$crud->set_model('user_model');		
+			$crud = new grocery_CRUD();			
 			$crud->set_theme('datatables');
-			$crud->set_table('user');
-			$crud->columns('nome','login');			
+			$crud->set_table('solicitacao_equi');
+			$crud->set_relation('suporte_id','usuarios','nome');
+			$crud->set_relation('prioridade_id','prioridade','nome');
+			$crud->set_relation('situacao_id','situacao','nome');
+			$crud->set_subject('Solicitação');
+			
+			 $crud->set_field_upload('anexo','assets/uploads/files');	
 			$output = $crud->render();
 			$this->template->load('home','templates/view_frm_solicitacao_equi',$output);
 
