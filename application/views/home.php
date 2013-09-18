@@ -18,7 +18,9 @@
    <link href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.min.css" rel="stylesheet">
    <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet">
    <link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet">
-
+ <?php foreach($css_files as $file): ?>
+   <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+   <?php endforeach; ?>    
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
     <script src="<?php echo base_url(); ?>assets/js/html5shiv.js"></script>
@@ -29,9 +31,7 @@
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo base_url(); ?>assets/img/apple-touch-icon-114-precomposed.png">
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo base_url(); ?>assets/img/apple-touch-icon-72-precomposed.png">
   <link rel="apple-touch-icon-precomposed" href="<?php echo base_url(); ?>assets/img/apple-touch-icon-57-precomposed.png">
-   <?php foreach($css_files as $file): ?>
-   <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
-   <?php endforeach; ?>    
+  
   
   <style type='text/css'>
     body{
@@ -78,7 +78,7 @@
                          
                         <ul class="dropdown-menu">
                           <li>
-                            <a href="<?php echo base_url(); ?>home/solicitacao-equipamento/">Problema Em Equipamento de Informática</a>
+                            <a href="<?php echo base_url(); ?>home/solicitacao-equipamento/add">Problema Em Equipamento de Informática</a>
                           </li>
                           <li>
                             <a href="<?php echo base_url(); ?>home/solicitacao-sistema/">Problema Em Sistema da Instituição</a>
@@ -147,14 +147,12 @@
   </div>
 </div>
 </body>
-
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
    
   <?php foreach($js_files as $file): ?>
   <script type="text/javascript" src="<?php echo $file; ?>"></script>
   <?php endforeach; ?>
 
-
-<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script> -->
  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script> 
  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
 
