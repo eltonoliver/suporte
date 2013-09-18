@@ -22,7 +22,7 @@ class Home extends CI_Controller{
 		$this->template->load('home','templates/view_frm_solicitacao_sis');
 	}
 
-	public function solicitacaoEquipamento(){
+	public function solicitacaoEquipamento($id = null){
 		try{
 			
 			$crud = new grocery_CRUD();			
@@ -34,7 +34,7 @@ class Home extends CI_Controller{
 
 			$crud->field_type('data_solicitacao', 'date');
 			$crud->set_subject('Solicitação');			
-			$crud->set_field_upload('anexo','assets/arquivos/anexo_solicitacao');
+			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
 			$output = $crud->render();
 			$this->template->load('home','templates/view_frm_solicitacao_equi',$output);
 
