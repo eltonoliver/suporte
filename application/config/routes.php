@@ -38,14 +38,14 @@
 |
 */
 
-$route['default_controller'] 								= "home";
-$route['home'] 												= "/home/home_sisten/";
-
-$route['home/solicitacao-equipamento/add'] 					= "/home/solicitacaoEquipamento/";
-$route['home/solicitacao-equipamento/insert'] 				= "/home/solicitacaoEquipamento/";
-$route['home/solicitacao-equipamento/edit'] 				= "/home/solicitacaoEquipamento/";
-$route['home/solicitacao-equipamento/upload_file/anexo'] 	= "/home/solicitacaoEquipamento/";
-$route['home/solicitacao-equipamento/delete/:num']			= "/home/solicitacaoEquipamento/";
+$route['default_controller'] 										= "home";
+$route['home'] 														= "/home/home_sisten/";
+$route['home/solicitacao-equipamento/add'] 							= "/home/solicitacaoEquipamento/";
+$route['home/solicitacao-equipamento/insert'] 						= "/home/solicitacaoEquipamento/";
+$route['home/solicitacao-equipamento/edit'] 						= "/home/solicitacaoEquipamento/";
+$route['home/solicitacao-equipamento/upload_file/anexo'] 			= "/home/solicitacaoEquipamento/";
+$route['home/solicitacao-equipamento/delete_file/anexo/(:any)'] 	= "/home/solicitacaoEquipamento/";
+$route['home/solicitacao-equipamento/delete/:num']					= "/home/solicitacaoEquipamento/";
 
 
 
