@@ -11,6 +11,7 @@ class Home extends CI_Controller{
 
 	}
 
+	
 	public function home_sisten(){
 
 		$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
