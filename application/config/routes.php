@@ -48,6 +48,7 @@ $route['home/solicitacao-equipamento/upload_file/anexo'] 	= "/home/solicitacaoEq
 $route['home/solicitacao-equipamento/delete/:num']			= "/home/solicitacaoEquipamento/";
 
 
+
 $route['404_override'] = 'home/home_sisten';
 
 
