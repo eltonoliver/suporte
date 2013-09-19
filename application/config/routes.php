@@ -46,6 +46,7 @@ $route['home/solicitacao-equipamento/edit'] 						= "/home/solicitacaoEquipament
 $route['home/solicitacao-equipamento/upload_file/anexo'] 			= "/home/solicitacaoEquipamento/";
 $route['home/solicitacao-equipamento/delete_file/anexo/(:any)'] 	= "/home/solicitacaoEquipamento/";
 $route['home/solicitacao-equipamento/delete/:num']					= "/home/solicitacaoEquipamento/";
+$route['home/solicitacao-equipamento/insert_validation']			= "/home/solicitacaoEquipamento/";
 
 
 
