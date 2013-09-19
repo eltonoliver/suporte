@@ -30,9 +30,9 @@ class Home extends CI_Controller{
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');	
 			$crud->fields('patrimonio','descricao_equi','anexo','descricao_servico','local_servico');
 			$crud->display_as('patrimonio','Patrimônio:')
-				 ->display_as('descricao_equi','Descrição Equipamento:')
+				 ->display_as('descricao_equi','Descrição do Equipamento:')
 				 ->display_as('anexo','Anexo:')
-				 ->display_as('descricao_servico','Descrição Serviço:')
+				 ->display_as('descricao_servico','Descrição do Serviço:')
 				 ->display_as('local_servico','Local do Serviço:');
 			
 			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
