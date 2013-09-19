@@ -26,21 +26,19 @@ class Home extends CI_Controller{
 			
 			$crud = new grocery_CRUD();			
 			$crud->set_theme('flexigrid');
-			$crud->set_table('solicitacao_equi');
-			$crud->set_relation('suporte_id','usuarios','nome');
-			$crud->set_relation('prioridade_id','prioridade','nome');
-			$crud->set_relation('situacao_id','situacao','nome');
-			/*$crud->fields('patrimonio','descricao_equi','anexo','descricao_servico');
+			$crud->set_table('solicitacao_equi');	
+			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');	
+			$crud->fields('patrimonio','descricao_equi','anexo','descricao_servico','local_servico');
 			$crud->display_as('patrimonio','Patrimônio:')
 				 ->display_as('descricao_equi','Descrição Equipamento:')
 				 ->display_as('anexo','Anexo:')
-				 ->display_as('descricao_servico','Descrição Serviço:');
-			*/
-			$crud->required_fields('descricao_equi','descricao_servico');
+				 ->display_as('descricao_servico','Descrição Serviço:')
+				 ->display_as('local_servico','Local do Serviço:');
+			
+			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
 			$crud->field_type('data_solicitacao', 'date');
 			$crud->set_subject('Solicitação');
-			//$crud->callback_before_insert(array($this,'data_solicitacao'));
-
+			$crud->callback_before_insert(array($this,'data_solicitacao'));
 			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
 			$output = $crud->render();
 			$this->template->load('home','templates/view_frm_solicitacao_equi',$output);
@@ -54,9 +52,7 @@ class Home extends CI_Controller{
 	public function solcicitacaoSistema(){
 
 
-
 	}
-
 
 	function data_solicitacao($dados = null) {
 		
