@@ -5,12 +5,10 @@ class Home extends CI_Controller{
 	public function __construct(){
 
 		parent::__construct();
-		$this->load->database();
-	
+		//$this->load->database();	
 		$this->load->library('grocery_CRUD');
 
 	}
-
 	
 	public function home_sisten(){
 
@@ -32,9 +30,17 @@ class Home extends CI_Controller{
 			$crud->set_relation('suporte_id','usuarios','nome');
 			$crud->set_relation('prioridade_id','prioridade','nome');
 			$crud->set_relation('situacao_id','situacao','nome');
-
+			/*$crud->fields('patrimonio','descricao_equi','anexo','descricao_servico');
+			$crud->display_as('patrimonio','Patrimônio:')
+				 ->display_as('descricao_equi','Descrição Equipamento:')
+				 ->display_as('anexo','Anexo:')
+				 ->display_as('descricao_servico','Descrição Serviço:');
+			*/
+			$crud->required_fields('descricao_equi','descricao_servico');
 			$crud->field_type('data_solicitacao', 'date');
-			$crud->set_subject('Solicitação');			
+			$crud->set_subject('Solicitação');
+			//$crud->callback_before_insert(array($this,'data_solicitacao'));
+
 			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
 			$output = $crud->render();
 			$this->template->load('home','templates/view_frm_solicitacao_equi',$output);
@@ -44,6 +50,19 @@ class Home extends CI_Controller{
 		}
 		
 	}
+
+	public function solcicitacaoSistema(){
+
+
+
+	}
+
+
+	function data_solicitacao($dados = null) {
+		
+		  $dataSolicitcao['data_solicitacao'] = '2013-09-19 00:00:00';	 
+		  return $post_array;
+	}    
 
 
 }
