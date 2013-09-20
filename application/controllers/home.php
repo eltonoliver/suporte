@@ -38,12 +38,14 @@ class Home extends CI_Controller{
 			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
 			$crud->field_type('data_solicitacao', 'date');
 			$crud->set_subject('Solicitação');
+			$crud->unset_back_to_list();
 			$crud->callback_before_insert(array($this,'data_solicitacao'));
 			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
 			$output = $crud->render();
 			$this->template->load('home','templates/view_frm_solicitacao_equi',$output);
 
 		}catch(Exception $e){
+
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
 		
