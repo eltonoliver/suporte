@@ -41,7 +41,6 @@ class Home extends CI_Controller{
 			$crud->field_type('tipo', 'hidden',1);
 			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
 			
-			
 			$crud->set_subject('Solicitação - Equipamentos');
 			
 			$crud->unset_back_to_list();
@@ -92,6 +91,19 @@ class Home extends CI_Controller{
 
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
+
+	}
+
+	public function minhasSolicitacoes($id = null){
+		try{
+			echo 1;
+
+
+		}catch(Exception $e){
+
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+
 
 	}
 	/*
