@@ -49,6 +49,15 @@ $route['home/solicitacao-equipamento/delete/:num']					= "/home/solicitacaoEquip
 $route['home/solicitacao-equipamento/insert_validation']			= "/home/solicitacaoEquipamento/";
 
 
+$route['home/solicitacao-sistema/add'] 							= "/home/solcicitacaoSistema/";
+$route['home/solicitacao-sistema/insert'] 						= "/home/solcicitacaoSistema/";
+$route['home/solicitacao-sistema/edit'] 						= "/home/solcicitacaoSistema/";
+$route['home/solicitacao-sistema/upload_file/anexo'] 			= "/home/solcicitacaoSistema/";
+$route['home/solicitacao-sistema/delete_file/anexo/(:any)'] 	= "/home/solcicitacaoSistema/";
+$route['home/solicitacao-sistema/delete/:num']					= "/home/solcicitacaoSistema/";
+$route['home/solicitacao-sistema/insert_validation']			= "/home/solcicitacaoSistema/";
+
+
 
 $route['404_override'] = 'home/home_sisten';
 
