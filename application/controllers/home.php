@@ -16,10 +16,6 @@ class Home extends CI_Controller{
 		$this->template->load('home','templates/view_home',$output);
 	}
 
-	public function solicitacaoSistema(){
-
-		$this->template->load('home','templates/view_frm_solicitacao_sis');
-	}
 
 	public function solicitacaoEquipamento($id = null){
 		try{
@@ -96,7 +92,14 @@ class Home extends CI_Controller{
 
 	public function minhasSolicitacoes($id = null){
 		try{
-			echo 1;
+
+			$crud = new grocery_CRUD();		
+
+			$crud->set_theme('flexigrid');
+			$crud->set_table('solicitacao');	
+			$output = $crud->render();
+			
+			$this->template->load('home','templates/view_solicitacoes',$output);
 
 
 		}catch(Exception $e){
