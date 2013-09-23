@@ -83,7 +83,7 @@
                             <a href="<?php echo base_url(); ?>home/solicitacao-equipamento/add">Problema Em Equipamento de Informática</a>
                           </li>
                           <li>
-                            <a href="<?php echo base_url(); ?>home/solicitacao-sistema/">Problema Em Sistema da Instituição</a>
+                            <a href="<?php echo base_url(); ?>home/solicitacao-sistema/add">Problema Em Sistema da Instituição</a>
                           </li>                     
                         </ul>
                     </li>
