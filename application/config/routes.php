@@ -58,6 +58,8 @@ $route['home/solicitacao-sistema/delete_file/anexo/(:any)'] 	= "/home/solcicitac
 $route['home/solicitacao-sistema/delete/:num']					= "/home/solcicitacaoSistema/";
 $route['home/solicitacao-sistema/insert_validation']			= "/home/solcicitacaoSistema/";
 
+/*ROTAS MINHAS SOLICITACOES*/
+$route['home/minhas-solicitacoes']								= "/home/minhasSolicitacoes/";
 
 
 $route['404_override'] = 'home/home_sisten';
