@@ -40,6 +40,7 @@
 
 $route['default_controller'] 										= "home";
 $route['home'] 														= "/home/home_sisten/";
+/*ROTA SOLICITACAO EQUIPAMENTO*/
 $route['home/solicitacao-equipamento/add'] 							= "/home/solicitacaoEquipamento/";
 $route['home/solicitacao-equipamento/insert'] 						= "/home/solicitacaoEquipamento/";
 $route['home/solicitacao-equipamento/edit'] 						= "/home/solicitacaoEquipamento/";
@@ -48,7 +49,7 @@ $route['home/solicitacao-equipamento/delete_file/anexo/(:any)'] 	= "/home/solici
 $route['home/solicitacao-equipamento/delete/:num']					= "/home/solicitacaoEquipamento/";
 $route['home/solicitacao-equipamento/insert_validation']			= "/home/solicitacaoEquipamento/";
 
-
+/*ROTAS SOLICITACAO SISTEMAS*/
 $route['home/solicitacao-sistema/add'] 							= "/home/solcicitacaoSistema/";
 $route['home/solicitacao-sistema/insert'] 						= "/home/solcicitacaoSistema/";
 $route['home/solicitacao-sistema/edit'] 						= "/home/solcicitacaoSistema/";
