@@ -26,20 +26,26 @@ class Home extends CI_Controller{
 			
 			$crud = new grocery_CRUD();			
 			$crud->set_theme('flexigrid');
-			$crud->set_table('solicitacao_equi');	
-			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');	
-			$crud->fields('patrimonio','descricao_equi','anexo','descricao_servico','local_servico');
-			$crud->display_as('patrimonio','Patrimônio:')
-				 ->display_as('descricao_equi','Descrição do Equipamento:')
-				 ->display_as('anexo','Anexo:')
-				 ->display_as('descricao_servico','Descrição do Serviço:')
-				 ->display_as('local_servico','Local do Serviço:');
-			
+			$crud->set_table('solicitacao');	
+			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
+			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
+			$crud->set_relation('patrimonio_id','patrimonio','patrimonio');
+			$crud->fields('patrimonio_id','descricao_equi','anexo','descricao_servico','local_servico','data_solicitacao');
+			$crud->display_as('patrimonio_id','Patrimônio')
+				 ->display_as('descricao_equi','Descrição do Equipamento')
+				 ->display_as('anexo','Anexo')
+				 ->display_as('descricao_servico','Descrição do Serviço')
+				 ->display_as('local_servico','Local do Serviço');
+			/*Deixa o campo data_solicitacao invisivel*/	 
+			$crud->field_type('data_solicitacao','invisible');
 			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
 			$crud->field_type('data_solicitacao', 'date');
+			
 			$crud->set_subject('Solicitação');
+			
 			$crud->unset_back_to_list();
-			$crud->callback_before_insert(array($this,'data_solicitacao'));
+			/*Insere a data de solicitação automaticamente via callback*/
+			$crud->callback_before_insert(array($this,'data_solicitacao_callback'));
 			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
 			$output = $crud->render();
 			$this->template->load('home','templates/view_frm_solicitacao_equi',$output);
@@ -55,11 +61,16 @@ class Home extends CI_Controller{
 
 
 	}
+	/*
+	*@method - data_solicitacao_callback 
+	*Esse método so podera ser utilizado caso o campo esteja como invisible
+	*@return retorna um array modificado
+	*/
 
-	function data_solicitacao($dados = null) {
-		
-		  $dataSolicitcao['data_solicitacao'] = '2013-09-19 00:00:00';	 
-		  return $post_array;
+	function data_solicitacao_callback($postArray) {
+		  	
+		  $postArray['data_solicitacao'] = date('Y-m-d h:i:s');
+		  return $postArray;
 	}    
 
 
