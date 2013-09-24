@@ -104,7 +104,7 @@
                          
                         <ul class="dropdown-menu">
                           <li>
-                            <a href="<?php echo base_url(); ?>home/atendimentos/add">Atendimentos</a>
+                            <a href="<?php echo base_url(); ?>admin/atendimentos">Atendimentos</a>
                           </li>
                           <li>
                             <a href="<?php echo base_url(); ?>home/solicitacao-sistema/add">Relatórios</a>
@@ -117,7 +117,7 @@
                           </li>                     
                         </ul>
                     </li>
-                    
+
                   <!--End Drop Administração -->
                 </ul>
 
