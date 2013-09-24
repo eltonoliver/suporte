@@ -7,6 +7,7 @@ class Home extends CI_Controller{
 		parent::__construct();
 		
 		$this->load->library('grocery_CRUD');
+		$this->load->model('solicitacao_model');
 
 	}
 	
@@ -124,7 +125,7 @@ class Home extends CI_Controller{
 			$crud->add_action('Adicionar Mensagem', '', 'home/mensagem','ui-icon-plus');
 
 			/*REMOVAR OPÇÃO DE DELETAR LER E EDITAR*/
-			$crud->unset_delete();
+			//$crud->unset_delete();
 			$crud->unset_read();
 			$crud->unset_edit();
 			$crud->unset_add();
@@ -144,12 +145,14 @@ class Home extends CI_Controller{
 	}
 
 	public function mensagem($id = null){
+		
 		try{
 			$crud = new grocery_CRUD();
 			$crud->set_table('solicitacao');
+
+
 			$crud->set_crud_url_path(site_url('home/mensagem'));
 			$crud->set_theme('datatables');
-			$crud->columns('id');
 
 			$output = $crud->render();
 			$this->template->load('home','templates/view_mensagem',$output);
@@ -169,11 +172,6 @@ class Home extends CI_Controller{
 		  return $postArray;
 	}
 
-	
-
-	
-
-	
 
 
 
