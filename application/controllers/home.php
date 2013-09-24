@@ -103,23 +103,35 @@ class Home extends CI_Controller{
 			/*RELACIONAMENTO EQUIPAMENTO*/
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
 			$crud->set_relation('patrimonio_id','patrimonio','patrimonio');
-			//$crud->set_relation('id_suporte','usuarios','nome');
-
-			$crud->callback_column('id_suporte',array($this,'verificaSuporte'));
-
+			$crud->set_relation('id_suporte','usuarios','nome');
 			$crud->set_relation('situacao_id','situacao','nome');
 			/*EQUIPAMENTO*/
 			/*RELACIONAMENTO SISTEMAS*/
-			$crud->add_action('Mais', '', 'demo/action_more','ui-icon-plus');
+			
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
 			$crud->set_relation('sistemas_id','sistemas','nome');
 			/*SISTEMAS*/
+			
 						
+			$crud->display_as('id','Código')
+				 ->display_as('situacao_id','Situação')
+				 ->display_as('id_suporte','Nome do Suporte')
+				 ->display_as('data_solicitacao','Data de Solicitação')
+				 ->display_as('local_servico','Local do Serviço');
 
+
+			/*ACTION - TELA DO FORUM*/
+			$crud->add_action('Adicionar Mensagem', '', 'home/mensagem','ui-icon-plus');
+
+			/*REMOVAR OPÇÃO DE DELETAR LER E EDITAR*/
+			$crud->unset_delete();
+			$crud->unset_read();
+			$crud->unset_edit();
+			$crud->unset_add();
+			$crud->unset_print();	 
 			$output = $crud->render();
 			
-    		
-
+			
 			$this->template->load('home','templates/view_solicitacoes',$output);
 
 
@@ -127,6 +139,11 @@ class Home extends CI_Controller{
 
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
+
+
+	}
+
+	public function mensagem($id = null){
 
 
 	}
@@ -142,15 +159,9 @@ class Home extends CI_Controller{
 		  return $postArray;
 	}
 
-	public function verificaSuporte($primary_key , $row){
-		
-		 if($row->id_suporte == ''){
+	
 
-		 	return "Vazio";
-
-		 }
-		
-	}
+	
 
 	
 
