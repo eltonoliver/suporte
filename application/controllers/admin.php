@@ -6,8 +6,7 @@ class Admin extends CI_Controller{
 
 	public function __construct(){
 
-		parent::__construct();
-		
+		parent::__construct();		
 		$this->load->library('grocery_CRUD');
 		$this->load->model('solicitacao_model');
 
@@ -19,10 +18,20 @@ class Admin extends CI_Controller{
 			$crud = new grocery_CRUD();
 			$crud->set_theme('datatables');
 			$crud->set_table('solicitacao');
+			$crud->set_relation('id_suporte','usuarios','nome');
+			$crud->set_relation('situacao_id','situacao','nome');	
+			$crud->set_relation('prioridade_id','prioridade','nome');	
+			$crud->set_relation('patrimonio_id','prioridade','nome');
+			$crud->set_relation('sistemas_id','sistemas','nome');
+			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');		
 			$crud->columns('id','usuario_id','data_solicitacao','situacao_id','id_suporte');
-			$crud->display_as('id','Código');
-			$output = $crud->render();
+			$crud->display_as('id','Código')->display_as('id_suporte','Nome do Suporte')
+				 ->display_as('situacao_id','Situação')
+				 ->display_as('data_solicitacao','Data de Solicitação')
+				 ->display_as('usuario_id','Nome do usuário');
 
+			$crud->unset_print();		 
+			$output = $crud->render();
 
 			$this->template->load('home','templates/view_atendimento',$output);
 
@@ -30,6 +39,12 @@ class Admin extends CI_Controller{
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 
 		}
+	}
+
+
+	public function tipo_callback(){
+
+		
 	}
 
 
