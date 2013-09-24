@@ -4,9 +4,11 @@
 	$idSolicitacao = $this->uri->segment(3);
 
 	$dados = $this->solicitacao_model->getSolicitacao($idSolicitacao);
-	echo "<pre>";
-	print_r($dados);
+	echo '<pre>';
+	foreach ($dados as $value) {
 
+		print_r($value);
+	}
 
 
  ?>
