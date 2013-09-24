@@ -15,7 +15,7 @@ class Solicitacao_model extends CI_Model{
 
 	   public function getSolicitacao($id = null){
 	
-	    	return $this->db->select(
+	    	return $this->db->query(
 	    		'
 	    			SELECT solicitacao.id, 
 					solicitacao.descricao_equi, 
@@ -33,8 +33,8 @@ class Solicitacao_model extends CI_Model{
 					 LEFT JOIN patrimonio ON solicitacao.patrimonio_id = patrimonio.id
 					 LEFT JOIN sistemas ON solicitacao.sistemas_id = sistemas.id
 					 LEFT JOIN situacao ON solicitacao.situacao_id = situacao.id
-				WHERE solicitacao.id = 34'
-	    		);
+				WHERE solicitacao.id = '.$id
+	    		)->result();
 	    }
 	
 	
