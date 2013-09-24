@@ -148,13 +148,14 @@ class Home extends CI_Controller{
 		
 		try{
 			$crud = new grocery_CRUD();
-			$crud->set_table('solicitacao');
+			$crud->set_table('forum');
 
 
 			$crud->set_crud_url_path(site_url('home/mensagem'));
 			$crud->set_theme('datatables');
 
 			$output = $crud->render();
+			
 			$this->template->load('home','templates/view_mensagem',$output);
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
