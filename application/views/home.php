@@ -95,8 +95,34 @@
                   <li>
                     <a href="#modal-container-95857" data-toggle="modal"><i class="icon-thumbs-up icon-white"></i> &nbsp;Dúvidas Frequentes</a>
                   </li>
-                
+
+                  <!--Drop Administração -->
+               
+
+                   <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-wrench icon-white"></i> &nbsp;Administração<strong class="caret"></strong></a>
+                         
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a href="<?php echo base_url(); ?>home/atendimentos/add">Atendimentos</a>
+                          </li>
+                          <li>
+                            <a href="<?php echo base_url(); ?>home/solicitacao-sistema/add">Relatórios</a>
+                          </li> 
+                            <li>
+                            <a href="<?php echo base_url(); ?>home/solicitacao-sistema/add">Cadastro de Usuários</a>
+                          </li>  
+                            <li>
+                            <a href="<?php echo base_url(); ?>home/solicitacao-sistema/add">Cadastro de Dúvidas</a>
+                          </li>                     
+                        </ul>
+                    </li>
+                    
+                  <!--End Drop Administração -->
                 </ul>
+
+
+
                 
                   </li>
                 </ul>
