@@ -94,11 +94,32 @@ class Home extends CI_Controller{
 		try{
 
 			$crud = new grocery_CRUD();		
+			$crud->set_crud_url_path(site_url('home/minhasSolicitacoes'));
+			$crud->set_theme('datatables');
+			$crud->set_table('solicitacao');
+			$crud->columns('id','local_servico','data_solicitacao','situacao_id','id_suporte');
 
-			$crud->set_theme('flexigrid');
-			$crud->set_table('solicitacao');	
+
+			/*RELACIONAMENTO EQUIPAMENTO*/
+			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
+			$crud->set_relation('patrimonio_id','patrimonio','patrimonio');
+			//$crud->set_relation('id_suporte','usuarios','nome');
+
+			$crud->callback_column('id_suporte',array($this,'verificaSuporte'));
+
+			$crud->set_relation('situacao_id','situacao','nome');
+			/*EQUIPAMENTO*/
+			/*RELACIONAMENTO SISTEMAS*/
+			$crud->add_action('Mais', '', 'demo/action_more','ui-icon-plus');
+			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
+			$crud->set_relation('sistemas_id','sistemas','nome');
+			/*SISTEMAS*/
+						
+
 			$output = $crud->render();
 			
+    		
+
 			$this->template->load('home','templates/view_solicitacoes',$output);
 
 
@@ -119,6 +140,16 @@ class Home extends CI_Controller{
 		  	
 		  $postArray['data_solicitacao'] = date('Y-m-d h:i:s');
 		  return $postArray;
+	}
+
+	public function verificaSuporte($primary_key , $row){
+		
+		 if($row->id_suporte == ''){
+
+		 	return "Vazio";
+
+		 }
+		
 	}
 
 	
