@@ -161,6 +161,8 @@ class Home extends CI_Controller{
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}		
 	}
+
+	
 	/*
 	*@method - data_solicitacao_callback 
 	*Esse método so podera ser utilizado caso o campo esteja como invisible
