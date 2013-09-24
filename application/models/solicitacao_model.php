@@ -36,6 +36,13 @@ class Solicitacao_model extends CI_Model{
 				WHERE solicitacao.id = '.$id
 	    		)->result();
 	    }
+
+
+	    public function getForum($id = null){
+	    		   $this->db->where('solicitacao_id',$id);   	
+	    	return $this->db->get('forum')->result();
+
+	    }
 	
 	
 
