@@ -23,8 +23,11 @@ class Admin extends CI_Controller{
 			$crud->set_relation('prioridade_id','prioridade','nome');	
 			$crud->set_relation('patrimonio_id','prioridade','nome');
 			$crud->set_relation('sistemas_id','sistemas','nome');
-			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');		
-			$crud->columns('id','usuario_id','data_solicitacao','situacao_id','id_suporte');
+			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');	
+			$crud->unset_edit_fields('data_atualizacao','data_finalizacao','tipo');	
+			$crud->unset_add_fields('data_atualizacao','data_finalizacao','tipo');	
+			$crud->columns('id','usuario_id','data_solicitacao','situacao_id','id_suporte','tipo');
+			$crud->callback_column('tipo',array($this,'tipo_callback'));
 			$crud->display_as('id','Código')->display_as('id_suporte','Nome do Suporte')
 				 ->display_as('situacao_id','Situação')
 				 ->display_as('data_solicitacao','Data de Solicitação')
@@ -42,9 +45,18 @@ class Admin extends CI_Controller{
 	}
 
 
-	public function tipo_callback(){
+	public function tipo_callback($value,$row){
+		if($row->tipo == 1){
 
-		
+			$value = "Equipamentos";
+
+		}else{
+
+			$value = "Sistemas";
+		}
+
+		return $value;
+
 	}
 
 
