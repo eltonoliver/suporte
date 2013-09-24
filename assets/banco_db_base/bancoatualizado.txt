@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 24, 2013 at 03:28 AM
+-- Generation Time: Sep 24, 2013 at 01:04 PM
 -- Server version: 5.5.29
 -- PHP Version: 5.4.10
 
@@ -37,20 +37,41 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('25595c9b05467b3fc9f9efab563ccda2', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379980618, ''),
-('431480a70c743ba12809e2c0f6391d10', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983490, ''),
-('6eece2688ea5270bb2d0263d7c03f3b0', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983490, ''),
-('77693bb1c808412ea46dc73c2ddfd5b3', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983365, ''),
-('7dfc4a336a4c42c3c92a2453e116e262', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983565, ''),
-('903b39c7232280e47ccc55a3c5cc66c3', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983565, ''),
-('94382a83007b1f7518985246d417f786', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379985925, ''),
-('974d04ac60bd24f1ddecb397972edfe3', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379980357, ''),
-('9ec0cc608264dc97df9316ebe446a2c6', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379980618, ''),
-('9fcbab5daaa78660822780b76fc36c19', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983365, ''),
-('b29cbada63bdebd2fc4162d4e2d24e95', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983533, ''),
-('c4330e41f9763f1e7211ce46d5790cf6', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379980357, ''),
-('d20ce974b4f7c251c0051a2d343607c7', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/536.30.1 (KHTML, like Gecko) Version/6.0.5 Safari/536.30.1', 1379985347, ''),
-('d584228212a7a0e43322566a3c196413', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983533, '');
+('15bee7d237bc94135d5ab4a563e188b4', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995433, ''),
+('2188653dfdee681db85db3cc59293ccc', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995318, ''),
+('2a85f5ab05fa7f99aeb9b25668205088', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995434, ''),
+('6f03894798602ef16d90985723a04c65', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995427, ''),
+('7c596d46768d2e5fa62e020cc4794515', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995424, ''),
+('7e873e041f58adc219d75007c153867b', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995434, ''),
+('8b04bcb5edca8a7436c5645a312b3639', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995317, ''),
+('9137f2aeacee3ac2d92ec09b80f027be', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995362, ''),
+('994d41dbe9a66900189338c6b8a46985', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995433, ''),
+('9d941ce57e169ce758b5c4101ced731d', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995396, ''),
+('a2a12c377d0b21f3630b0425320cc006', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995463, ''),
+('d0930b032e149a46c34a6321a37a4807', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995362, ''),
+('e09955bbf192a46479c5c7685fba4b9c', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995396, ''),
+('e725fdcf3871e189c44cd791dc40487f', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995420, ''),
+('f0e7e098c07fcfff3a10079e68324cb4', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995420, ''),
+('f382dcc37b1c0121bbf6330a9f1f95a9', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995427, ''),
+('fd3f17f3b658c33f8ada3da54d0aded3', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995424, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `forum`
+--
+
+CREATE TABLE `forum` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mensagem` text NOT NULL,
+  `data` datetime NOT NULL,
+  `suporte_id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `solicitacao_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`suporte_id`,`solicitacao_id`),
+  KEY `fk_forum_usuarios1_idx` (`suporte_id`),
+  KEY `fk_forum_solicitacao1_idx` (`solicitacao_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -163,27 +184,15 @@ CREATE TABLE `solicitacao` (
   KEY `fk_solicitacao_equi_prioridade1_idx` (`prioridade_id`),
   KEY `fk_solicitacao_equi_sistemas1_idx` (`sistemas_id`),
   KEY `fk_solicitacao_equi_patrimonio2_idx` (`patrimonio_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `solicitacao`
 --
 
 INSERT INTO `solicitacao` (`id`, `descricao_equi`, `descricao_servico`, `anexo`, `local_servico`, `usuario_id`, `data_solicitacao`, `data_atualizacao`, `data_finalizacao`, `situacao_id`, `prioridade_id`, `id_suporte`, `sistemas_id`, `patrimonio_id`, `tipo`) VALUES
-(6, 'teste', 'teste', NULL, 1, 1, '2013-09-18 00:00:00', NULL, NULL, 1, 1, 1, NULL, NULL, 0),
-(8, 'ss', 'dd', NULL, 1, 1, '2013-09-16 00:00:00', NULL, NULL, 1, 1, NULL, NULL, NULL, 0),
-(17, '<p>\n	ddd</p>\n', '<p>\n	blah</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
-(18, '<p>\n	hello word</p>\n', '<p>\n	Hellow word</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
-(19, '<p>\n	f</p>\n', '<p>\n	f</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
-(20, '<p>\n	lek</p>\n', '<p>\n	lek</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
-(21, '<p>\n	d</p>\n', '<p>\n	d</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
-(22, '<p>\n	datetime</p>\n', '<p>\n	datetime</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
-(23, '<p>\n	d</p>\n', '<p>\n	d</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
-(24, '', '<p>\n	Problema no Mira</p>\n', NULL, 2, 0, '2013-09-23 05:02:47', NULL, NULL, 1, 1, NULL, 2, NULL, 0),
-(25, '<p>\n	tipo 1</p>\n', '<p>\n	tipo 1</p>\n', NULL, 2, 0, '2013-09-23 05:20:25', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
-(26, '<p>\n	ddsd</p>\n', '<p>\n	sd</p>\n', NULL, 2, 0, '2013-09-23 05:22:05', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
-(27, '<p>\n	d</p>\n', '<p>\n	d</p>\n', NULL, 2, 0, '2013-09-23 05:27:26', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
-(30, '', '<p>\n	d</p>\n', NULL, 2, 0, '2013-09-23 05:36:09', NULL, NULL, 1, 1, NULL, 2, NULL, 2);
+(33, '<p>\n	Equipamento teste</p>\n', '<p>\n	Equipamento teste</p>\n', NULL, 2, 0, '2013-09-24 05:02:46', NULL, NULL, 1, 1, 1, NULL, 2, 1),
+(34, '', '<p>\n	MXM</p>\n', NULL, 2, 0, '2013-09-24 05:09:56', NULL, NULL, 1, 1, NULL, 2, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -250,11 +259,18 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `cargo`, `email`, `status_id`) VALUES
-(2, 'Elton', 'Programador', 'elton.oliveira@am.senac.br', 1);
+(1, 'Elton', 'Programador', 'elton.oliveira@am.senac.br', 1);
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `forum`
+--
+ALTER TABLE `forum`
+  ADD CONSTRAINT `fk_forum_usuarios1` FOREIGN KEY (`suporte_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_forum_solicitacao1` FOREIGN KEY (`solicitacao_id`) REFERENCES `solicitacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `solicitacao`
