@@ -1,0 +1,281 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.7
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Sep 24, 2013 at 03:28 AM
+-- Server version: 5.5.29
+-- PHP Version: 5.4.10
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `suporte`
+--
+CREATE DATABASE `suporte` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `suporte`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ci_sessions`
+--
+
+CREATE TABLE `ci_sessions` (
+  `session_id` varchar(40) NOT NULL DEFAULT '0',
+  `ip_address` varchar(45) NOT NULL DEFAULT '0',
+  `user_agent` varchar(120) NOT NULL,
+  `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_data` text NOT NULL,
+  PRIMARY KEY (`session_id`),
+  KEY `last_activity_idx` (`last_activity`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ci_sessions`
+--
+
+INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
+('25595c9b05467b3fc9f9efab563ccda2', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379980618, ''),
+('431480a70c743ba12809e2c0f6391d10', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983490, ''),
+('6eece2688ea5270bb2d0263d7c03f3b0', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983490, ''),
+('77693bb1c808412ea46dc73c2ddfd5b3', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983365, ''),
+('7dfc4a336a4c42c3c92a2453e116e262', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983565, ''),
+('903b39c7232280e47ccc55a3c5cc66c3', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983565, ''),
+('94382a83007b1f7518985246d417f786', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379985925, ''),
+('974d04ac60bd24f1ddecb397972edfe3', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379980357, ''),
+('9ec0cc608264dc97df9316ebe446a2c6', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379980618, ''),
+('9fcbab5daaa78660822780b76fc36c19', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983365, ''),
+('b29cbada63bdebd2fc4162d4e2d24e95', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983533, ''),
+('c4330e41f9763f1e7211ce46d5790cf6', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379980357, ''),
+('d20ce974b4f7c251c0051a2d343607c7', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/536.30.1 (KHTML, like Gecko) Version/6.0.5 Safari/536.30.1', 1379985347, ''),
+('d584228212a7a0e43322566a3c196413', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379983533, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `patrimonio`
+--
+
+CREATE TABLE `patrimonio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `patrimonio` varchar(40) DEFAULT NULL,
+  `id_unidade` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `patrimonio`
+--
+
+INSERT INTO `patrimonio` (`id`, `patrimonio`, `id_unidade`) VALUES
+(1, 'ijijij32323', 1),
+(2, 'ji20@#', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prioridade`
+--
+
+CREATE TABLE `prioridade` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `prioridade`
+--
+
+INSERT INTO `prioridade` (`id`, `nome`) VALUES
+(1, 'Baixa'),
+(2, 'Média'),
+(3, 'Alta');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sistemas`
+--
+
+CREATE TABLE `sistemas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `sistemas`
+--
+
+INSERT INTO `sistemas` (`id`, `nome`, `descricao`) VALUES
+(1, 'Mira', 'Sistemas .......'),
+(2, 'MXM', 'Sistema de ...');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `situacao`
+--
+
+CREATE TABLE `situacao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `situacao`
+--
+
+INSERT INTO `situacao` (`id`, `nome`) VALUES
+(1, 'Em Circulação'),
+(2, 'Em Atendimento'),
+(3, 'Finalizado');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `solicitacao`
+--
+
+CREATE TABLE `solicitacao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao_equi` text NOT NULL,
+  `descricao_servico` text NOT NULL,
+  `anexo` varchar(90) DEFAULT NULL,
+  `local_servico` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `data_solicitacao` datetime NOT NULL,
+  `data_atualizacao` datetime DEFAULT NULL,
+  `data_finalizacao` datetime DEFAULT NULL,
+  `situacao_id` int(11) NOT NULL DEFAULT '1',
+  `prioridade_id` int(11) NOT NULL DEFAULT '1',
+  `id_suporte` int(11) DEFAULT NULL,
+  `sistemas_id` int(11) DEFAULT NULL,
+  `patrimonio_id` int(11) DEFAULT NULL,
+  `tipo` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_solicitacao_equi_situacao1_idx` (`situacao_id`),
+  KEY `fk_solicitacao_equi_prioridade1_idx` (`prioridade_id`),
+  KEY `fk_solicitacao_equi_sistemas1_idx` (`sistemas_id`),
+  KEY `fk_solicitacao_equi_patrimonio2_idx` (`patrimonio_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
+
+--
+-- Dumping data for table `solicitacao`
+--
+
+INSERT INTO `solicitacao` (`id`, `descricao_equi`, `descricao_servico`, `anexo`, `local_servico`, `usuario_id`, `data_solicitacao`, `data_atualizacao`, `data_finalizacao`, `situacao_id`, `prioridade_id`, `id_suporte`, `sistemas_id`, `patrimonio_id`, `tipo`) VALUES
+(6, 'teste', 'teste', NULL, 1, 1, '2013-09-18 00:00:00', NULL, NULL, 1, 1, 1, NULL, NULL, 0),
+(8, 'ss', 'dd', NULL, 1, 1, '2013-09-16 00:00:00', NULL, NULL, 1, 1, NULL, NULL, NULL, 0),
+(17, '<p>\n	ddd</p>\n', '<p>\n	blah</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
+(18, '<p>\n	hello word</p>\n', '<p>\n	Hellow word</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
+(19, '<p>\n	f</p>\n', '<p>\n	f</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
+(20, '<p>\n	lek</p>\n', '<p>\n	lek</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
+(21, '<p>\n	d</p>\n', '<p>\n	d</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
+(22, '<p>\n	datetime</p>\n', '<p>\n	datetime</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
+(23, '<p>\n	d</p>\n', '<p>\n	d</p>\n', NULL, 2, 0, '2013-09-23 00:00:00', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
+(24, '', '<p>\n	Problema no Mira</p>\n', NULL, 2, 0, '2013-09-23 05:02:47', NULL, NULL, 1, 1, NULL, 2, NULL, 0),
+(25, '<p>\n	tipo 1</p>\n', '<p>\n	tipo 1</p>\n', NULL, 2, 0, '2013-09-23 05:20:25', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
+(26, '<p>\n	ddsd</p>\n', '<p>\n	sd</p>\n', NULL, 2, 0, '2013-09-23 05:22:05', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
+(27, '<p>\n	d</p>\n', '<p>\n	d</p>\n', NULL, 2, 0, '2013-09-23 05:27:26', NULL, NULL, 1, 1, NULL, NULL, 2, 0),
+(30, '', '<p>\n	d</p>\n', NULL, 2, 0, '2013-09-23 05:36:09', NULL, NULL, 1, 1, NULL, 2, NULL, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `solicitacao_sis`
+--
+
+CREATE TABLE `solicitacao_sis` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao_servico` text NOT NULL,
+  `anexo` varchar(95) DEFAULT NULL,
+  `data_solicitacao` datetime NOT NULL,
+  `data_atualizacao` datetime DEFAULT NULL,
+  `data_finalizacao` datetime DEFAULT NULL,
+  `situacao_id` int(11) NOT NULL,
+  `sistemas_id` int(11) NOT NULL,
+  `suporte_id` int(11) NOT NULL,
+  `prioridade_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`,`situacao_id`,`sistemas_id`,`suporte_id`,`data_solicitacao`,`prioridade_id`),
+  KEY `fk_solicitacao_sis_situacao1_idx` (`situacao_id`),
+  KEY `fk_solicitacao_sis_sistemas1_idx` (`sistemas_id`),
+  KEY `fk_solicitacao_sis_usuarios1_idx` (`suporte_id`),
+  KEY `fk_solicitacao_sis_prioridade1_idx` (`prioridade_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status`
+--
+
+CREATE TABLE `status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `status`
+--
+
+INSERT INTO `status` (`id`, `nome`) VALUES
+(1, 'Ativo'),
+(2, 'Inativo');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(40) NOT NULL,
+  `cargo` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `status_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`status_id`),
+  KEY `fk_usuarios_status_idx` (`status_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nome`, `cargo`, `email`, `status_id`) VALUES
+(2, 'Elton', 'Programador', 'elton.oliveira@am.senac.br', 1);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `solicitacao`
+--
+ALTER TABLE `solicitacao`
+  ADD CONSTRAINT `fk_solicitacao_equi_patrimonio2` FOREIGN KEY (`patrimonio_id`) REFERENCES `patrimonio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_solicitacao_equi_prioridade1` FOREIGN KEY (`prioridade_id`) REFERENCES `prioridade` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_solicitacao_equi_sistemas1` FOREIGN KEY (`sistemas_id`) REFERENCES `sistemas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_solicitacao_equi_situacao1` FOREIGN KEY (`situacao_id`) REFERENCES `situacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `solicitacao_sis`
+--
+ALTER TABLE `solicitacao_sis`
+  ADD CONSTRAINT `fk_solicitacao_sis_situacao1` FOREIGN KEY (`situacao_id`) REFERENCES `situacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_solicitacao_sis_sistemas1` FOREIGN KEY (`sistemas_id`) REFERENCES `sistemas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_solicitacao_sis_usuarios1` FOREIGN KEY (`suporte_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_solicitacao_sis_prioridade1` FOREIGN KEY (`prioridade_id`) REFERENCES `prioridade` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `fk_usuarios_status` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
