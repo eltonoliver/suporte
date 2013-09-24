@@ -150,10 +150,9 @@ class Home extends CI_Controller{
 			$crud = new grocery_CRUD();
 			$crud->set_table('forum');
 
-
 			$crud->set_crud_url_path(site_url('home/mensagem'));
 			$crud->set_theme('datatables');
-
+			 $crud->callback_after_insert(array($this, 'mensagem_insert'));
 			$output = $crud->render();
 			
 			$this->template->load('home','templates/view_mensagem',$output);
@@ -176,6 +175,18 @@ class Home extends CI_Controller{
 	}
 
 
+	function mensagem_insert($postArray){	  	
+ 		
+
+		$msg = '
+			<div class="alert alert-success">
+				 <button type="button" class="close" data-dismiss="alert">×</button>
+ 					Mensagem Enviada..
+			</div>
+		';
+ 		$this->session->set_flashdata('msg', $msg); 		
+    	redirect('home/mensagem/'.$postArray['solicitacao_id']);
+	}
 
 
 }
