@@ -100,7 +100,44 @@ class Admin extends CI_Controller{
 			$crud->set_crud_url_path(site_url('admin/cadastrarUsuarios'));
 			$crud->set_theme('datatables');
 			$crud->set_table('usuarios');
-			$crud->columns('id','nome','login','email');
+			$crud->columns('id','nome','login','email','status_id');
+			//$crud->add_fields('nome','login','cargo','email');
+			//$crud->edit_fields('nome','login','cargo','email');
+			$crud->field_type('status_id', 'hidden', 1);
+
+			$crud->display_as('nome','Nome')
+				 ->display_as('login','Login')
+				 ->display_as('email','E-mail');
+			$crud->unset_print();	 
+		    $crud->callback_column('status_id',array($this,'status_callback'));	
+			$output = $crud->render();
+
+			$this->template->load('home','templates/view_frm_usuarios',$output);
+		}catch(Exception $e){
+
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());	
+
+		}
+		
+
+	}
+	/*CADASTRO DE DÚVIDAS*/
+
+	public function cadastrarDuvidas(){
+		try{
+
+			$crud = new grocery_CRUD();
+			$crud->set_crud_url_path(site_url('admin/cadastrarDuvidas'));
+			$crud->set_theme('datatables');
+			$crud->set_table('duvidas');
+			$crud->columns('id','titulo','conteudo');
+			
+
+			$crud->display_as('titulo','Título')
+				 ->display_as('conteudo','Conteúdo');
+				 
+			$crud->unset_print();	 
+		    $crud->callback_column('status_id',array($this,'status_callback'));	
 			$output = $crud->render();
 
 			$this->template->load('home','templates/view_frm_usuarios',$output);
@@ -122,6 +159,21 @@ class Admin extends CI_Controller{
 		}else{
 
 			$value = "Sistemas";
+		}
+
+		return $value;
+
+	}
+
+	/*VERIFICA AO LISTAR OS DADOS*/
+	public function status_callback($value,$row){
+		if($row->status_id == 1){
+
+			$value = "Ativo";
+
+		}else{
+
+			$value = "Inativo";
 		}
 
 		return $value;
