@@ -33,7 +33,7 @@ class Home extends CI_Controller{
 	}
 	
 	public function home_sisten(){
-		echo "Meu id de suporte = ".$this->idSuporte . ' Meu login '.$this->sessionLogin;
+		
 		$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
 		$this->template->load('home','templates/view_home',$output);
 	}
