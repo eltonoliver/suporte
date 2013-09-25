@@ -57,6 +57,16 @@ class Solicitacao_model extends CI_Model{
 	    	return $this->db->get('usuarios')->result();
 
 	    }
+
+	    public function assumir($id = null, $data = array()){
+
+	    	
+	    	$this->db->where('id',$id);	
+	        $this->db->update('solicitacao', $data);
+			return $this->db->affected_rows();
+	    		    
+	    	
+	    }
 	
 	
 
