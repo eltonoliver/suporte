@@ -15,11 +15,10 @@ class Admin extends CI_Controller{
 	  try{	
 			$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
 			$crud = new grocery_CRUD();
+
 			$crud->set_theme('datatables');
 			$crud->set_table('solicitacao');
 				 
-
-
 			$crud->set_relation('id_suporte','usuarios','nome');
 			$crud->set_relation('situacao_id','situacao','nome');	
 			$crud->set_relation('prioridade_id','prioridade','nome');	
@@ -55,8 +54,6 @@ class Admin extends CI_Controller{
 				$crud->field_type('descricao_servico', 'readonly');
 				$crud->field_type('local_servico', 'readonly');
 				$crud->field_type('usuario_id', 'readonly');
-			
-
 
         		$idSolicitacao = $state_info->primary_key;
     			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
@@ -125,7 +122,6 @@ class Admin extends CI_Controller{
 				redirect('admin/atendimentos/');
 		}catch(Exception $e){
 
-			
 
 			$msg = '
 				<div class="alert alert-error">
