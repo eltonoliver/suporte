@@ -12,8 +12,9 @@ class Admin extends CI_Controller{
 
 
 	public function atendimentos(){
+		$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
 	  try{	
-			$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
+			
 			$crud = new grocery_CRUD();
 
 			$crud->set_theme('datatables');
@@ -75,9 +76,6 @@ class Admin extends CI_Controller{
     		/*END ACTIONS*/	
 		
 			$output = $crud->render();
-
- 
-
 
 			$this->template->load('home','templates/view_atendimento',$output);
 
