@@ -37,6 +37,13 @@ class Solicitacao_model extends CI_Model{
 	    		)->result();
 	    }
 
+	    public function getTipoSolicitacao($id = null){
+	    	$this->db->where('id', $id);
+	    	$this->db->select('tipo');
+	    	return $this->db->get('solicitacao')->result();
+
+	    }
+
 
 	    public function getForum($id = null){
 	    		   $this->db->where('solicitacao_id',$id);   	
