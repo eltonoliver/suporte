@@ -91,6 +91,28 @@ class Admin extends CI_Controller{
 		}
 	}
 
+	/*CADASTRAR USUÁRIOS*/
+
+	public function cadastrarUsuarios(){
+		try{
+
+			$crud = new grocery_CRUD();
+			$crud->set_crud_url_path(site_url('admin/cadastrarUsuarios'));
+			$crud->set_theme('datatables');
+			$crud->set_table('usuarios');
+			$crud->columns('id','nome','login','email');
+			$output = $crud->render();
+
+			$this->template->load('home','templates/view_frm_usuarios',$output);
+		}catch(Exception $e){
+
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());	
+
+		}
+		
+
+	}
+
 
 	public function tipo_callback($value,$row){
 		if($row->tipo == 1){
