@@ -2,24 +2,22 @@
 -- version 3.5.7
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Sep 24, 2013 at 01:04 PM
--- Server version: 5.5.29
--- PHP Version: 5.4.10
+-- Máquina: localhost
+-- Data de Criação: 25-Set-2013 às 20:23
+-- Versão do servidor: 5.5.29
+-- versão do PHP: 5.4.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `suporte`
+-- Base de Dados: `suporte`
 --
-CREATE DATABASE `suporte` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `suporte`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ci_sessions`
+-- Estrutura da tabela `ci_sessions`
 --
 
 CREATE TABLE `ci_sessions` (
@@ -33,38 +31,22 @@ CREATE TABLE `ci_sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `ci_sessions`
+-- Extraindo dados da tabela `ci_sessions`
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('15bee7d237bc94135d5ab4a563e188b4', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995433, ''),
-('2188653dfdee681db85db3cc59293ccc', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995318, ''),
-('2a85f5ab05fa7f99aeb9b25668205088', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995434, ''),
-('6f03894798602ef16d90985723a04c65', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995427, ''),
-('7c596d46768d2e5fa62e020cc4794515', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995424, ''),
-('7e873e041f58adc219d75007c153867b', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995434, ''),
-('8b04bcb5edca8a7436c5645a312b3639', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995317, ''),
-('9137f2aeacee3ac2d92ec09b80f027be', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995362, ''),
-('994d41dbe9a66900189338c6b8a46985', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995433, ''),
-('9d941ce57e169ce758b5c4101ced731d', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995396, ''),
-('a2a12c377d0b21f3630b0425320cc006', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995463, ''),
-('d0930b032e149a46c34a6321a37a4807', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995362, ''),
-('e09955bbf192a46479c5c7685fba4b9c', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995396, ''),
-('e725fdcf3871e189c44cd791dc40487f', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995420, ''),
-('f0e7e098c07fcfff3a10079e68324cb4', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995420, ''),
-('f382dcc37b1c0121bbf6330a9f1f95a9', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995427, ''),
-('fd3f17f3b658c33f8ada3da54d0aded3', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1379995424, '');
+('f623bf7178cf1171b1878948df48acf9', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1380133080, 'a:4:{s:9:"user_data";s:0:"";s:10:"usuario_id";i:25;s:5:"login";s:5:"elton";s:10:"suporte_id";s:1:"1";}');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `forum`
+-- Estrutura da tabela `forum`
 --
 
 CREATE TABLE `forum` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mensagem` text NOT NULL,
-  `data` datetime NOT NULL,
+  `data` date NOT NULL,
   `suporte_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `solicitacao_id` int(11) NOT NULL,
@@ -76,7 +58,7 @@ CREATE TABLE `forum` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `patrimonio`
+-- Estrutura da tabela `patrimonio`
 --
 
 CREATE TABLE `patrimonio` (
@@ -87,7 +69,7 @@ CREATE TABLE `patrimonio` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `patrimonio`
+-- Extraindo dados da tabela `patrimonio`
 --
 
 INSERT INTO `patrimonio` (`id`, `patrimonio`, `id_unidade`) VALUES
@@ -97,7 +79,7 @@ INSERT INTO `patrimonio` (`id`, `patrimonio`, `id_unidade`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prioridade`
+-- Estrutura da tabela `prioridade`
 --
 
 CREATE TABLE `prioridade` (
@@ -107,7 +89,7 @@ CREATE TABLE `prioridade` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `prioridade`
+-- Extraindo dados da tabela `prioridade`
 --
 
 INSERT INTO `prioridade` (`id`, `nome`) VALUES
@@ -118,7 +100,7 @@ INSERT INTO `prioridade` (`id`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sistemas`
+-- Estrutura da tabela `sistemas`
 --
 
 CREATE TABLE `sistemas` (
@@ -129,7 +111,7 @@ CREATE TABLE `sistemas` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `sistemas`
+-- Extraindo dados da tabela `sistemas`
 --
 
 INSERT INTO `sistemas` (`id`, `nome`, `descricao`) VALUES
@@ -139,7 +121,7 @@ INSERT INTO `sistemas` (`id`, `nome`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `situacao`
+-- Estrutura da tabela `situacao`
 --
 
 CREATE TABLE `situacao` (
@@ -149,7 +131,7 @@ CREATE TABLE `situacao` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `situacao`
+-- Extraindo dados da tabela `situacao`
 --
 
 INSERT INTO `situacao` (`id`, `nome`) VALUES
@@ -160,7 +142,7 @@ INSERT INTO `situacao` (`id`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `solicitacao`
+-- Estrutura da tabela `solicitacao`
 --
 
 CREATE TABLE `solicitacao` (
@@ -170,9 +152,9 @@ CREATE TABLE `solicitacao` (
   `anexo` varchar(90) DEFAULT NULL,
   `local_servico` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
-  `data_solicitacao` datetime NOT NULL,
-  `data_atualizacao` datetime DEFAULT NULL,
-  `data_finalizacao` datetime DEFAULT NULL,
+  `data_solicitacao` date NOT NULL,
+  `data_atualizacao` date DEFAULT NULL,
+  `data_finalizacao` date DEFAULT NULL,
   `situacao_id` int(11) NOT NULL DEFAULT '1',
   `prioridade_id` int(11) NOT NULL DEFAULT '1',
   `id_suporte` int(11) DEFAULT NULL,
@@ -184,44 +166,22 @@ CREATE TABLE `solicitacao` (
   KEY `fk_solicitacao_equi_prioridade1_idx` (`prioridade_id`),
   KEY `fk_solicitacao_equi_sistemas1_idx` (`sistemas_id`),
   KEY `fk_solicitacao_equi_patrimonio2_idx` (`patrimonio_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 --
--- Dumping data for table `solicitacao`
+-- Extraindo dados da tabela `solicitacao`
 --
 
 INSERT INTO `solicitacao` (`id`, `descricao_equi`, `descricao_servico`, `anexo`, `local_servico`, `usuario_id`, `data_solicitacao`, `data_atualizacao`, `data_finalizacao`, `situacao_id`, `prioridade_id`, `id_suporte`, `sistemas_id`, `patrimonio_id`, `tipo`) VALUES
-(33, '<p>\n	Equipamento teste</p>\n', '<p>\n	Equipamento teste</p>\n', NULL, 2, 0, '2013-09-24 05:02:46', NULL, NULL, 1, 1, 1, NULL, 2, 1),
-(34, '', '<p>\n	MXM</p>\n', NULL, 2, 0, '2013-09-24 05:09:56', NULL, NULL, 1, 1, NULL, 2, NULL, 2);
+(33, '<p>\n Equipamento teste</p>\n', '<p>\n  Equipamento teste</p>\n', NULL, 2, 0, '2013-09-24', NULL, NULL, 1, 1, 1, NULL, 2, 1),
+(34, '', '<p>\n MXM</p>\n', 'b28d3-alphabet.png', 2, 0, '2013-09-24', NULL, NULL, 1, 1, 1, 2, NULL, 2),
+(35, '<p>\n user data</p>\n', '<p>\n  user data</p>\n', NULL, 2, 25, '2013-09-25', NULL, NULL, 1, 1, 1, NULL, 2, 1),
+(36, '', '<p>\n mxm</p>\n', NULL, 2, 25, '2013-09-25', NULL, NULL, 1, 1, 1, 2, NULL, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `solicitacao_sis`
---
-
-CREATE TABLE `solicitacao_sis` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descricao_servico` text NOT NULL,
-  `anexo` varchar(95) DEFAULT NULL,
-  `data_solicitacao` datetime NOT NULL,
-  `data_atualizacao` datetime DEFAULT NULL,
-  `data_finalizacao` datetime DEFAULT NULL,
-  `situacao_id` int(11) NOT NULL,
-  `sistemas_id` int(11) NOT NULL,
-  `suporte_id` int(11) NOT NULL,
-  `prioridade_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`,`situacao_id`,`sistemas_id`,`suporte_id`,`data_solicitacao`,`prioridade_id`),
-  KEY `fk_solicitacao_sis_situacao1_idx` (`situacao_id`),
-  KEY `fk_solicitacao_sis_sistemas1_idx` (`sistemas_id`),
-  KEY `fk_solicitacao_sis_usuarios1_idx` (`suporte_id`),
-  KEY `fk_solicitacao_sis_prioridade1_idx` (`prioridade_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `status`
+-- Estrutura da tabela `status`
 --
 
 CREATE TABLE `status` (
@@ -231,7 +191,7 @@ CREATE TABLE `status` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `status`
+-- Extraindo dados da tabela `status`
 --
 
 INSERT INTO `status` (`id`, `nome`) VALUES
@@ -241,39 +201,41 @@ INSERT INTO `status` (`id`, `nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estrutura da tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(40) NOT NULL,
+  `login` varchar(45) NOT NULL,
   `cargo` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `status_id` int(11) NOT NULL,
   PRIMARY KEY (`id`,`status_id`),
   KEY `fk_usuarios_status_idx` (`status_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `usuarios`
+-- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `cargo`, `email`, `status_id`) VALUES
-(1, 'Elton', 'Programador', 'elton.oliveira@am.senac.br', 1);
+INSERT INTO `usuarios` (`id`, `nome`, `login`, `cargo`, `email`, `status_id`) VALUES
+(1, 'Elton Oliveira', 'elton', 'Programador', 'elton.oliveira@am.senac.br', 1),
+(3, 'Fernando Mauricio', 'fernando', 'Analista de Sistemas', 'fernando.mauricio@am.senac.br', 1);
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `forum`
+-- Limitadores para a tabela `forum`
 --
 ALTER TABLE `forum`
-  ADD CONSTRAINT `fk_forum_usuarios1` FOREIGN KEY (`suporte_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_forum_solicitacao1` FOREIGN KEY (`solicitacao_id`) REFERENCES `solicitacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_forum_solicitacao1` FOREIGN KEY (`solicitacao_id`) REFERENCES `solicitacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_forum_usuarios1` FOREIGN KEY (`suporte_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `solicitacao`
+-- Limitadores para a tabela `solicitacao`
 --
 ALTER TABLE `solicitacao`
   ADD CONSTRAINT `fk_solicitacao_equi_patrimonio2` FOREIGN KEY (`patrimonio_id`) REFERENCES `patrimonio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -282,16 +244,7 @@ ALTER TABLE `solicitacao`
   ADD CONSTRAINT `fk_solicitacao_equi_situacao1` FOREIGN KEY (`situacao_id`) REFERENCES `situacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `solicitacao_sis`
---
-ALTER TABLE `solicitacao_sis`
-  ADD CONSTRAINT `fk_solicitacao_sis_situacao1` FOREIGN KEY (`situacao_id`) REFERENCES `situacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_solicitacao_sis_sistemas1` FOREIGN KEY (`sistemas_id`) REFERENCES `sistemas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_solicitacao_sis_usuarios1` FOREIGN KEY (`suporte_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_solicitacao_sis_prioridade1` FOREIGN KEY (`prioridade_id`) REFERENCES `prioridade` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `usuarios`
+-- Limitadores para a tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `fk_usuarios_status` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
