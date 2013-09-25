@@ -98,7 +98,7 @@
 
                   <!--Drop Administração -->
                
-
+                  <?php if($this->session->userdata('suporte_id') != ''){ ?>
                    <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-wrench icon-white"></i> &nbsp;Administração<strong class="caret"></strong></a>
                          
@@ -117,7 +117,7 @@
                           </li>                     
                         </ul>
                     </li>
-
+                    <?php }else{ echo ''; } ?>
                   <!--End Drop Administração -->
                 </ul>
 
