@@ -8,6 +8,8 @@ class Home extends CI_Controller{
 		
 		$this->load->library('grocery_CRUD');
 		$this->load->model('solicitacao_model');
+		//SIMULACAO DO ID DO USUÁRIO
+		$this->session->set_userdata('usuario_id', 25);
 
 	}
 	
