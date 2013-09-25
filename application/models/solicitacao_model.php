@@ -29,7 +29,7 @@ class Solicitacao_model extends CI_Model{
 					sistemas.nome, 
 					situacao.nome as nomeSituacao
 				FROM solicitacao LEFT JOIN usuarios ON solicitacao.id_suporte = usuarios.id
-					 LEFT JOIN db_base.unidade_uni ON solicitacao.local_servico = db_base.unidade_uni.uni_codunidade
+					 LEFT JOIN db_base.unidade_uni ON solicitacao.local_servico = db_base.unidade_uni.id
 					 LEFT JOIN patrimonio ON solicitacao.patrimonio_id = patrimonio.id
 					 LEFT JOIN sistemas ON solicitacao.sistemas_id = sistemas.id
 					 LEFT JOIN situacao ON solicitacao.situacao_id = situacao.id
