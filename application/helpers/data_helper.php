@@ -119,5 +119,34 @@
 	}
 
 
+	function dataRelativa($data){
+		$today = strtotime(date('M j, Y'));
+		$reldays = (strtotime($data) - $today)/86400;
+		$hora = substr($data,11,5);
+		if ($reldays >= 0 && $reldays < 1) 
+			return (strlen($hora)?$hora:'Hoje');
+		else if ($reldays >= 1 && $reldays < 2)
+			return 'Amanhã ';
+		else if ($reldays >= -1 && $reldays < 0)
+			return 'Ontem '.(substr($data,11,5) != '00:00'?" às ".substr($data,11,5):'');
+
+			if (abs($reldays) < 7){
+			  if ($reldays > 0) {
+			    $reldays = floor($reldays);
+			   return 'Há ' . $reldays . ' dia' . ($reldays != 1 ? 's' : '');
+			} 
+			  else {
+			   $reldays = abs(floor($reldays));
+			   return $reldays . ' dia' . ($reldays != 1 ? 's' : '') . ' atrás '.(substr($data,11,5) != '00:00'?" às ".substr($data,11,5):'');
+			 }
+			}
+
+			if (abs($reldays) < 182) 
+			   return toSystemDate($data);
+			else
+			  return toSystemDate($data);
+	}
+
+
 
 ?>
