@@ -11,7 +11,7 @@ class Admin extends CI_Controller{
 	}
 
 
-	public function atendimentos(){
+	public function atendimentos($id = null){
 		$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
 	  try{	
 			
@@ -40,7 +40,8 @@ class Admin extends CI_Controller{
 				 ->display_as('prioridade_id','Prioridade')
 				 ->display_as('sistemas_id','Nome do Sistema')
 				 ->display_as('patrimonio_id','Patrimônio');
-			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');	 
+			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
+			$crud->unset_back_to_list();	 
 			$crud->unset_print();
 			$crud->unset_add();
 			$crud->unset_delete();
@@ -49,12 +50,15 @@ class Admin extends CI_Controller{
 			$state = $crud->getState();
     		$state_info = $crud->getStateInfo();
 			if($state == 'read' || $state == 'edit'){
+				$crud->set_theme('flexigrid');
 				/*READONLY - CAMPOS DE SOMENTE LEITURA*/
 				$crud->field_type('data_solicitacao', 'readonly');
 				$crud->field_type('descricao_equi', 'readonly');
 				$crud->field_type('descricao_servico', 'readonly');
 				$crud->field_type('local_servico', 'readonly');
 				$crud->field_type('usuario_id', 'readonly');
+				$crud->field_type('sistemas_id','readonly');
+
 
         		$idSolicitacao = $state_info->primary_key;
     			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
@@ -62,6 +66,7 @@ class Admin extends CI_Controller{
         			if($value->tipo == 2){
 
         				$crud->field_type('descricao_equi', 'hidden');
+        				$crud->field_type('patrimonio_id', 'readonly');
 
         			}else{
         				
@@ -71,7 +76,7 @@ class Admin extends CI_Controller{
     		/*END STATE*/
 
     		/*ACTIONS*/
-
+    		$crud->callback_after_update(array($this, 'msgUpdate'));
     		$crud->add_action('Assumir Atendimento', '', 'admin/assumirAtendimento','ui-icon ui-icon-circle-check');
     		/*END ACTIONS*/	
 		
@@ -120,7 +125,6 @@ class Admin extends CI_Controller{
 				redirect('admin/atendimentos/');
 		}catch(Exception $e){
 
-
 			$msg = '
 				<div class="alert alert-error">
 				<button type="button" class="close" data-dismiss="alert">×</button>
@@ -132,6 +136,20 @@ class Admin extends CI_Controller{
 		}
 
 	}
+
+
+	/*CALLBACK MSG DE UPDATE*/
+	function msgUpdate($post_array,$primary_key){
+    	
+ 		$msg = '
+				<div class="alert alert-success">
+					 <button type="button" class="close" data-dismiss="alert">×</button>
+ 						Dados Atualizados! <a href="'.base_url().'admin/atendimentos/">Voltar para lista </a> 
+				</div>';
+		$this->session->set_flashdata('msg', $msg); 		
+    	redirect('admin/atendimentos/edit/'.$primary_key);
+	}
+ 
 
 
 }
