@@ -41,7 +41,7 @@ class Admin extends CI_Controller{
 				 ->display_as('prioridade_id','Prioridade')
 				 ->display_as('sistemas_id','Nome do Sistema')
 				 ->display_as('patrimonio_id','Patrimônio');
-
+			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');	 
 			$crud->unset_print();
 			$crud->unset_add();
 			$crud->unset_delete();
@@ -49,16 +49,25 @@ class Admin extends CI_Controller{
 			/*STATE*/
 			$state = $crud->getState();
     		$state_info = $crud->getStateInfo();
-			if($state == 'read'){
+			if($state == 'read' || $state == 'edit'){
+				$crud->field_type('data_solicitacao', 'readonly');
+				$crud->field_type('descricao_equi', 'readonly');
+				$crud->field_type('descricao_servico', 'readonly');
+				$crud->field_type('local_servico', 'readonly');
+				$crud->field_type('usuario_id', 'readonly');
+
+
+
+
+
         		$idSolicitacao = $state_info->primary_key;
     			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
         		foreach ($tipo as $value) {
         			if($value->tipo == 2){
         				$crud->field_type('descricao_equi', 'hidden');
-        				$crud->field_type('patrimonio_id', 'invisible');
 
-
- 
+        			}else{
+        				$crud->field_type('sistemas_id', 'invisible');
         			}
         		}
     		}
@@ -104,7 +113,7 @@ class Admin extends CI_Controller{
 			$dados = array('id_suporte' => $this->session->userdata('suporte_id'));
 			if(!$this->solicitacao_model->assumir($id,$dados)){
 
-				throw new Exception("Erro ao assumir atendimento!");
+				throw new Exception("Você já é responsável por este atendimento!");
 				
 			}
 
@@ -117,7 +126,15 @@ class Admin extends CI_Controller{
 				redirect('admin/atendimentos/');
 		}catch(Exception $e){
 
-			echo '<script> alert("'.$e->getMessage().'"); </script>';
+			
+
+			$msg = '
+				<div class="alert alert-error">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+  					'.$e->getMessage().'
+				</div>
+			';
+			$this->session->set_flashdata('msg', $msg); 
 			redirect('admin/atendimentos/');
 		}
 
