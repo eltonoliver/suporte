@@ -61,6 +61,8 @@ $route['home/solicitacao-sistema/insert_validation']			= "/home/solcicitacaoSist
 /*ROTAS MINHAS SOLICITACOES*/
 $route['home/minhas-solicitacoes']								= "/home/minhasSolicitacoes/";
 
+$route['admin/cadastrar-usuarios']								= "/admin/cadastrarUsuarios/";
+
 
 $route['404_override'] = 'home/home_sisten';
 
