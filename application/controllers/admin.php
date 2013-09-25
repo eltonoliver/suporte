@@ -14,27 +14,11 @@ class Admin extends CI_Controller{
 
 	public function atendimentos(){
 	  try{	
-			$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
+			//$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
 			$crud = new grocery_CRUD();
 			$crud->set_theme('datatables');
 			$crud->set_table('solicitacao');
-				/*STATE*/
-			$state = $crud->getState();
-    		$state_info = $crud->getStateInfo();
-			if($state == 'read'){
-        		$idSolicitacao = $state_info->primary_key;
-    			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
-        		foreach ($tipo as $value) {
-        			if($value->tipo == 2){
-        				$crud->field_type('descricao_equi', 'hidden');
-        				$crud->field_type('patrimonio', 'hidden');
-        				$crud->field_type('patrimonio_id', 'hidden');
-
- 
-        			}
-        		}
-    		}
-    		/*END STATE*/		 
+				 
 
 
 			$crud->set_relation('id_suporte','usuarios','nome');
@@ -59,7 +43,31 @@ class Admin extends CI_Controller{
 				 ->display_as('patrimonio_id','Patrimônio');
 
 			$crud->unset_print();
+			$crud->unset_add();
+			$crud->unset_delete();
+			$crud->unset_jquery();
+			/*STATE*/
+			$state = $crud->getState();
+    		$state_info = $crud->getStateInfo();
+			if($state == 'read'){
+        		$idSolicitacao = $state_info->primary_key;
+    			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
+        		foreach ($tipo as $value) {
+        			if($value->tipo == 2){
+        				$crud->field_type('descricao_equi', 'hidden');
+        				$crud->field_type('patrimonio_id', 'invisible');
 
+
+ 
+        			}
+        		}
+    		}
+    		/*END STATE*/
+
+    		/*ACTIONS*/
+
+    		$crud->add_action('Assumir Atendimento', '', 'admin/assumirAtendimento','ui-icon ui-icon-circle-check');
+    		/*END ACTIONS*/	
 		
 			$output = $crud->render();
 
@@ -86,6 +94,32 @@ class Admin extends CI_Controller{
 		}
 
 		return $value;
+
+	}
+
+	/*CALLBACK ASSUMIR ATENDIMENTO*/
+
+	public function assumirAtendimento($id = null){
+		try{
+			$dados = array('id_suporte' => $this->session->userdata('suporte_id'));
+			if(!$this->solicitacao_model->assumir($id,$dados)){
+
+				throw new Exception("Erro ao assumir atendimento!");
+				
+			}
+
+			$msg = '
+				<div class="alert alert-success">
+					 <button type="button" class="close" data-dismiss="alert">×</button>
+ 						Você assumiu este atendimento!
+				</div>';
+ 				$this->session->set_flashdata('msg', $msg); 	
+				redirect('admin/atendimentos/');
+		}catch(Exception $e){
+
+			echo '<script> alert("'.$e->getMessage().'"); </script>';
+			redirect('admin/atendimentos/');
+		}
 
 	}
 
