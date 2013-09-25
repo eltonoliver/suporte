@@ -2,6 +2,10 @@
 
 class Home extends CI_Controller{	
 
+	public $sessionUsuario;
+	public $sessionNome;
+	public $idSuporte;
+
 	public function __construct(){
 
 		parent::__construct();
@@ -10,11 +14,26 @@ class Home extends CI_Controller{
 		$this->load->model('solicitacao_model');
 		//SIMULACAO DO ID DO USUÁRIO
 		$this->session->set_userdata('usuario_id', 25);
+		$this->session->set_userdata('login','eltons');
+		$this->sessionLogin = $this->session->userdata('login');
+		$this->sessionUsuario =  $this->session->userdata('usuario_id');
+
+		$dados = $this->solicitacao_model->getSuporte($this->sessionLogin);
+		/*************
+		*CASO O USUÁRIO SEJA UM ADMINISTRADOR , O ID DELE DE SUPORTE FICARA NA SESSAO
+		*
+		**************/
+		foreach ($dados as $value) {
+			if($this->sessionLogin === $value->login){
+				$this->session->set_userdata('suporte_id',$value->id);
+				$this->idSuporte = $this->session->userdata('suporte_id');
+			}
+		}
 
 	}
 	
 	public function home_sisten(){
-
+		echo "Meu id de suporte = ".$this->idSuporte . ' Meu login '.$this->sessionLogin;
 		$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
 		$this->template->load('home','templates/view_home',$output);
 	}
@@ -27,9 +46,10 @@ class Home extends CI_Controller{
 			$crud->set_theme('flexigrid');
 			$crud->set_table('solicitacao');	
 			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
+
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
 			$crud->set_relation('patrimonio_id','patrimonio','patrimonio');
-			$crud->fields('patrimonio_id','descricao_equi','anexo','descricao_servico','local_servico','data_solicitacao','tipo');
+			$crud->fields('patrimonio_id','descricao_equi','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');
 			$crud->display_as('patrimonio_id','Patrimônio')
 				 ->display_as('descricao_equi','Descrição do Equipamento')
 				 ->display_as('anexo','Anexo')
@@ -37,6 +57,7 @@ class Home extends CI_Controller{
 				 ->display_as('local_servico','Local do Serviço');
 			/*Deixa o campo data_solicitacao invisivel*/	 
 			$crud->field_type('data_solicitacao','invisible');
+			$crud->field_type('usuario_id', 'hidden', $this->sessionUsuario);
 			$crud->field_type('tipo', 'hidden',1);
 			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
 			
@@ -67,13 +88,14 @@ class Home extends CI_Controller{
 			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
 			$crud->set_relation('sistemas_id','sistemas','nome');
-			$crud->fields('sistemas_id','anexo','descricao_servico','local_servico','data_solicitacao','tipo');
+			$crud->fields('sistemas_id','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');
 			$crud->display_as('sistemas_id','Sistema')
 				 ->display_as('anexo','Anexo')
 				 ->display_as('descricao_servico','Descrição do Serviço')
 				 ->display_as('local_servico','Local do Serviço');
 			/*Deixa o campo data_solicitacao invisivel*/	 
 			$crud->field_type('data_solicitacao','invisible');
+			$crud->field_type('usuario_id', 'hidden', $this->sessionUsuario);
 			$crud->field_type('tipo', 'hidden',2);
 			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
 						
@@ -100,6 +122,7 @@ class Home extends CI_Controller{
 			$crud->set_crud_url_path(site_url('home/minhasSolicitacoes'));
 			$crud->set_theme('datatables');
 			$crud->set_table('solicitacao');
+			$crud->where('usuario_id',$this->sessionUsuario);
 			$crud->columns('id','local_servico','data_solicitacao','situacao_id','id_suporte');
 
 
