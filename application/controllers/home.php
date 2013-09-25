@@ -14,7 +14,7 @@ class Home extends CI_Controller{
 		$this->load->model('solicitacao_model');
 		//SIMULACAO DO ID DO USUÁRIO
 		$this->session->set_userdata('usuario_id', 25);
-		$this->session->set_userdata('login','eltons');
+		$this->session->set_userdata('login','elton');
 		$this->sessionLogin = $this->session->userdata('login');
 		$this->sessionUsuario =  $this->session->userdata('usuario_id');
 
@@ -29,7 +29,7 @@ class Home extends CI_Controller{
 				$this->idSuporte = $this->session->userdata('suporte_id');
 			}
 		}
-
+		//$this->session->sess_destroy();
 	}
 	
 	public function home_sisten(){
