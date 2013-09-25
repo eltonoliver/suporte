@@ -76,6 +76,7 @@ class Admin extends CI_Controller{
     		/*END STATE*/
 
     		/*ACTIONS*/
+    		
     		$crud->callback_after_update(array($this, 'msgUpdate'));
     		$crud->add_action('Assumir Atendimento', '', 'admin/assumirAtendimento','ui-icon ui-icon-circle-check');
     		/*END ACTIONS*/	
@@ -110,7 +111,7 @@ class Admin extends CI_Controller{
 	public function assumirAtendimento($id = null){
 		try{
 			$dados = array('id_suporte' => $this->session->userdata('suporte_id'));
-			if(!$this->solicitacao_model->assumir($id,$dados)){
+			if(!$this->solicitacao_model->update($id,$dados)){
 
 				throw new Exception("Você já é responsável por este atendimento!");
 				
@@ -139,16 +140,25 @@ class Admin extends CI_Controller{
 
 
 	/*CALLBACK MSG DE UPDATE*/
-	function msgUpdate($post_array,$primary_key){
+	public function msgUpdate($post_array,$primary_key){
     	
+    	$dados = array('data_atualizacao' => date('Y-m-d h:i:s'));
+    	$this->solicitacao_model->update($primary_key,$dados);	
+
  		$msg = '
 				<div class="alert alert-success">
 					 <button type="button" class="close" data-dismiss="alert">×</button>
  						Dados Atualizados! <a href="'.base_url().'admin/atendimentos/">Voltar para lista </a> 
 				</div>';
+
 		$this->session->set_flashdata('msg', $msg); 		
     	redirect('admin/atendimentos/edit/'.$primary_key);
 	}
+
+	/*CALBACK EDIT SITUAÇÃO*/
+
+	
+
  
 
 
