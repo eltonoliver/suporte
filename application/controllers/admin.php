@@ -1,8 +1,6 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Admin extends CI_Controller{	
-
-
 
 	public function __construct(){
 
@@ -12,9 +10,10 @@ class Admin extends CI_Controller{
 
 	}
 
+
 	public function atendimentos(){
 	  try{	
-			//$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
+			$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
 			$crud = new grocery_CRUD();
 			$crud->set_theme('datatables');
 			$crud->set_table('solicitacao');
@@ -50,24 +49,24 @@ class Admin extends CI_Controller{
 			$state = $crud->getState();
     		$state_info = $crud->getStateInfo();
 			if($state == 'read' || $state == 'edit'){
+				/*READONLY - CAMPOS DE SOMENTE LEITURA*/
 				$crud->field_type('data_solicitacao', 'readonly');
 				$crud->field_type('descricao_equi', 'readonly');
 				$crud->field_type('descricao_servico', 'readonly');
 				$crud->field_type('local_servico', 'readonly');
 				$crud->field_type('usuario_id', 'readonly');
-
-
-
+			
 
 
         		$idSolicitacao = $state_info->primary_key;
     			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
         		foreach ($tipo as $value) {
         			if($value->tipo == 2){
+
         				$crud->field_type('descricao_equi', 'hidden');
 
         			}else{
-        				$crud->field_type('sistemas_id', 'invisible');
+        				
         			}
         		}
     		}
@@ -139,9 +138,6 @@ class Admin extends CI_Controller{
 		}
 
 	}
-
-
-
 
 
 }
