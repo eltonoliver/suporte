@@ -113,7 +113,7 @@
                             <a href="<?php echo base_url(); ?>admin/cadastrar-usuarios/">Cadastro de Usuários</a>
                           </li>  
                             <li>
-                            <a href="<?php echo base_url(); ?>home/solicitacao-sistema/add">Cadastro de Dúvidas</a>
+                            <a href="<?php echo base_url(); ?>admin/cadastrar-duvidas/">Cadastro de Dúvidas</a>
                           </li>                     
                         </ul>
                     </li>
