@@ -58,7 +58,7 @@ class Solicitacao_model extends CI_Model{
 
 	    }
 
-	    public function assumir($id = null, $data = array()){
+	    public function update($id = null, $data = array()){
 
 	    	
 	    	$this->db->where('id',$id);	
@@ -67,9 +67,6 @@ class Solicitacao_model extends CI_Model{
 	    		    
 	    	
 	    }
-	
-	
-
 
 }
 ?>
