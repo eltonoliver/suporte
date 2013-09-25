@@ -33,14 +33,21 @@ class Solicitacao_model extends CI_Model{
 					 LEFT JOIN patrimonio ON solicitacao.patrimonio_id = patrimonio.id
 					 LEFT JOIN sistemas ON solicitacao.sistemas_id = sistemas.id
 					 LEFT JOIN situacao ON solicitacao.situacao_id = situacao.id
-				WHERE solicitacao.id = '.$id
+				WHERE solicitacao.id = '.$id.' AND solicitacao.usuario_id ='.$this->session->userdata('usuario_id')
 	    		)->result();
 	    }
 
 
 	    public function getForum($id = null){
 	    		   $this->db->where('solicitacao_id',$id);   	
+	    		   $this->db->where('usuario_id', $this->session->userdata('usuario_id'));
 	    	return $this->db->get('forum')->result();
+
+	    }
+
+	    public function getSuporte($login = null){
+	    	$this->db->where('login',$login);
+	    	return $this->db->get('usuarios')->result();
 
 	    }
 	
