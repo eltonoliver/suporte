@@ -110,7 +110,7 @@
                             <a href="<?php echo base_url(); ?>home/solicitacao-sistema/add">Relatórios</a>
                           </li> 
                             <li>
-                            <a href="<?php echo base_url(); ?>home/solicitacao-sistema/add">Cadastro de Usuários</a>
+                            <a href="<?php echo base_url(); ?>admin/cadastrar-usuarios/">Cadastro de Usuários</a>
                           </li>  
                             <li>
                             <a href="<?php echo base_url(); ?>home/solicitacao-sistema/add">Cadastro de Dúvidas</a>
