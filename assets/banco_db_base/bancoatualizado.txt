@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 25-Set-2013 às 20:23
+-- Data de Criação: 25-Set-2013 às 23:00
 -- Versão do servidor: 5.5.29
 -- versão do PHP: 5.4.10
 
@@ -13,6 +13,8 @@ SET time_zone = "+00:00";
 --
 -- Base de Dados: `suporte`
 --
+CREATE DATABASE `suporte` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `suporte`;
 
 -- --------------------------------------------------------
 
@@ -35,7 +37,27 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('f623bf7178cf1171b1878948df48acf9', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1380133080, 'a:4:{s:9:"user_data";s:0:"";s:10:"usuario_id";i:25;s:5:"login";s:5:"elton";s:10:"suporte_id";s:1:"1";}');
+('2fd4fc9e6a9deb92847f36e8a43a574b', '::1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36', 1380141757, 'a:4:{s:9:"user_data";s:0:"";s:10:"usuario_id";i:25;s:5:"login";s:5:"elton";s:10:"suporte_id";s:1:"1";}');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `duvidas`
+--
+
+CREATE TABLE `duvidas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(45) NOT NULL,
+  `conteudo` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Extraindo dados da tabela `duvidas`
+--
+
+INSERT INTO `duvidas` (`id`, `titulo`, `conteudo`) VALUES
+(1, 'Dúvida 1', '<p>\n  Conte&uacute;do da D&uacute;vida</p>\n');
 
 -- --------------------------------------------------------
 
@@ -47,13 +69,18 @@ CREATE TABLE `forum` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mensagem` text NOT NULL,
   `data` date NOT NULL,
-  `suporte_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `solicitacao_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`suporte_id`,`solicitacao_id`),
-  KEY `fk_forum_usuarios1_idx` (`suporte_id`),
+  PRIMARY KEY (`id`,`solicitacao_id`),
   KEY `fk_forum_solicitacao1_idx` (`solicitacao_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Extraindo dados da tabela `forum`
+--
+
+INSERT INTO `forum` (`id`, `mensagem`, `data`, `usuario_id`, `solicitacao_id`) VALUES
+(5, 'Quero urgência nesse atendimento', '2013-09-25', 25, 39);
 
 -- --------------------------------------------------------
 
@@ -166,17 +193,15 @@ CREATE TABLE `solicitacao` (
   KEY `fk_solicitacao_equi_prioridade1_idx` (`prioridade_id`),
   KEY `fk_solicitacao_equi_sistemas1_idx` (`sistemas_id`),
   KEY `fk_solicitacao_equi_patrimonio2_idx` (`patrimonio_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
 
 --
 -- Extraindo dados da tabela `solicitacao`
 --
 
 INSERT INTO `solicitacao` (`id`, `descricao_equi`, `descricao_servico`, `anexo`, `local_servico`, `usuario_id`, `data_solicitacao`, `data_atualizacao`, `data_finalizacao`, `situacao_id`, `prioridade_id`, `id_suporte`, `sistemas_id`, `patrimonio_id`, `tipo`) VALUES
-(33, '<p>\n Equipamento teste</p>\n', '<p>\n  Equipamento teste</p>\n', NULL, 2, 0, '2013-09-24', NULL, NULL, 1, 1, 1, NULL, 2, 1),
-(34, '', '<p>\n MXM</p>\n', 'b28d3-alphabet.png', 2, 0, '2013-09-24', NULL, NULL, 1, 1, 1, 2, NULL, 2),
-(35, '<p>\n user data</p>\n', '<p>\n  user data</p>\n', NULL, 2, 25, '2013-09-25', NULL, NULL, 1, 1, 1, NULL, 2, 1),
-(36, '', '<p>\n mxm</p>\n', NULL, 2, 25, '2013-09-25', NULL, NULL, 1, 1, 1, 2, NULL, 2);
+(39, '<p>\n Monitor Positivo&nbsp;</p>\n', '<p>\n Tro ca de monitor</p>\n', NULL, 2, 25, '2013-09-25', '2013-09-25', NULL, 1, 1, NULL, NULL, 2, 1),
+(40, '', '<p>\n Problema no MXM</p>\n', NULL, 2, 25, '2013-09-25', NULL, NULL, 1, 1, NULL, 2, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -213,7 +238,7 @@ CREATE TABLE `usuarios` (
   `status_id` int(11) NOT NULL,
   PRIMARY KEY (`id`,`status_id`),
   KEY `fk_usuarios_status_idx` (`status_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Extraindo dados da tabela `usuarios`
@@ -231,8 +256,7 @@ INSERT INTO `usuarios` (`id`, `nome`, `login`, `cargo`, `email`, `status_id`) VA
 -- Limitadores para a tabela `forum`
 --
 ALTER TABLE `forum`
-  ADD CONSTRAINT `fk_forum_solicitacao1` FOREIGN KEY (`solicitacao_id`) REFERENCES `solicitacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_forum_usuarios1` FOREIGN KEY (`suporte_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_forum_solicitacao1` FOREIGN KEY (`solicitacao_id`) REFERENCES `solicitacao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `solicitacao`
