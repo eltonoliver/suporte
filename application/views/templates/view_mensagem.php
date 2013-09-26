@@ -34,8 +34,8 @@ var ajax_relation_url = 'http://localhost/suportehome/mensagem/ajax_relation';
 
 	<textarea id="field-mensagem" name="mensagem" class="texteditor" style="margin: 0px 0px 10px; width: 1184px; height: 53px;"></textarea><br>
 	<input id="field-data" type="hidden" name="data" value="<?php echo date('Y-m-d h:i:s'); ?>" />
-	<input id="field-suporte_id" type="hidden" name="suporte_id" value="1" />
-	<input id="field-usuario_id" type="hidden" name="usuario_id" value="2" />
+	<input id="field-suporte_id" type="hidden" name="suporte_id" value="" />
+	<input id="field-usuario_id" type="hidden" name="usuario_id" value="<?php echo $dados[0]->usuario_id ?>" />
 	<input id="field-solicitacao_id" type="hidden" name="solicitacao_id" value="<?php echo $dados[0]->id; ?>" />
 
 	<center><button id="button-save"  class="btn btn-warning" style="width:1000px;font-size:16px;"> Enviar  </button></center>
