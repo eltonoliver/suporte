@@ -107,7 +107,7 @@
                             <a href="<?php echo base_url(); ?>admin/atendimentos">Atendimentos</a>
                           </li>
                           <li>
-                            <a href="<?php echo base_url(); ?>home/solicitacao-sistema/add">Relatórios</a>
+                            <a href="<?php echo base_url(); ?>admin/relatorio/">Relatórios</a>
                           </li> 
                             <li>
                             <a href="<?php echo base_url(); ?>admin/cadastrar-usuarios/">Cadastro de Usuários</a>
@@ -148,12 +148,22 @@
             <div class="modal-header">
                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h3 id="myModalLabel">
-                Título
+                Dúvidas Frequentes
               </h3>
             </div>
             <div class="modal-body">
+              <?php 
+
+                $duvidas = $this->db->get('duvidas')->result();
+
+                foreach ($duvidas as $value) {
+                   echo '<h6>'.$value->titulo.' </h6>';
+                   echo '<p>'.$value->conteudo.' </p>';
+                }
+
+               ?>
               <p>
-                Texto com descrição da dúvidas
+                
               </p>
             </div>
             <div class="modal-footer">

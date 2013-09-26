@@ -159,7 +159,7 @@ class Home extends CI_Controller{
 			/*REMOVAR OPÇÃO DE DELETAR LER E EDITAR*/
 			//$crud->unset_delete();
 			//$crud->unset_read();
-			$crud->fields('local_servico','data_solicitacao','situacao_id','id_suporte');
+			$crud->fields('local_servico','data_solicitacao','situacao_id','id_suporte','descricao_servico');
 			$crud->unset_edit();
 			$crud->unset_add();
 			$crud->unset_print();	 
