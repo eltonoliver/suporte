@@ -14,6 +14,10 @@ class Home extends CI_Controller{
 		$this->load->library('grocery_CRUD');
 		$this->load->model('solicitacao_model');
 		//SIMULACAO DO ID DO USUÁRIO
+		
+		$_SESSION['sess_codusuario'] = 3;
+		$_SESSION['sess_nomeusuario'] = "ELTON OLIVEIRA";
+
 		$sess_codusuario = isset($_SESSION['sess_codusuario']) ? $sess_codusuario = $_SESSION['sess_codusuario'] : $sess_codusuario = "";
 		$sess_nomeusuario = isset($_SESSION['sess_nomeusuario']) ? $sess_nomeusuario = $_SESSION['sess_nomeusuario'] : $sess_nomeusuario = "";
 		$this->session->set_userdata('usuario_id', $sess_codusuario);
@@ -150,11 +154,12 @@ class Home extends CI_Controller{
 
 
 			/*ACTION - TELA DO FORUM*/
-			$crud->add_action('Adicionar Mensagem', '', 'home/mensagem','ui-icon-plus');
+			//$crud->add_action('Adicionar Mensagem', '', 'home/mensagem','ui-icon-plus');
 
 			/*REMOVAR OPÇÃO DE DELETAR LER E EDITAR*/
 			//$crud->unset_delete();
-			$crud->unset_read();
+			//$crud->unset_read();
+			$crud->fields('local_servico','data_solicitacao','situacao_id','id_suporte');
 			$crud->unset_edit();
 			$crud->unset_add();
 			$crud->unset_print();	 
