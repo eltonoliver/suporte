@@ -10,7 +10,7 @@ class Home extends CI_Controller{
 	public function __construct(){
 
 		parent::__construct();
-		session_start();
+		
 		$this->load->library('grocery_CRUD');
 		$this->load->model('solicitacao_model');
 		//SIMULACAO DO ID DO USUÁRIO
@@ -33,18 +33,11 @@ class Home extends CI_Controller{
 			}
 		}
 		//$this->session->sess_destroy();
-
-		if(!$this->session->userdata('usuario_id')){
-
-			redirect('http://portalsenac.am.senac.br/');
-
-			}
 	}
 	
 	public function home_sisten(){
 		
 		$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
-		echo "Nome = ".$_SESSION['sess_nomeusuario']." ID suporte".$this->idSuporte ;
 		$this->template->load('home','templates/view_home',$output);
 	}
 
