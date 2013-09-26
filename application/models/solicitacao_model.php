@@ -52,6 +52,12 @@ class Solicitacao_model extends CI_Model{
 
 	    }
 
+	    public function getMensagemForum($id = null){
+	    	 		$this->db->where('solicitacao_id',$id);   	 
+	    	 return $this->db->get('forum')->result();
+
+	    }
+
 	    public function getSuporte($login = null){
 	    	$this->db->where('nome',$login);
 	    	return $this->db->get('usuarios')->result();
