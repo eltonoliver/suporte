@@ -5,7 +5,7 @@
 
 	$dados = $this->solicitacao_model->getSolicitacao($idSolicitacao);
 	
-
+	
 
  ?>
 <script type="text/javascript">
