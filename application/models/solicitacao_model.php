@@ -53,7 +53,7 @@ class Solicitacao_model extends CI_Model{
 	    }
 
 	    public function getSuporte($login = null){
-	    	$this->db->where('login',$login);
+	    	$this->db->where('nome',$login);
 	    	return $this->db->get('usuarios')->result();
 
 	    }
