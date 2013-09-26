@@ -64,6 +64,7 @@ class Admin extends CI_Controller{
     			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
         		foreach ($tipo as $value) {
         			if($value->tipo == 2){
+        				//$crud->fields('descricao_servico','anexo','local_servico','usuario_id','data_solicitacao','situacao_id','prioridade_id','suporte_id','sistemas_id');
 
         				$crud->field_type('descricao_equi', 'hidden');
         				$crud->field_type('patrimonio_id', 'readonly');
@@ -78,7 +79,10 @@ class Admin extends CI_Controller{
     		/*ACTIONS*/
     		
     		$crud->callback_after_update(array($this, 'msgUpdate'));
+    		//$crud->callback_column('Mensagem',array($this,'callback_forum'));
     		$crud->add_action('Assumir Atendimento', '', 'admin/assumirAtendimento','ui-icon ui-icon-circle-check');
+
+    		
     		/*END ACTIONS*/	
 		
 			$output = $crud->render();
@@ -229,9 +233,22 @@ class Admin extends CI_Controller{
     	redirect('admin/atendimentos/edit/'.$primary_key);
 	}
 
-	/*CALBACK EDIT SITUAÇÃO*/
+	/*CALLBACK EDIT SITUAÇÃO*/
+	public function callback_forum($value,$row){
+		$id = $row->id;
+		$query = $this->solicitacao_model->getMensagemForum($id);
+		if($query){
 
-	
+			return '<a href="'.base_url().'home/mensagem/'.$id.'">Ativo</a>';
+		}else{
+
+			return '';
+		}
+
+	}	
+
+	/*END CALLBACK EDIT SITUACAO*/
+
 
  
 
