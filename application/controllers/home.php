@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends CI_Controller{	
@@ -13,8 +14,10 @@ class Home extends CI_Controller{
 		$this->load->library('grocery_CRUD');
 		$this->load->model('solicitacao_model');
 		//SIMULACAO DO ID DO USUÁRIO
-		$this->session->set_userdata('usuario_id', 25);
-		$this->session->set_userdata('login','elton');
+		$sess_codusuario = isset($_SESSION['sess_codusuario']) ? $sess_codusuario = $_SESSION['sess_codusuario'] : $sess_codusuario = "";
+		$sess_nomeusuario = isset($_SESSION['sess_nomeusuario']) ? $sess_nomeusuario = $_SESSION['sess_nomeusuario'] : $sess_nomeusuario = "";
+		$this->session->set_userdata('usuario_id', $sess_codusuario);
+		$this->session->set_userdata('login', $sess_nomeusuario);
 		$this->sessionLogin = $this->session->userdata('login');
 		$this->sessionUsuario =  $this->session->userdata('usuario_id');
 
@@ -24,7 +27,7 @@ class Home extends CI_Controller{
 		*
 		**************/
 		foreach ($dados as $value) {
-			if($this->sessionLogin === $value->login){
+			if($this->sessionLogin === $value->nome){
 				$this->session->set_userdata('suporte_id',$value->id);
 				$this->idSuporte = $this->session->userdata('suporte_id');
 			}
