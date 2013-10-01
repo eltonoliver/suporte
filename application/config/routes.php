@@ -64,6 +64,8 @@ $route['home/minhas-solicitacoes']								= "/home/minhasSolicitacoes/";
 $route['admin/cadastrar-usuarios']								= "/admin/cadastrarUsuarios/";
 /*ROTAS CADASTRO DE DUVIDAS*/
 $route['admin/cadastrar-duvidas']								= "/admin/cadastrarDuvidas/";
+/*ROTAS CADASTRO DE SISTEMAS*/
+$route['admin/cadastrar-sistemas']								= "/admin/cadastrarSistemas/";
 
 
 $route['404_override'] = 'home/home_sisten';
