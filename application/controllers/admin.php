@@ -164,6 +164,33 @@ class Admin extends CI_Controller{
 
 	}
 
+	public function cadastrarSistemas(){
+		try{
+
+			$crud = new grocery_CRUD();
+			$crud->set_crud_url_path(site_url('admin/cadastrarSistemas'));
+			$crud->set_theme('datatables');
+			$crud->set_table('sistemas');
+			$crud->columns('id','nome','descricao');
+			
+
+			$crud->display_as('id','Código')
+				 ->display_as('nome','Nome do Sistema')
+				 ->display_as('descricao','Descrição do Sistema');
+				 
+			$crud->unset_print();		
+			$output = $crud->render();
+
+			$this->template->load('home','templates/view_sistemas',$output);
+		}catch(Exception $e){
+
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());	
+
+		}
+		
+
+	}
+
 
 	public function relatorio(){
 		try{
