@@ -16,7 +16,7 @@ class Admin extends CI_Controller{
 	  try{	
 			
 			$crud = new grocery_CRUD();
-
+			$crud->set_crud_url_path(site_url('admin/atendimentos'));
 			$crud->set_theme('datatables');
 			$crud->set_table('solicitacao');
 				 
@@ -29,6 +29,7 @@ class Admin extends CI_Controller{
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
 			
 			$crud->columns('id','usuario_id','data_solicitacao','situacao_id','id_suporte','tipo');
+
 			$crud->callback_column('tipo',array($this,'tipo_callback'));
 
 			
@@ -43,7 +44,10 @@ class Admin extends CI_Controller{
 				 ->display_as('prioridade_id','Prioridade')
 				 ->display_as('sistemas_id','Nome do Sistema')
 				 ->display_as('patrimonio_id','Patrimônio');
+			$crud->order_by('situacao_id','desc');
 			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
+			$crud->callback_field('data_solicitacao',array($this,'formatData'));
+			$crud->field_type('id','readonly');
 			$crud->unset_back_to_list();	 
 			$crud->unset_print();
 			$crud->unset_add();
@@ -61,13 +65,24 @@ class Admin extends CI_Controller{
     			foreach ($tipo as $value) {
         			if($value->tipo == 2){
         				
-        				$crud->fields('id','descricao_servico','data_solicitacao','situacao_id','id_suporte','sistemas_id');        				
+        				$crud->fields('id','descricao_servico','anexo','data_solicitacao','situacao_id','id_suporte','sistemas_id');        				
 
         			}else{
-        				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio_id','data_solicitacao','situacao_id','id_suporte');
+        				$crud->fields('id','local_servico','anexo','descricao_equi','descricao_servico','patrimonio_id','data_solicitacao','situacao_id','id_suporte');
         			}
         		}
 
+    		}elseif($state == 'edit'){
+    				$idSolicitacao = $state_info->primary_key;
+    			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
+
+    			foreach ($tipo as $value) {
+        			if($value->tipo == 2 || $value->tipo == 1 ){
+        				
+        				$crud->edit_fields('id','id_suporte');   				
+
+        			}
+        		}
     		}
     		/*END STATE*/
 
@@ -79,7 +94,7 @@ class Admin extends CI_Controller{
 
     		
     		/*END ACTIONS*/	
-		
+			
 			$output = $crud->render();
 
 			$this->template->load('home','templates/view_atendimento',$output);
@@ -287,7 +302,12 @@ class Admin extends CI_Controller{
 
 	}	
 
-	/*END CALLBACK EDIT SITUACAO*/
+	
+	/*FORMATAÇÃO DAS DATAS*/
+	public function formatData($value, $primary_key = null){
+		return formatDataBrasil($value);
+	}
+
 
 
  
