@@ -245,6 +245,7 @@ class Admin extends CI_Controller{
 				suporte.usuarios.nome as suporteNome,
 				db_base.unidade_uni.uni_nomecompleto as localServico,
 				suporte.situacao.nome as situacao,
+				suporte.situacao.id as idSituacao,
 				db_base.usuario_usu.usu_loginusuario as nomeUsuario,
 				suporte.solicitacao.tipo,
 				suporte.solicitacao.data_solicitacao,
@@ -259,15 +260,31 @@ class Admin extends CI_Controller{
 		)->result();
 
 		$conteudo = "";
+		$chamado = 0;
+		$chamadoAberto = 0;
+		$chamadoFechado = 0;
+		$reg = 0;
 		foreach ($report as $value) {
-			
+			$reg++;
+			$chamado++;
+			if($value->idSituacao == 1){
+				$chamadoAberto++;
+			}
+
+			if($value->idSituacao == 3){
+				$chamadoFechado++;
+			}
+
+			($value->suporteNome == "") ? $value->suporteNome = "Em aberto" : $value->suporteNome;
+			($value->data_finalizacao == "") ? $value->data_finalizacao = "Em aberto" : formatDataBrasil($value->data_finalizacao);
+
 			$conteudo .= '
 							<tr>
 									<td><center>'.$value->id.'</center></td>
 									<td><center>'.$value->nomeUsuario.'</center></td>
 									<td><center>'.$value->localServico.'</center></td>
 									<td><center>'.formatDataBrasil($value->data_solicitacao).'</center></td>
-									<td><center>'.formatDataBrasil($value->data_finalizacao).'</center></td>
+									<td><center>'.$value->data_finalizacao.'</center></td>
 									<td><center>'.$value->suporteNome.'</center></td>
 									<td><center>'.$value->situacao.'</center></td>
 									
@@ -312,10 +329,19 @@ class Admin extends CI_Controller{
 								</tr>
 								'.$conteudo.'	
 								
-							
+								
 								</tbody>
 						</table>
 						</center>
+						<br>
+
+						<div style="margin: 0 auto; width: 1000px;font-family: Arial">
+						<strong>Quantidade de Registros : </strong>'.$reg.'<br>
+						<strong>Quantidade de Chamados : </strong> '.$chamado.' <br>
+						<strong>Quantidade de Chamados Abertos: </strong> '.$chamadoAberto.' <br>
+						<strong>Quantidade de Chamados Finalizados:</strong>  '.$chamadoFechado.' <br>
+						</div>
+
 						<br>
 						<center> <img src="'.base_url().'assets/images/print.png" style="cursor:pointer" class="imprimir"/> </center>
 
