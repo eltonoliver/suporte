@@ -94,7 +94,7 @@ class Home extends CI_Controller{
 			$crud = new grocery_CRUD();
 			$crud->set_theme('flexigrid');
 			$crud->set_table('solicitacao');
-			$crud->columns('sistemas_id','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');	
+			$crud->add_fields('sistemas_id','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');	
 			
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
 			$crud->set_relation('sistemas_id','sistemas','nome');
@@ -107,7 +107,7 @@ class Home extends CI_Controller{
 			$crud->field_type('data_solicitacao','invisible');
 			$crud->field_type('usuario_id', 'hidden', $this->sessionUsuario);
 			$crud->field_type('tipo', 'hidden',2);
-			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
+			$crud->required_fields('descricao_servico','sistemas_id');
 						
 			$crud->set_subject('Solicitação - Sistemas');
 			
@@ -138,7 +138,7 @@ class Home extends CI_Controller{
 
 			/*RELACIONAMENTO EQUIPAMENTO*/
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
-			$crud->set_relation('patrimonio_id','patrimonio','patrimonio');
+			$crud->set_relation('patrimonio_id','db_gde.equipamento_equi','equi_descricao');
 			$crud->set_relation('id_suporte','usuarios','nome');
 			$crud->set_relation('situacao_id','situacao','nome');
 			/*EQUIPAMENTO*/
@@ -153,7 +153,31 @@ class Home extends CI_Controller{
 				 ->display_as('situacao_id','Situação')
 				 ->display_as('id_suporte','Nome do Suporte')
 				 ->display_as('data_solicitacao','Data de Solicitação')
-				 ->display_as('local_servico','Local do Serviço');
+				 ->display_as('local_servico','Local do Serviço')
+				 ->display_as('patrimonio_id','Patrimônio')
+				 ->display_as('descricao_servico','Descrição do Serviço')
+				 ->display_as('descricao_equi','Descrição do Equipamento')
+				 ->display_as('sistemas_id','Sistema');
+		    $crud->callback_field('data_solicitacao',array($this,'formatData'));
+
+			$state = $crud->getState();
+    		$state_info = $crud->getStateInfo();
+    		if($state == 'read'){
+
+    			$idSolicitacao = $state_info->primary_key;
+    			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
+
+    			foreach ($tipo as $value) {
+        			if($value->tipo == 2){
+        				
+        				$crud->fields('id','descricao_servico','data_solicitacao','situacao_id','id_suporte','sistemas_id');        				
+
+        			}else{
+        				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio_id','data_solicitacao','situacao_id','id_suporte');
+        			}
+        		}
+
+    		}
 
 
 			/*ACTION - TELA DO FORUM*/
@@ -162,10 +186,10 @@ class Home extends CI_Controller{
 			/*REMOVAR OPÇÃO DE DELETAR LER E EDITAR*/
 			//$crud->unset_delete();
 			//$crud->unset_read();
-			$crud->fields('local_servico','data_solicitacao','situacao_id','id_suporte','descricao_servico');
-			$crud->unset_edit();
-			$crud->unset_add();
-			$crud->unset_print();	 
+			//$crud->fields('local_servico','data_solicitacao','situacao_id','id_suporte','descricao_servico');
+			//$crud->unset_edit();
+			//$crud->unset_add();
+			//$crud->unset_print();	 
 			$output = $crud->render();
 			
 			
@@ -211,7 +235,7 @@ class Home extends CI_Controller{
 	}
 
 
-	function mensagem_insert($postArray){	  	
+	public function mensagem_insert($postArray){	  	
  		
 
 		$msg = '
@@ -222,6 +246,10 @@ class Home extends CI_Controller{
 		';
  		$this->session->set_flashdata('msg', $msg); 		
     	redirect('home/mensagem/'.$postArray['solicitacao_id']);
+	}
+
+	public function formatData($value, $primary_key = null){
+		return formatDataBrasil($value);
 	}
 
 
