@@ -81,6 +81,7 @@ class Home extends CI_Controller{
 
 											window.location = "'.site_url('home/minhas-solicitacoes').'";
 										</script>
+										<div style="display:none">
 									
 									'
 									);
@@ -125,9 +126,10 @@ class Home extends CI_Controller{
 			$crud->set_lang_string('insert_success_message',
 			'Os dados foram armazenados no banco de dados
 				<script type="text/javascript">
-					
+
 					window.location = "'.site_url('home/minhas-solicitacoes').'";
 				</script>
+				<div style="display:none">
 			
 			'
 			);
@@ -287,6 +289,13 @@ class Home extends CI_Controller{
 	/*FORMATAÇÃO DAS DATAS*/
 	public function formatData($value, $primary_key = null){
 		return formatDataBrasil($value);
+	}
+
+	public function sair(){
+
+		$this->session->sess_destroy();
+		redirect('http://portalsenac.am.senac.br');
+
 	}
 
 
