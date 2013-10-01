@@ -44,6 +44,13 @@ class Solicitacao_model extends CI_Model{
 
 	    }
 
+	    public function getSituacaoSolicitacao($id = null){
+	    	$this->db->where('id', $id);
+	    	$this->db->select('situacao_id');
+	    	return $this->db->get('solicitacao')->result();
+
+	    }
+
 
 	    public function getForum($id = null){
 	    		   $this->db->where('solicitacao_id',$id);   	
@@ -73,6 +80,15 @@ class Solicitacao_model extends CI_Model{
 	    		    
 	    	
 	    }
+
+
+       public function verificaSolicitacoes($idUser = null, $tipo = null, $situacao = null){
+    			$arrayWhere = array('usuario_id' => $idUser,'situacao_id' => $situacao,'tipo' => $tipo);
+    			$this->db->where( $arrayWhere);
+    			$this->db->get('solicitacao')->result();
+    			return $this->db->affected_rows();
+        }
+	    
 
 }
 ?>
