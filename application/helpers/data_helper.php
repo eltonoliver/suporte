@@ -8,10 +8,10 @@
 
 		if($data != ""){
 
-			$array = explode("-",$data);
+			$array = explode("/",$data);
 
-			$dataMysql = $array[2]."/";
-			$dataMysql .= $array[1]."/";
+			$dataMysql = $array[2]."-";
+			$dataMysql .= $array[1]."-";
 			$dataMysql .= $array[0];
 			return $dataMysql;
 		}else{
