@@ -40,7 +40,6 @@ class Home extends CI_Controller{
 	}
 	
 	public function home_sisten(){
-		
 		$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
 		$this->template->load('home','templates/view_home',$output);
 	}
@@ -116,7 +115,7 @@ class Home extends CI_Controller{
 			$crud->callback_before_insert(array($this,'data_solicitacao_callback'));
 			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
 			$output = $crud->render();
-			$this->template->load('home','templates/view_frm_solicitacao_equi',$output);
+			$this->template->load('home','templates/view_frm_solicitacao_sis',$output);
 
 		}catch(Exception $e){
 
@@ -134,6 +133,7 @@ class Home extends CI_Controller{
 			$crud->set_table('solicitacao');
 			$crud->where('usuario_id',$this->sessionUsuario);
 			$crud->columns('id','local_servico','data_solicitacao','situacao_id','id_suporte');
+
 
 
 			/*RELACIONAMENTO EQUIPAMENTO*/
@@ -159,6 +159,8 @@ class Home extends CI_Controller{
 				 ->display_as('descricao_equi','Descrição do Equipamento')
 				 ->display_as('sistemas_id','Sistema');
 		    $crud->callback_field('data_solicitacao',array($this,'formatData'));
+		    $crud->callback_after_update(array($this, 'data_finalizacao_callback'));
+		    $crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
 		    $crud->unset_back_to_list();
 			$state = $crud->getState();
     		$state_info = $crud->getStateInfo();
@@ -179,15 +181,23 @@ class Home extends CI_Controller{
 
     		}elseif($state == 'edit'){
     				$idSolicitacao = $state_info->primary_key;
-    			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
+    			    $tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
+    			    $situacao = $this->solicitacao_model->getSituacaoSolicitacao($idSolicitacao);
 
     			foreach ($tipo as $value) {
         			if($value->tipo == 2){
-        				
-        				$crud->edit_fields('id','descricao_servico','situacao_id');        				
-
+        				if($situacao[0]->situacao_id != 3){
+        				    $crud->edit_fields('id','descricao_servico','anexo','situacao_id');        				
+        				 }else{
+        				 	  $crud->edit_fields('id','descricao_servico','anexo');
+        				 }
         			}else{
-        				$crud->edit_fields('id','descricao_equi','descricao_servico','situacao_id');
+        				if($situacao[0]->situacao_id != 3){
+        				   $crud->edit_fields('id','descricao_equi','anexo','descricao_servico','situacao_id');      				
+        				 }else{
+        				 	 $crud->edit_fields('id','descricao_equi','anexo','descricao_servico');
+        				 }
+        				
         			}
         		}
     		}
@@ -234,6 +244,12 @@ class Home extends CI_Controller{
 		  	
 		  $postArray['data_solicitacao'] = date('Y-m-d h:i:s');
 		  return $postArray;
+	}
+
+	public function data_finalizacao_callback($post_array,$primary_key) {
+		  	
+		  $dados = array('data_finalizacao' => date('Y-m-d h:i:s') ); 
+		  return $this->solicitacao_model->update($primary_key,$dados);
 	}
 
 
