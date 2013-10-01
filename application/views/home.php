@@ -79,7 +79,7 @@
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-file icon-white"></i> &nbsp;Nova Solicitação<strong class="caret"></strong></a>
                          
                         <ul class="dropdown-menu">
-                        
+
                           <li>
                             <a href="<?php echo base_url(); ?>home/solicitacao-equipamento/add">Problema Em Equipamento de Informática</a>
                           </li>
@@ -100,6 +100,8 @@
                     <a href="#modal-container-95857" data-toggle="modal"><i class="icon-thumbs-up icon-white"></i> &nbsp;Dúvidas Frequentes</a>
                   </li>
 
+
+
                   <!--Drop Administração -->
                
                   <?php if($this->session->userdata('suporte_id') != ''){ ?>
@@ -118,6 +120,9 @@
                           </li>  
                             <li>
                             <a href="<?php echo base_url(); ?>admin/cadastrar-duvidas/">Cadastro de Dúvidas</a>
+                          </li>  
+                           <li>
+                            <a href="<?php echo base_url(); ?>admin/cadastrar-sistemas/">Cadastro de Sistemas</a>
                           </li>                     
                         </ul>
                     </li>
