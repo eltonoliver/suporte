@@ -198,7 +198,7 @@ class Admin extends CI_Controller{
 	}
 
 	public function gerarRelatorio(){
-		$this->output->enable_profiler(TRUE);
+		
 		$nomeReport = "relatorio";
 
 		$tecnico  	= $this->input->post('tecnico');
@@ -276,6 +276,8 @@ class Admin extends CI_Controller{
 		
 
 				$html =  '
+					<script type="text/javascript" src="'.base_url().'assets/js/jquery.min.js"></script>
+					<script type="text/javascript" src="'.base_url().'assets/js/custom.js"></script>
 					<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
 					<style> 
 						h4{
@@ -314,7 +316,8 @@ class Admin extends CI_Controller{
 								</tbody>
 						</table>
 						</center>
-
+						<br>
+						<center> <img src="'.base_url().'assets/images/print.png" style="cursor:pointer" class="imprimir"/> </center>
 
 					 ';
 
