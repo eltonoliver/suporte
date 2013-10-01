@@ -49,14 +49,17 @@ class Home extends CI_Controller{
 	public function solicitacaoEquipamento($id = null){
 		try{
 			
-			$crud = new grocery_CRUD();			
+			$crud = new grocery_CRUD();
+			$crud->set_crud_url_path(site_url('home/solicitacaoEquipamento'));			
 			$crud->set_theme('flexigrid');
 			$crud->set_table('solicitacao');	
 			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
 
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
-			$crud->set_relation('patrimonio_id','patrimonio','patrimonio');
-			$crud->fields('patrimonio_id','descricao_equi','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');
+			$crud->set_relation('patrimonio_id','db_gde.equipamento_equi','equi_descricao');
+			
+			$crud->add_fields('patrimonio_id','descricao_equi','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');
+		
 			$crud->display_as('patrimonio_id','Patrimônio')
 				 ->display_as('descricao_equi','Descrição do Equipamento')
 				 ->display_as('anexo','Anexo')
@@ -87,15 +90,15 @@ class Home extends CI_Controller{
 
 	public function solcicitacaoSistema($id = null){
 		try{
-			
-			$crud = new grocery_CRUD();		
-
-			$crud->set_theme('flexigrid');
-			$crud->set_table('solicitacao');	
 			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
+			$crud = new grocery_CRUD();
+			$crud->set_theme('flexigrid');
+			$crud->set_table('solicitacao');
+			$crud->columns('sistemas_id','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');	
+			
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
 			$crud->set_relation('sistemas_id','sistemas','nome');
-			$crud->fields('sistemas_id','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');
+
 			$crud->display_as('sistemas_id','Sistema')
 				 ->display_as('anexo','Anexo')
 				 ->display_as('descricao_servico','Descrição do Serviço')
