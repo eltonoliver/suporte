@@ -206,7 +206,7 @@ class Admin extends CI_Controller{
 		$situacao 	= $this->input->post('situacao');
 		$dataInicio = $this->input->post('dataInicio');
 		$dataFim 	= $this->input->post('dataFim');
-
+		
 		if($tecnico !="Todos"){
 
 			$andtecnico = " AND suporte.solicitacao.id_suporte = ".$tecnico;
