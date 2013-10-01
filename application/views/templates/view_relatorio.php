@@ -15,7 +15,7 @@ $atts = array(
  ?>
 <h4><center>Relatórios</center></h4>
 <br>
-<?php echo form_open('admin/gerarRelatorio'); ?>
+<?php echo form_open('admin/gerarRelatorio','target="_blank"'); ?>
 <strong>Técnico : </strong> 
 
 <select name="tecnico" > 
@@ -36,9 +36,9 @@ $atts = array(
 <strong>Tipo : </strong>
 
 <select name="tipo" > 
-	<option>Todas</option>
-	<option value="sitemas"> Sistemas </option>
-	<option value="equipamentos"> Equipamentos </option>
+	<option>Todos</option>
+	<option value="1"> Equipamentos </option>
+	<option value="2"> Sistemas </option>
 
 </select>
 <br />
@@ -64,7 +64,6 @@ $atts = array(
 <strong> Data Fim : </strong> <?php echo nbs(2); ?> <input type="text" name="dataFim"> <br />
 
 
-
-<?php echo anchor_popup('home/gerarRelatorio/', 'Click Me!', $atts); ?>
+<input type="submit" class="btn btn-primary" value="Gerar Relatório" >
 
 </form>
