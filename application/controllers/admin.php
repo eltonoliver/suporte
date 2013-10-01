@@ -193,45 +193,10 @@ class Admin extends CI_Controller{
 
 
 	public function relatorio(){
-		try{
-			
-			$crud = new grocery_CRUD();		
-
-			$crud->set_theme('flexigrid');
-			$crud->set_table('solicitacao');	
-			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
-			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
-			$crud->set_relation('sistemas_id','sistemas','nome');
-			$crud->set_relation('patrimonio_id','patrimonio','patrimonio');
-
-
-			$crud->columns('id','id_suporte','tipo','sistemas_id','patrimonio_id','local_servico','data_solicitacao','data_finalizacao','usuario_id');
-			$crud->display_as('sistemas_id','Sistema')
-				 ->display_as('anexo','Anexo')
-				 ->display_as('descricao_servico','Descrição do Serviço')
-				 ->display_as('local_servico','Local do Serviço')
-				 ->display_as('descricao_equi','Descrição do Equipamento')
-				 ->display_as('id','Código')
-				 ->display_as('usuario_id','Usuário');
-
-			
-						
-			$crud->set_subject('Relatório - Atendimentos');
-			$crud->unset_edit();
-			$crud->unset_add();
-			$crud->unset_delete();
-			$crud->unset_read();
-			$crud->unset_back_to_list();
-			/*Insere a data de solicitação automaticamente via callback*/
-			$crud->callback_column('tipo',array($this,'tipo_callback'));
-
-			$output = $crud->render();
+			$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
 			$this->template->load('home','templates/view_relatorio',$output);
 
-		}catch(Exception $e){
-
-			show_error($e->getMessage().' --- '.$e->getTraceAsString());
-		}
+		
 
 		
 	}
