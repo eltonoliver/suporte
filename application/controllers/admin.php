@@ -198,7 +198,7 @@ class Admin extends CI_Controller{
 	}
 
 	public function gerarRelatorio(){
-		$this->output->enable_profiler(TRUE);
+		
 		$nomeReport = "relatorio";
 
 		$tecnico  	= $this->input->post('tecnico');
@@ -285,16 +285,16 @@ class Admin extends CI_Controller{
 						<h4> Relatório - Sistema de Suporte </h4>
 
 
-						<table style="height: 96px;font-family: Arial;" width="900" border="1">
+						<table style="height: 96px;font-family: Arial;" width="1000" border="1">
 								<tbody>
 								<tr>
-									<td>Código</td>
-									<td>Nome do usuário</td>
-									<td>Local do Serviço</td>
-									<td>Data Solicitação</td>
-									<td>Data Finalização</td>
-									<td>Nome do Suporte</td>
-									<td>Situação</td>
+									<td><strong><center>Código</center></strong></td>
+									<td><strong><center>Nome do usuário</center></strong></td>
+									<td><strong><center>Local do Serviço</center></strong></td>
+									<td><strong><center>Data Solicitação</center></strong></td>
+									<td><strong><center>Data Finalização</center></strong></td>
+									<td><strong><center>Nome do Suporte</center></strong></td>
+									<td><strong><center>Situação</center></strong></td>
 									
 								</tr>
 								'.$conteudo.'	
