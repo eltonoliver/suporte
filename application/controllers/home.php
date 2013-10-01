@@ -93,7 +93,7 @@ class Home extends CI_Controller{
 			$crud = new grocery_CRUD();
 			$crud->set_theme('flexigrid');
 			$crud->set_table('solicitacao');
-			$crud->add_fields('sistemas_id','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');	
+			$crud->add_fields( 'sistemas_id','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');	
 			
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
 			$crud->set_relation('sistemas_id','sistemas','nome');
