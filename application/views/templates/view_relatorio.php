@@ -16,7 +16,7 @@ $atts = array(
 <h4><center>Relatórios</center></h4>
 <br>
 <?php echo form_open('admin/gerarRelatorio','target="_blank"'); ?>
-<strong>Técnico : </strong> 
+<strong>Técnico : <?php echo nbs(4); ?>  </strong> 
 
 <select name="tecnico" > 
 	<option>Todos</option>
@@ -33,7 +33,7 @@ $atts = array(
 </select>
 <br />
 
-<strong>Tipo : </strong>
+<strong>Tipo :  <?php echo nbs(10); ?>  </strong>
 
 <select name="tipo" > 
 	<option>Todos</option>
@@ -42,7 +42,7 @@ $atts = array(
 
 </select>
 <br />
-<strong>Situação : </strong>
+<strong>Situação : <?php echo nbs(2); ?>  </strong>
 
 <select name="situacao" > 
 	<option>Todas</option>
