@@ -12,7 +12,7 @@ class Admin extends CI_Controller{
 
 
 	public function atendimentos($id = null){
-		$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
+
 	  try{	
 			
 			$crud = new grocery_CRUD();
@@ -23,14 +23,17 @@ class Admin extends CI_Controller{
 			$crud->set_relation('id_suporte','usuarios','nome');
 			$crud->set_relation('situacao_id','situacao','nome');	
 			$crud->set_relation('prioridade_id','prioridade','nome');	
-			$crud->set_relation('patrimonio_id','patrimonio','patrimonio');
+			$crud->set_relation('patrimonio_id','db_gde.equipamento_equi','equi_descricao');
 			$crud->set_relation('sistemas_id','sistemas','nome');
-			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');	
-			$crud->unset_edit_fields('data_atualizacao','data_finalizacao','tipo');	
-			$crud->unset_add_fields('data_atualizacao','data_finalizacao','tipo');	
+			$crud->set_relation('usuario_id','db_base.usuario_usu','usu_nomeusuario');
+			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
+			
 			$crud->columns('id','usuario_id','data_solicitacao','situacao_id','id_suporte','tipo');
 			$crud->callback_column('tipo',array($this,'tipo_callback'));
-			$crud->display_as('id','Código')->display_as('id_suporte','Nome do Suporte')
+
+			
+			$crud->display_as('id','Código')
+				 ->display_as('id_suporte','Nome do Suporte')
 				 ->display_as('situacao_id','Situação')
 				 ->display_as('data_solicitacao','Data de Solicitação')
 				 ->display_as('usuario_id','Nome do usuário')
@@ -45,34 +48,26 @@ class Admin extends CI_Controller{
 			$crud->unset_print();
 			$crud->unset_add();
 			$crud->unset_delete();
-			$crud->unset_jquery();
+			
 			/*STATE*/
+			
 			$state = $crud->getState();
     		$state_info = $crud->getStateInfo();
-			if($state == 'read' || $state == 'edit'){
-				$crud->set_theme('flexigrid');
-				/*READONLY - CAMPOS DE SOMENTE LEITURA*/
-				$crud->field_type('data_solicitacao', 'readonly');
-				$crud->field_type('descricao_equi', 'readonly');
-				$crud->field_type('descricao_servico', 'readonly');
-				$crud->field_type('local_servico', 'readonly');
-				$crud->field_type('usuario_id', 'readonly');
-				$crud->field_type('sistemas_id','readonly');
+    		if($state == 'read'){
 
-
-        		$idSolicitacao = $state_info->primary_key;
+    			$idSolicitacao = $state_info->primary_key;
     			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
-        		foreach ($tipo as $value) {
-        			if($value->tipo == 2){
-        				//$crud->fields('descricao_servico','anexo','local_servico','usuario_id','data_solicitacao','situacao_id','prioridade_id','suporte_id','sistemas_id');
 
-        				$crud->field_type('descricao_equi', 'hidden');
-        				$crud->field_type('patrimonio_id', 'readonly');
+    			foreach ($tipo as $value) {
+        			if($value->tipo == 2){
+        				
+        				$crud->fields('id','descricao_servico','data_solicitacao','situacao_id','id_suporte','sistemas_id');        				
 
         			}else{
-        				
+        				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio_id','data_solicitacao','situacao_id','id_suporte');
         			}
         		}
+
     		}
     		/*END STATE*/
 
