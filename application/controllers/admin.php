@@ -261,13 +261,13 @@ class Admin extends CI_Controller{
 			
 			$conteudo .= '
 							<tr>
-									<td>'.$value->id.'</td>
-									<td>'.$value->nomeUsuario.'</td>
-									<td>'.$value->localServico.'</td>
-									<td>'.$value->data_solicitacao.'</td>
-									<td>'.$value->data_finalizacao.'</td>
-									<td>'.$value->suporteNome.'</td>
-									<td>'.$value->situacao.'</td>
+									<td><center>'.$value->id.'</center></td>
+									<td><center>'.$value->nomeUsuario.'</center></td>
+									<td><center>'.$value->localServico.'</center></td>
+									<td><center>'.$value->data_solicitacao.'</center></td>
+									<td><center>'.$value->data_finalizacao.'</center></td>
+									<td><center>'.$value->suporteNome.'</center></td>
+									<td><center>'.$value->situacao.'</center></td>
 									
 								</tr>';
 		}
@@ -283,6 +283,7 @@ class Admin extends CI_Controller{
 
 							border: 1px solid black;
 							border-collapse: collapse;
+
 						}table td{
 							border: 1px solid black;
 							border-collapse: collapse;
