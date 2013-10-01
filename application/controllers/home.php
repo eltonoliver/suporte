@@ -147,7 +147,7 @@ class Home extends CI_Controller{
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
 			$crud->set_relation('sistemas_id','sistemas','nome');
 			/*SISTEMAS*/
-			
+			$crud->field_type('id','readonly');
 						
 			$crud->display_as('id','Código')
 				 ->display_as('situacao_id','Situação')
@@ -159,7 +159,7 @@ class Home extends CI_Controller{
 				 ->display_as('descricao_equi','Descrição do Equipamento')
 				 ->display_as('sistemas_id','Sistema');
 		    $crud->callback_field('data_solicitacao',array($this,'formatData'));
-
+		    $crud->unset_back_to_list();
 			$state = $crud->getState();
     		$state_info = $crud->getStateInfo();
     		if($state == 'read'){
@@ -177,24 +177,26 @@ class Home extends CI_Controller{
         			}
         		}
 
+    		}elseif($state == 'edit'){
+    				$idSolicitacao = $state_info->primary_key;
+    			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
+
+    			foreach ($tipo as $value) {
+        			if($value->tipo == 2){
+        				
+        				$crud->edit_fields('id','descricao_servico','situacao_id');        				
+
+        			}else{
+        				$crud->edit_fields('id','descricao_equi','descricao_servico','situacao_id');
+        			}
+        		}
     		}
-
-
-			/*ACTION - TELA DO FORUM*/
-			//$crud->add_action('Adicionar Mensagem', '', 'home/mensagem','ui-icon-plus');
-
-			/*REMOVAR OPÇÃO DE DELETAR LER E EDITAR*/
-			//$crud->unset_delete();
-			//$crud->unset_read();
-			//$crud->fields('local_servico','data_solicitacao','situacao_id','id_suporte','descricao_servico');
-			//$crud->unset_edit();
-			//$crud->unset_add();
-			//$crud->unset_print();	 
-			$output = $crud->render();
-			
+		
+			$crud->unset_add();
+			$crud->unset_print();	 
+			$output = $crud->render();			
 			
 			$this->template->load('home','templates/view_solicitacoes',$output);
-
 
 		}catch(Exception $e){
 
@@ -247,7 +249,7 @@ class Home extends CI_Controller{
  		$this->session->set_flashdata('msg', $msg); 		
     	redirect('home/mensagem/'.$postArray['solicitacao_id']);
 	}
-
+	/*FORMATAÇÃO DAS DATAS*/
 	public function formatData($value, $primary_key = null){
 		return formatDataBrasil($value);
 	}
