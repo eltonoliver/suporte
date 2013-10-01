@@ -279,13 +279,21 @@ class Admin extends CI_Controller{
 						h4{
 							font-family: Arial;
 						}
+						table th{
+
+							border: 1px solid black;
+							border-collapse: collapse;
+						}table td{
+							border: 1px solid black;
+							border-collapse: collapse;
+						}
 					 </style>	
 				
 
-						<h4> Relatório - Sistema de Suporte </h4>
+						<center><h4> Relatório - Sistema de Suporte </h4></center>
 
 
-						<table style="height: 96px;font-family: Arial;" width="1000" border="1">
+						<center><table style="height: 96px;font-family: Arial;border: 1px solid black;" width="1000">
 								<tbody>
 								<tr>
 									<td><strong><center>Código</center></strong></td>
@@ -302,7 +310,7 @@ class Admin extends CI_Controller{
 							
 								</tbody>
 						</table>
-
+						</center>
 
 
 					 ';
