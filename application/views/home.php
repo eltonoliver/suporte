@@ -79,12 +79,16 @@
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-file icon-white"></i> &nbsp;Nova Solicitação<strong class="caret"></strong></a>
                          
                         <ul class="dropdown-menu">
+                        
                           <li>
                             <a href="<?php echo base_url(); ?>home/solicitacao-equipamento/add">Problema Em Equipamento de Informática</a>
                           </li>
+
                           <li>
                             <a href="<?php echo base_url(); ?>home/solicitacao-sistema/add">Problema Em Sistema da Instituição</a>
-                          </li>                     
+                          </li>
+
+
                         </ul>
                     </li>
                   <!--End Drop Nova Solicitação -->
