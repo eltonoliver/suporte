@@ -194,12 +194,68 @@ class Admin extends CI_Controller{
 
 	public function relatorio(){
 			$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
-			$this->template->load('home','templates/view_relatorio',$output);
-
-		
-
-		
+			$this->template->load('home','templates/view_relatorio',$output);		
 	}
+
+	public function gerarRelatorio(){
+		//$this->load->library('gerarpdf');
+		$nomeReport = "relatorio";
+		
+		$html =  '
+			<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+			<style> 
+				h4{
+					font-family: Arial;
+				}
+			 </style>	
+		
+
+				<h4> Relatório - Sistema de Suporte </h4>
+
+
+				<table style="height: 96px;font-family: Arial;" width="900" border="1">
+						<tbody>
+						<tr>
+							<td>Código</td>
+							<td>Nome do usuário</td>
+							<td>Local do Serviço</td>
+							<td>Data Solicitação</td>
+							<td>Data Finalização</td>
+							<td>Nome do Suporte</td>
+							<td>Situação</td>
+							
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						
+						</tr>
+						</tbody>
+				</table>
+
+
+
+			 ';
+
+			// $this->gerarpdf->actionGerar($html,$nomeReport,'assets/relatorios/');
+	}
+
+
 
 
 	public function tipo_callback($value,$row){
