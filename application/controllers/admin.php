@@ -198,61 +198,119 @@ class Admin extends CI_Controller{
 	}
 
 	public function gerarRelatorio(){
-		//$this->load->library('gerarpdf');
+		$this->output->enable_profiler(TRUE);
 		$nomeReport = "relatorio";
+
+		$tecnico  	= $this->input->post('tecnico');
+		$tipo     	= $this->input->post('tipo');
+		$situacao 	= $this->input->post('situacao');
+		$dataInicio = $this->input->post('dataInicio');
+		$dataFim 	= $this->input->post('dataFim');
+
+		if($tecnico !="Todos"){
+
+			$andtecnico = " AND suporte.solicitacao.id_suporte = ".$tecnico;
+		}else{
+			$andtecnico ="";
+		}
+
+		if($tipo != "Todos"){
+			$andtipo = " AND suporte.solicitacao.tipo = ".$tipo;
+
+		}else{
+			$andtipo = "";
+		}
+
+		if($situacao != "Todas"){
+
+			$andsituacao = " AND suporte.solicitacao.situacao_id = ".$situacao;
+		}else{
+			$andsituacao = "";
+		}
+
+		if($dataInicio != "" && $dataFim != ""){
+
+			$andData = " AND suporte.solicitacao.data_solicitacao >= '".$dataInicio."' AND  suporte.solicitacao.data_finalizacao >= ('".$dataFim."')";
+		}elseif($dataInicio != "" && $dataFim == ""){
+			$andData = " AND suporte.solicitacao.data_solicitacao >= '".$dataInicio."'";
+		}elseif($dataInicio == "" && $dataFim == ""){
+			$andData = "";
+		}
+
+		$report = $this->db->query(
+			'SELECT
+				suporte.solicitacao.id,
+				suporte.usuarios.nome as suporteNome,
+				db_base.unidade_uni.uni_nomecompleto as localServico,
+				suporte.situacao.nome as situacao,
+				db_base.usuario_usu.usu_loginusuario as nomeUsuario,
+				suporte.solicitacao.tipo,
+				suporte.solicitacao.data_solicitacao,
+				suporte.solicitacao.data_finalizacao
+			FROM
+				suporte.solicitacao
+				Left Join db_base.unidade_uni ON suporte.solicitacao.local_servico = db_base.unidade_uni.uni_codunidade
+				Left Join suporte.usuarios ON suporte.solicitacao.id_suporte = suporte.usuarios.id
+				Left Join suporte.situacao ON suporte.solicitacao.situacao_id = suporte.situacao.id
+				Inner Join db_base.usuario_usu ON suporte.solicitacao.usuario_id = db_base.usuario_usu.usu_codusuario'.$andtecnico.$andtipo.$andsituacao.$andData
+
+		)->result();
+
+		$conteudo = "";
+		foreach ($report as $value) {
+			
+			$conteudo .= '
+							<tr>
+									<td>'.$value->id.'</td>
+									<td>'.$value->nomeUsuario.'</td>
+									<td>'.$value->localServico.'</td>
+									<td>'.$value->data_solicitacao.'</td>
+									<td>'.$value->data_finalizacao.'</td>
+									<td>'.$value->suporteNome.'</td>
+									<td>'.$value->situacao.'</td>
+									
+								</tr>';
+		}
 		
-		$html =  '
-			<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-			<style> 
-				h4{
-					font-family: Arial;
-				}
-			 </style>	
+
+				$html =  '
+					<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+					<style> 
+						h4{
+							font-family: Arial;
+						}
+					 </style>	
+				
+
+						<h4> Relatório - Sistema de Suporte </h4>
+
+
+						<table style="height: 96px;font-family: Arial;" width="900" border="1">
+								<tbody>
+								<tr>
+									<td>Código</td>
+									<td>Nome do usuário</td>
+									<td>Local do Serviço</td>
+									<td>Data Solicitação</td>
+									<td>Data Finalização</td>
+									<td>Nome do Suporte</td>
+									<td>Situação</td>
+									
+								</tr>
+								'.$conteudo.'	
+								
+							
+								</tbody>
+						</table>
+
+
+
+					 ';
+
 		
+			echo $html;		 
 
-				<h4> Relatório - Sistema de Suporte </h4>
-
-
-				<table style="height: 96px;font-family: Arial;" width="900" border="1">
-						<tbody>
-						<tr>
-							<td>Código</td>
-							<td>Nome do usuário</td>
-							<td>Local do Serviço</td>
-							<td>Data Solicitação</td>
-							<td>Data Finalização</td>
-							<td>Nome do Suporte</td>
-							<td>Situação</td>
-							
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-						
-						</tr>
-						</tbody>
-				</table>
-
-
-
-			 ';
-
-			// $this->gerarpdf->actionGerar($html,$nomeReport,'assets/relatorios/');
+		
 	}
 
 
