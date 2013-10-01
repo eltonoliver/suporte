@@ -198,15 +198,17 @@ class Admin extends CI_Controller{
 	}
 
 	public function gerarRelatorio(){
-		
+		$this->output->enable_profiler(TRUE);
 		$nomeReport = "relatorio";
 
 		$tecnico  	= $this->input->post('tecnico');
 		$tipo     	= $this->input->post('tipo');
 		$situacao 	= $this->input->post('situacao');
-		$dataInicio = $this->input->post('dataInicio');
-		$dataFim 	= $this->input->post('dataFim');
-		
+		$dataInicio = formatDataMysql($this->input->post('dataInicio'));
+		$dataFim 	= formatDataMysql($this->input->post('dataFim'));
+
+	
+
 		if($tecnico !="Todos"){
 
 			$andtecnico = " AND suporte.solicitacao.id_suporte = ".$tecnico;
@@ -230,7 +232,7 @@ class Admin extends CI_Controller{
 
 		if($dataInicio != "" && $dataFim != ""){
 
-			$andData = " AND suporte.solicitacao.data_solicitacao >= '".$dataInicio."' AND  suporte.solicitacao.data_finalizacao >= ('".$dataFim."')";
+			$andData = " AND suporte.solicitacao.data_solicitacao >= '".$dataInicio."' AND  suporte.solicitacao.data_finalizacao <= ('".$dataFim."')";
 		}elseif($dataInicio != "" && $dataFim == ""){
 			$andData = " AND suporte.solicitacao.data_solicitacao >= '".$dataInicio."'";
 		}elseif($dataInicio == "" && $dataFim == ""){
@@ -264,8 +266,8 @@ class Admin extends CI_Controller{
 									<td><center>'.$value->id.'</center></td>
 									<td><center>'.$value->nomeUsuario.'</center></td>
 									<td><center>'.$value->localServico.'</center></td>
-									<td><center>'.$value->data_solicitacao.'</center></td>
-									<td><center>'.$value->data_finalizacao.'</center></td>
+									<td><center>'.formatDataBrasil($value->data_solicitacao).'</center></td>
+									<td><center>'.formatDataBrasil($value->data_finalizacao).'</center></td>
 									<td><center>'.$value->suporteNome.'</center></td>
 									<td><center>'.$value->situacao.'</center></td>
 									
