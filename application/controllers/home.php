@@ -75,6 +75,15 @@ class Home extends CI_Controller{
 			$crud->unset_back_to_list();
 			/*Insere a data de solicitação automaticamente via callback*/
 			$crud->callback_before_insert(array($this,'data_solicitacao_callback'));
+			$crud->set_lang_string('insert_success_message',
+									'Os dados foram armazenados no banco de dados
+										<script type="text/javascript">
+
+											window.location = "'.site_url('home/minhas-solicitacoes').'";
+										</script>
+									
+									'
+									);
 			
 			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
 			$output = $crud->render();
@@ -113,6 +122,16 @@ class Home extends CI_Controller{
 			$crud->unset_back_to_list();
 			/*Insere a data de solicitação automaticamente via callback*/
 			$crud->callback_before_insert(array($this,'data_solicitacao_callback'));
+			$crud->set_lang_string('insert_success_message',
+			'Os dados foram armazenados no banco de dados
+				<script type="text/javascript">
+					
+					window.location = "'.site_url('home/minhas-solicitacoes').'";
+				</script>
+			
+			'
+			);
+		
 			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
 			$output = $crud->render();
 			$this->template->load('home','templates/view_frm_solicitacao_sis',$output);
@@ -269,6 +288,8 @@ class Home extends CI_Controller{
 	public function formatData($value, $primary_key = null){
 		return formatDataBrasil($value);
 	}
+
+
 
 
 }
