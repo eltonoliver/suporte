@@ -210,12 +210,17 @@ class Home extends CI_Controller{
         				if($situacao[0]->situacao_id != 3){
         				    $crud->edit_fields('id','descricao_servico','anexo','situacao_id');        				
         				 }else{
+        				 	  $crud->field_type('descricao_servico', 'readonly');
+        				 	  $crud->field_type('anexo', 'readonly');
         				 	  $crud->edit_fields('id','descricao_servico','anexo');
         				 }
         			}else{
         				if($situacao[0]->situacao_id != 3){
         				   $crud->edit_fields('id','descricao_equi','anexo','descricao_servico','situacao_id');      				
         				 }else{
+        				 	 $crud->field_type('descricao_equi', 'readonly');
+        				 	 $crud->field_type('descricao_servico', 'readonly');
+        				 	 $crud->field_type('anexo', 'readonly');
         				 	 $crud->edit_fields('id','descricao_equi','anexo','descricao_servico');
         				 }
         				
