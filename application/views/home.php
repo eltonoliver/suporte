@@ -206,7 +206,7 @@
  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script> 
  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
    
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   
  <script type="text/javascript">
