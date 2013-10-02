@@ -127,7 +127,10 @@
                           </li>  
                            <li>
                             <a href="<?php echo base_url(); ?>admin/cadastrar-sistemas/">Cadastro de Sistemas</a>
-                          </li>                     
+                          </li>
+                          <li>
+                            <a href="<?php echo base_url(); ?>admin/cadastrar-noticia/">Cadastro de Notícias</a>
+                          </li>                       
                         </ul>
                     </li>
                     <?php }else{ echo ''; } ?>
