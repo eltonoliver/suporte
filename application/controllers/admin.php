@@ -65,10 +65,10 @@ class Admin extends CI_Controller{
     			foreach ($tipo as $value) {
         			if($value->tipo == 2){
         				
-        				$crud->fields('id','descricao_servico','anexo','data_solicitacao','situacao_id','id_suporte','sistemas_id');        				
+        				$crud->fields('id','descricao_servico','anexo','data_solicitacao','situacao_id','id_suporte','sistemas_id','usuario_id');        				
 
         			}else{
-        				$crud->fields('id','local_servico','anexo','descricao_equi','descricao_servico','patrimonio_id','data_solicitacao','situacao_id','id_suporte');
+        				$crud->fields('id','local_servico','anexo','descricao_equi','descricao_servico','patrimonio_id','data_solicitacao','situacao_id','id_suporte','usuario_id');
         			}
         		}
 
