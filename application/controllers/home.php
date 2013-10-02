@@ -1,4 +1,5 @@
 <?php ob_start(); ?>
+<?php session_start(); ?>
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends CI_Controller{	
@@ -6,6 +7,8 @@ class Home extends CI_Controller{
 	public $sessionUsuario;
 	public $sessionNome;
 	public $idSuporte;
+	public $idUnidade;
+	public $nomeUnidade;
 
 	public function __construct(){
 
@@ -15,14 +18,18 @@ class Home extends CI_Controller{
 		$this->load->model('solicitacao_model');
 		//SIMULACAO DO ID DO USUÁRIO
 		
-		$_SESSION['sess_codusuario'] = 3;
-		$_SESSION['sess_nomeusuario'] = "ELTON OLIVEIRA";
-		$_SESSIO['sess_codunidade'] => 22;
-		$_SESSION['sess_unidade'] => "CFP - LILI BENCHIMOL";
+		$_SESSION['sess_codusuario'] 	= 3;
+		$_SESSION['sess_nomeusuario'] 	= "ELTON OLIVEIRA";
+		$_SESSION['sess_codunidade'] 	= 22;
+		$_SESSION['sess_unidade'] 		= "CFP - LILI BENCHIMOL";
 
 
 		$sess_codusuario = isset($_SESSION['sess_codusuario']) ? $sess_codusuario = $_SESSION['sess_codusuario'] : $sess_codusuario = "";
 		$sess_nomeusuario = isset($_SESSION['sess_nomeusuario']) ? $sess_nomeusuario = $_SESSION['sess_nomeusuario'] : $sess_nomeusuario = "";
+
+		$this->idUnidade    		= isset($_SESSION['sess_codunidade']) ? $this->idUnidade = $_SESSION['sess_codunidade'] : $this->idUnidade = "";
+		$this->nomeUnidade  		= isset($_SESSION['sess_unidade']) 	? $this->nomeUnidade = $_SESSION['sess_unidade'] 	: $this->nomeUnidade = "";
+
 		$this->session->set_userdata('usuario_id', $sess_codusuario);
 		$this->session->set_userdata('login', $sess_nomeusuario);
 		$this->sessionLogin = $this->session->userdata('login');
@@ -56,10 +63,7 @@ class Home extends CI_Controller{
 			$crud->set_theme('flexigrid');
 			$crud->set_table('solicitacao');	
 			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
-
-			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
-			
-			
+					
 			
 			$crud->add_fields('patrimonio','descricao_equi','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');
 			
@@ -73,6 +77,12 @@ class Home extends CI_Controller{
 			
 			$crud->field_type('usuario_id', 'hidden', $this->sessionUsuario);
 			$crud->field_type('tipo', 'hidden',1);
+
+			/*UNIDADE*/
+			$crud->field_type('local_servico','dropdown',
+           					 array( $this->idUnidade => $this->nomeUnidade));
+			/*END UNIDADE*/
+			
 			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
 			
 			$crud->set_subject('Solicitação - Equipamentos');
