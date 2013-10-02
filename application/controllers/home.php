@@ -17,6 +17,9 @@ class Home extends CI_Controller{
 		
 		$_SESSION['sess_codusuario'] = 3;
 		$_SESSION['sess_nomeusuario'] = "ELTON OLIVEIRA";
+		$_SESSIO['sess_codunidade'] => 22;
+		$_SESSION['sess_unidade'] => "CFP - LILI BENCHIMOL";
+
 
 		$sess_codusuario = isset($_SESSION['sess_codusuario']) ? $sess_codusuario = $_SESSION['sess_codusuario'] : $sess_codusuario = "";
 		$sess_nomeusuario = isset($_SESSION['sess_nomeusuario']) ? $sess_nomeusuario = $_SESSION['sess_nomeusuario'] : $sess_nomeusuario = "";
