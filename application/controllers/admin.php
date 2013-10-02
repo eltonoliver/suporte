@@ -1,4 +1,6 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Admin extends CI_Controller{	
 
@@ -7,6 +9,11 @@ class Admin extends CI_Controller{
 		parent::__construct();		
 		$this->load->library('grocery_CRUD');
 		$this->load->model('solicitacao_model');
+		if(!$this->session->userdata('login')){
+
+			redirect('http://portalsenac.am.senac.br/');
+
+		}
 
 	}
 
@@ -48,7 +55,7 @@ class Admin extends CI_Controller{
 			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
 			$crud->callback_field('data_solicitacao',array($this,'formatData'));
 			$crud->field_type('id','readonly');
-			$crud->unset_back_to_list();	 
+			//$crud->unset_back_to_list();	 
 			$crud->unset_print();
 			$crud->unset_add();
 			$crud->unset_delete();
@@ -397,19 +404,18 @@ class Admin extends CI_Controller{
 			}
 
 			$msg = '
-				<div class="alert alert-success">
-					 <button type="button" class="close" data-dismiss="alert">×</button>
- 						Você assumiu este atendimento!
-				</div>';
- 				$this->session->set_flashdata('msg', $msg); 	
+				<script>
+					alert("Você assumiu este atendimento!");
+				</script>';
+ 				$this->session->set_flashdata('msg', $msg);
+			
 				redirect('admin/atendimentos/');
 		}catch(Exception $e){
 
 			$msg = '
-				<div class="alert alert-error">
-				<button type="button" class="close" data-dismiss="alert">×</button>
-  					'.$e->getMessage().'
-				</div>
+				<script>
+  					alert("'.$e->getMessage().'");
+				</script>
 			';
 			$this->session->set_flashdata('msg', $msg); 
 			redirect('admin/atendimentos/');
@@ -425,13 +431,14 @@ class Admin extends CI_Controller{
     	$this->solicitacao_model->update($primary_key,$dados);	
 
  		$msg = '
-				<div class="alert alert-success">
-					 <button type="button" class="close" data-dismiss="alert">×</button>
- 						Dados Atualizados! <a href="'.base_url().'admin/atendimentos/">Voltar para lista </a> 
-				</div>';
-
-		$this->session->set_flashdata('msg', $msg); 		
-    	redirect('admin/atendimentos/edit/'.$primary_key);
+				<script>
+ 						alert("Dados Atualizados!");
+						
+				</script>';
+		
+		$this->session->set_flashdata('msg', $msg); 
+		
+    	
 	}
 
 	/*CALLBACK EDIT SITUAÇÃO*/
