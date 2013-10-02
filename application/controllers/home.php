@@ -131,7 +131,6 @@ class Home extends CI_Controller{
 			$crud->set_table('solicitacao');
 			$crud->add_fields( 'sistemas_id','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');	
 			
-			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
 			$crud->set_relation('sistemas_id','sistemas','nome');
 
 			$crud->display_as('sistemas_id','Sistema')
@@ -142,6 +141,10 @@ class Home extends CI_Controller{
 			$crud->field_type('data_solicitacao','invisible');
 			$crud->field_type('usuario_id', 'hidden', $this->sessionUsuario);
 			$crud->field_type('tipo', 'hidden',2);
+			/*UNIDADE*/
+			$crud->field_type('local_servico','dropdown',
+           					 array( $this->idUnidade => $this->nomeUnidade));
+			/*END UNIDADE*/
 			$crud->required_fields('descricao_servico','sistemas_id');
 						
 			$crud->set_subject('Solicitação - Sistemas');
