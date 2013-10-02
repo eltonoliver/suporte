@@ -55,10 +55,11 @@ class Home extends CI_Controller{
 			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
 
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
-			$crud->set_relation('patrimonio_id','db_gde.equipamento_equi','equi_descricao');
+			$crud->set_relation('patrimonio_id','db_gde.equipamento_equi','equi_patrimonio');
+			$crud->set_relation('descricao_equi','db_gde.equipamento_equi','equi_descricao');
 			
-			$crud->add_fields('patrimonio_id','descricao_equi','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');
-		
+			$crud->add_fields('patrimonio_id','descricao_equi','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');
+			
 			$crud->display_as('patrimonio_id','Patrimônio')
 				 ->display_as('descricao_equi','Descrição do Equipamento')
 				 ->display_as('anexo','Anexo')
@@ -66,6 +67,7 @@ class Home extends CI_Controller{
 				 ->display_as('local_servico','Local do Serviço');
 			/*Deixa o campo data_solicitacao invisivel*/	 
 			$crud->field_type('data_solicitacao','invisible');
+			$crud->field_type('descricao_equi','readonly');
 			$crud->field_type('usuario_id', 'hidden', $this->sessionUsuario);
 			$crud->field_type('tipo', 'hidden',1);
 			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
@@ -94,6 +96,17 @@ class Home extends CI_Controller{
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
 		
+	}
+
+	public function retornaDescricao($id = null){
+
+		$dados = $this->solicitacao_model->getDescricaoEqui($id);
+		
+		foreach ($dados as $value) {
+				
+				echo $value->equi_descricao;
+		}	
+
 	}
 
 	public function solcicitacaoSistema($id = null){
