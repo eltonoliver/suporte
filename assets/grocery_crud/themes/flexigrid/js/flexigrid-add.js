@@ -1,4 +1,32 @@
 $(function(){
+
+	/*ALTERACAO SOLICITACAO EQUIPAMENTO*/
+		var baseUrl = "http://localhost/suporte/home/";
+
+		$("#field-patrimonio_id").live('change',function(){
+
+			var id = $(this).val();
+
+				$.ajax({
+				  url: 'http://localhost/suporte/home/retornaDescricao/'+id,
+				  type: 'POST',
+				  dataType: 'html',
+				  data: {id: 'id'},
+				  complete: function(xhr, textStatus) {
+				    //em requisição
+				  },
+				  success: function(data, textStatus, xhr) {
+				    	$("#field-descricao_equi").html(data);
+				  },
+				  error: function(xhr, textStatus, errorThrown) {
+				   	$("#field-descricao_equi").html("Erro ao retornar descrição!");
+				  }
+				});
+				
+		});
+
+
+		/*END ALTERACAO*/
 		$('.ptogtitle').click(function(){
 			if($(this).hasClass('vsble'))
 			{
