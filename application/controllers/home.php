@@ -81,7 +81,6 @@ class Home extends CI_Controller{
 
 											window.location = "'.site_url('home/minhas-solicitacoes').'";
 										</script>
-										<div style="display:none">
 									
 									'
 									);
@@ -101,6 +100,7 @@ class Home extends CI_Controller{
 		try{
 			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
 			$crud = new grocery_CRUD();
+			$crud->set_crud_url_path(site_url('home/solcicitacaoSistema'));			
 			$crud->set_theme('flexigrid');
 			$crud->set_table('solicitacao');
 			$crud->add_fields( 'sistemas_id','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');	
@@ -126,10 +126,9 @@ class Home extends CI_Controller{
 			$crud->set_lang_string('insert_success_message',
 			'Os dados foram armazenados no banco de dados
 				<script type="text/javascript">
-
+					
 					window.location = "'.site_url('home/minhas-solicitacoes').'";
 				</script>
-				<div style="display:none">
 			
 			'
 			);
@@ -297,13 +296,11 @@ class Home extends CI_Controller{
 	}
 
 	public function sair(){
-
+		session_destroy();	
 		$this->session->sess_destroy();
 		redirect('http://portalsenac.am.senac.br');
 
 	}
-
-
 
 
 }
