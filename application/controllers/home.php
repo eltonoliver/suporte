@@ -183,8 +183,6 @@ class Home extends CI_Controller{
 			$crud->where('usuario_id',$this->sessionUsuario);
 			$crud->columns('id','local_servico','data_solicitacao','situacao_id','id_suporte');
 
-
-
 			/*RELACIONAMENTO EQUIPAMENTO*/
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
 			
@@ -268,6 +266,21 @@ class Home extends CI_Controller{
 		}
 
 
+	}
+
+	public function cadastrarNoticia(){
+
+		try{
+
+			$crud = new grocery_CRUD();
+			$crud->set_crud_url_path(site_url('home/cadastrarNoticia'));
+			
+
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+
+		}
 	}
 
 	public function mensagem($id = null){
