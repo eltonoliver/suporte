@@ -55,12 +55,12 @@ class Home extends CI_Controller{
 			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
 
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
-			$crud->set_relation('patrimonio_id','db_gde.equipamento_equi','equi_patrimonio');
 			
 			
-			$crud->add_fields('patrimonio_id','descricao_equi','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');
 			
-			$crud->display_as('patrimonio_id','Patrimônio')
+			$crud->add_fields('patrimonio','descricao_equi','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');
+			
+			$crud->display_as('patrimonio','Patrimônio')
 				 ->display_as('descricao_equi','Descrição do Equipamento')
 				 ->display_as('anexo','Anexo')
 				 ->display_as('descricao_servico','Descrição do Serviço')
@@ -171,7 +171,7 @@ class Home extends CI_Controller{
 
 			/*RELACIONAMENTO EQUIPAMENTO*/
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
-			$crud->set_relation('patrimonio_id','db_gde.equipamento_equi','equi_descricao');
+			
 			$crud->set_relation('id_suporte','usuarios','nome');
 			$crud->set_relation('situacao_id','situacao','nome');
 			/*EQUIPAMENTO*/
@@ -187,7 +187,7 @@ class Home extends CI_Controller{
 				 ->display_as('id_suporte','Nome do Suporte')
 				 ->display_as('data_solicitacao','Data de Solicitação')
 				 ->display_as('local_servico','Local do Serviço')
-				 ->display_as('patrimonio_id','Patrimônio')
+				 ->display_as('patrimonio','Patrimônio')
 				 ->display_as('descricao_servico','Descrição do Serviço')
 				 ->display_as('descricao_equi','Descrição do Equipamento')
 				 ->display_as('sistemas_id','Sistema');
@@ -208,7 +208,7 @@ class Home extends CI_Controller{
         				$crud->fields('id','descricao_servico','data_solicitacao','situacao_id','id_suporte','sistemas_id');        				
 
         			}else{
-        				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio_id','data_solicitacao','situacao_id','id_suporte');
+        				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio','data_solicitacao','situacao_id','id_suporte');
         			}
         		}
 
