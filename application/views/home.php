@@ -96,6 +96,7 @@
                     </li>
                   <!--End Drop Nova Solicitação -->
 
+
                   <li>
                     <a href="<?php echo base_url(); ?>home/minhas-solicitacoes"><i class="icon-search icon-white"></i> &nbsp;Minhas Solicitações</a>
                   </li>
@@ -103,7 +104,6 @@
                   <li>
                     <a href="#modal-container-95857" data-toggle="modal"><i class="icon-thumbs-up icon-white"></i> &nbsp;Dúvidas Frequentes</a>
                   </li>
-
 
 
                   <!--Drop Administração -->
@@ -139,9 +139,6 @@
                     <a href="<?php echo base_url(); ?>home/sair"><i class="icon-arrow-left icon-white"></i> Sair </a>
                   </li>
                 </ul>
-
-
-
 
                 
                   </li>
