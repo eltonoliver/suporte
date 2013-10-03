@@ -98,9 +98,8 @@ class Home extends CI_Controller{
 										</script>
 									
 									'
-									);
+									);			
 			
-			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
 			$output = $crud->render();
 			$this->template->load('home','templates/view_frm_solicitacao_equi',$output);
 
@@ -162,7 +161,7 @@ class Home extends CI_Controller{
 			'
 			);
 		
-			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
+			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_sis');
 			$output = $crud->render();
 			$this->template->load('home','templates/view_frm_solicitacao_sis',$output);
 
@@ -207,7 +206,7 @@ class Home extends CI_Controller{
 				 ->display_as('sistemas_id','Sistema');
 		    $crud->callback_field('data_solicitacao',array($this,'formatData'));
 		    $crud->callback_after_update(array($this, 'data_finalizacao_callback'));
-		    $crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
+		    $crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_sis');
 		    $crud->unset_back_to_list();
 			$state = $crud->getState();
     		$state_info = $crud->getStateInfo();
