@@ -30,7 +30,7 @@ class Admin extends CI_Controller{
 			$crud->set_relation('id_suporte','usuarios','nome');
 			$crud->set_relation('situacao_id','situacao','nome');	
 			$crud->set_relation('prioridade_id','prioridade','nome');	
-			$crud->set_relation('patrimonio_id','db_gde.equipamento_equi','equi_descricao');
+		
 			$crud->set_relation('sistemas_id','sistemas','nome');
 			$crud->set_relation('usuario_id','db_base.usuario_usu','usu_nomeusuario');
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
@@ -52,7 +52,7 @@ class Admin extends CI_Controller{
 				 ->display_as('sistemas_id','Nome do Sistema')
 				 ->display_as('patrimonio_id','Patrimônio');
 			$crud->order_by('situacao_id','desc');
-			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
+			
 			$crud->callback_field('data_solicitacao',array($this,'formatData'));
 			$crud->field_type('id','readonly');
 			//$crud->unset_back_to_list();	 
@@ -204,6 +204,9 @@ class Admin extends CI_Controller{
 
 			$crud = new grocery_CRUD();
 			$crud->set_crud_url_path(site_url('admin/cadastrarNoticia'));
+			$crud->set_theme('datatables');
+			$crud->set_table('noticia');			
+			$crud->columns('id','titulo','descricao');
 			
 			$output = $crud->render();
 
