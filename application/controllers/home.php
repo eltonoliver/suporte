@@ -275,7 +275,7 @@ class Home extends CI_Controller{
 			$crud = new grocery_CRUD();
 			$crud->set_crud_url_path(site_url('home/cadastrarNoticia'));
 			
-
+			$output = $crud->render();
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
