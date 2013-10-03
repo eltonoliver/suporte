@@ -198,6 +198,23 @@ class Admin extends CI_Controller{
 
 	}
 
+	public function cadastrarNoticia(){
+
+		try{
+
+			$crud = new grocery_CRUD();
+			$crud->set_crud_url_path(site_url('admin/cadastrarNoticia'));
+			
+			$output = $crud->render();
+
+			$this->template->load('home','templates/view_noticia',$output);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+
+		}
+	}
+
 
 	public function relatorio(){
 			$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
