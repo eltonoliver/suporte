@@ -306,8 +306,7 @@ class Home extends CI_Controller{
 	}
 
 
-	public function mensagem_insert($postArray){	  	
- 		
+	public function mensagem_insert($postArray){		
 
 		$msg = '
 			<div class="alert alert-success">
