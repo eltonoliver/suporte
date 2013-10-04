@@ -1,3 +1,7 @@
 $(function(){
-	$( "#datepicker" ).datepicker();
+	$(".imprimir").click(function(){
+
+		window.print();
+		return false;
+	})
 })

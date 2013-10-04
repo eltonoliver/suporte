@@ -1,4 +1,6 @@
 $(function(){
+
+
 		$('.ptogtitle').click(function(){
 			if($(this).hasClass('vsble'))
 			{

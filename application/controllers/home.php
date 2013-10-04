@@ -1,4 +1,5 @@
 <?php ob_start(); ?>
+<?php session_start(); ?>
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends CI_Controller{	
@@ -6,6 +7,8 @@ class Home extends CI_Controller{
 	public $sessionUsuario;
 	public $sessionNome;
 	public $idSuporte;
+	public $idUnidade;
+	public $nomeUnidade;
 
 	public function __construct(){
 
@@ -15,11 +18,18 @@ class Home extends CI_Controller{
 		$this->load->model('solicitacao_model');
 		//SIMULACAO DO ID DO USUÁRIO
 		
-		$_SESSION['sess_codusuario'] = 3;
-		$_SESSION['sess_nomeusuario'] = "ELTON OLIVEIRA";
+		$_SESSION['sess_codusuario'] 	= 3;
+		$_SESSION['sess_nomeusuario'] 	= "ELTON OLIVEIRA";
+		$_SESSION['sess_codunidade'] 	= 22;
+		$_SESSION['sess_unidade'] 		= "CFP - LILI BENCHIMOL";
+
 
 		$sess_codusuario = isset($_SESSION['sess_codusuario']) ? $sess_codusuario = $_SESSION['sess_codusuario'] : $sess_codusuario = "";
 		$sess_nomeusuario = isset($_SESSION['sess_nomeusuario']) ? $sess_nomeusuario = $_SESSION['sess_nomeusuario'] : $sess_nomeusuario = "";
+
+		$this->idUnidade    		= isset($_SESSION['sess_codunidade']) ? $this->idUnidade = $_SESSION['sess_codunidade'] : $this->idUnidade = "";
+		$this->nomeUnidade  		= isset($_SESSION['sess_unidade']) 	? $this->nomeUnidade = $_SESSION['sess_unidade'] 	: $this->nomeUnidade = "";
+
 		$this->session->set_userdata('usuario_id', $sess_codusuario);
 		$this->session->set_userdata('login', $sess_nomeusuario);
 		$this->sessionLogin = $this->session->userdata('login');
@@ -53,21 +63,26 @@ class Home extends CI_Controller{
 			$crud->set_theme('flexigrid');
 			$crud->set_table('solicitacao');	
 			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
-
-			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
-			$crud->set_relation('patrimonio_id','db_gde.equipamento_equi','equi_descricao');
+					
 			
-			$crud->add_fields('patrimonio_id','descricao_equi','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');
-		
-			$crud->display_as('patrimonio_id','Patrimônio')
+			$crud->add_fields('patrimonio','descricao_equi','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');
+			
+			$crud->display_as('patrimonio','Patrimônio')
 				 ->display_as('descricao_equi','Descrição do Equipamento')
 				 ->display_as('anexo','Anexo')
 				 ->display_as('descricao_servico','Descrição do Serviço')
 				 ->display_as('local_servico','Local do Serviço');
 			/*Deixa o campo data_solicitacao invisivel*/	 
 			$crud->field_type('data_solicitacao','invisible');
+			
 			$crud->field_type('usuario_id', 'hidden', $this->sessionUsuario);
 			$crud->field_type('tipo', 'hidden',1);
+
+			/*UNIDADE*/
+			$crud->field_type('local_servico','dropdown',
+           					 array( $this->idUnidade => $this->nomeUnidade));
+			/*END UNIDADE*/
+			
 			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
 			
 			$crud->set_subject('Solicitação - Equipamentos');
@@ -75,8 +90,16 @@ class Home extends CI_Controller{
 			$crud->unset_back_to_list();
 			/*Insere a data de solicitação automaticamente via callback*/
 			$crud->callback_before_insert(array($this,'data_solicitacao_callback'));
+			$crud->set_lang_string('insert_success_message',
+									'Os dados foram armazenados no banco de dados
+										<script type="text/javascript">
+
+											window.location = "'.site_url('home/minhas-solicitacoes').'";
+										</script>
+									
+									'
+									);			
 			
-			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
 			$output = $crud->render();
 			$this->template->load('home','templates/view_frm_solicitacao_equi',$output);
 
@@ -87,15 +110,26 @@ class Home extends CI_Controller{
 		
 	}
 
+	public function retornaDescricao($id = null){
+
+		$dados = $this->solicitacao_model->getDescricaoEqui($id);
+		
+		foreach ($dados as $value) {
+				
+				echo $value->equi_descricao;
+		}	
+
+	}
+
 	public function solcicitacaoSistema($id = null){
 		try{
 			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
 			$crud = new grocery_CRUD();
+			$crud->set_crud_url_path(site_url('home/solcicitacaoSistema'));			
 			$crud->set_theme('flexigrid');
 			$crud->set_table('solicitacao');
 			$crud->add_fields( 'sistemas_id','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');	
 			
-			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
 			$crud->set_relation('sistemas_id','sistemas','nome');
 
 			$crud->display_as('sistemas_id','Sistema')
@@ -106,6 +140,10 @@ class Home extends CI_Controller{
 			$crud->field_type('data_solicitacao','invisible');
 			$crud->field_type('usuario_id', 'hidden', $this->sessionUsuario);
 			$crud->field_type('tipo', 'hidden',2);
+			/*UNIDADE*/
+			$crud->field_type('local_servico','dropdown',
+           					 array( $this->idUnidade => $this->nomeUnidade));
+			/*END UNIDADE*/
 			$crud->required_fields('descricao_servico','sistemas_id');
 						
 			$crud->set_subject('Solicitação - Sistemas');
@@ -113,7 +151,17 @@ class Home extends CI_Controller{
 			$crud->unset_back_to_list();
 			/*Insere a data de solicitação automaticamente via callback*/
 			$crud->callback_before_insert(array($this,'data_solicitacao_callback'));
-			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
+			$crud->set_lang_string('insert_success_message',
+			'Os dados foram armazenados no banco de dados
+				<script type="text/javascript">
+					
+					window.location = "'.site_url('home/minhas-solicitacoes').'";
+				</script>
+			
+			'
+			);
+		
+			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_sis');
 			$output = $crud->render();
 			$this->template->load('home','templates/view_frm_solicitacao_sis',$output);
 
@@ -134,11 +182,9 @@ class Home extends CI_Controller{
 			$crud->where('usuario_id',$this->sessionUsuario);
 			$crud->columns('id','local_servico','data_solicitacao','situacao_id','id_suporte');
 
-
-
 			/*RELACIONAMENTO EQUIPAMENTO*/
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
-			$crud->set_relation('patrimonio_id','db_gde.equipamento_equi','equi_descricao');
+			
 			$crud->set_relation('id_suporte','usuarios','nome');
 			$crud->set_relation('situacao_id','situacao','nome');
 			/*EQUIPAMENTO*/
@@ -154,13 +200,13 @@ class Home extends CI_Controller{
 				 ->display_as('id_suporte','Nome do Suporte')
 				 ->display_as('data_solicitacao','Data de Solicitação')
 				 ->display_as('local_servico','Local do Serviço')
-				 ->display_as('patrimonio_id','Patrimônio')
+				 ->display_as('patrimonio','Patrimônio')
 				 ->display_as('descricao_servico','Descrição do Serviço')
 				 ->display_as('descricao_equi','Descrição do Equipamento')
 				 ->display_as('sistemas_id','Sistema');
 		    $crud->callback_field('data_solicitacao',array($this,'formatData'));
 		    $crud->callback_after_update(array($this, 'data_finalizacao_callback'));
-		    $crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
+		    $crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_sis');
 		    $crud->unset_back_to_list();
 			$state = $crud->getState();
     		$state_info = $crud->getStateInfo();
@@ -175,7 +221,7 @@ class Home extends CI_Controller{
         				$crud->fields('id','descricao_servico','data_solicitacao','situacao_id','id_suporte','sistemas_id');        				
 
         			}else{
-        				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio_id','data_solicitacao','situacao_id','id_suporte');
+        				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio','data_solicitacao','situacao_id','id_suporte');
         			}
         		}
 
@@ -189,12 +235,17 @@ class Home extends CI_Controller{
         				if($situacao[0]->situacao_id != 3){
         				    $crud->edit_fields('id','descricao_servico','anexo','situacao_id');        				
         				 }else{
+        				 	  $crud->field_type('descricao_servico', 'readonly');
+        				 	  $crud->field_type('anexo', 'readonly');
         				 	  $crud->edit_fields('id','descricao_servico','anexo');
         				 }
         			}else{
         				if($situacao[0]->situacao_id != 3){
         				   $crud->edit_fields('id','descricao_equi','anexo','descricao_servico','situacao_id');      				
         				 }else{
+        				 	 $crud->field_type('descricao_equi', 'readonly');
+        				 	 $crud->field_type('descricao_servico', 'readonly');
+        				 	 $crud->field_type('anexo', 'readonly');
         				 	 $crud->edit_fields('id','descricao_equi','anexo','descricao_servico');
         				 }
         				
@@ -215,6 +266,8 @@ class Home extends CI_Controller{
 
 
 	}
+
+	
 
 	public function mensagem($id = null){
 		
@@ -253,8 +306,7 @@ class Home extends CI_Controller{
 	}
 
 
-	public function mensagem_insert($postArray){	  	
- 		
+	public function mensagem_insert($postArray){		
 
 		$msg = '
 			<div class="alert alert-success">
@@ -268,6 +320,13 @@ class Home extends CI_Controller{
 	/*FORMATAÇÃO DAS DATAS*/
 	public function formatData($value, $primary_key = null){
 		return formatDataBrasil($value);
+	}
+
+	public function sair(){
+		session_destroy();	
+		$this->session->sess_destroy();
+		redirect('http://portalsenac.am.senac.br');
+
 	}
 
 

@@ -1,9 +1,8 @@
-
 <?php 
 $verifica = $this->solicitacao_model->verificaSolicitacoes($this->sessionUsuario, 2 , 1);
-if($verifica < 1){
+ if($verifica < 4){
 	echo $output;
-
+ 
 }else{
 
 	echo '<div class="alert alert-block">

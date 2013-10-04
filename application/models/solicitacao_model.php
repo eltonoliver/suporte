@@ -88,6 +88,13 @@ class Solicitacao_model extends CI_Model{
     			$this->db->get('solicitacao')->result();
     			return $this->db->affected_rows();
         }
+
+        public function getDescricaoEqui($id = null){
+
+        	$this->db->where('equi_patrimonio',$id);
+        	$this->db->select('equi_descricao');
+        	return $this->db->get('db_gde.equipamento_equi')->result();
+        }
 	    
 
 }

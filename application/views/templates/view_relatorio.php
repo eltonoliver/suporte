@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 9a7e751d8f9ecd1a6ea1ed710735a7c86eac2d2b
 
 <h4><center>Relatórios</center></h4>
 <br>
@@ -45,9 +50,9 @@
 
 <br />
 
-<strong> Data Início : </strong> <input type="text" name="dataInicio"> <br />
+<strong> Data Início : </strong> <input type="text" name="dataInicio" class="data"> <br />
 
-<strong> Data Fim : </strong> <?php echo nbs(2); ?> <input type="text" name="dataFim"> <br />
+<strong> Data Fim : </strong> <?php echo nbs(2); ?> <input type="text" name="dataFim" class="data"> <br />
 
 
 <input type="submit" class="btn btn-primary" value="Gerar Relatório" >

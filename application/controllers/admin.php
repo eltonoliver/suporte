@@ -1,4 +1,6 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Admin extends CI_Controller{	
 
@@ -7,6 +9,11 @@ class Admin extends CI_Controller{
 		parent::__construct();		
 		$this->load->library('grocery_CRUD');
 		$this->load->model('solicitacao_model');
+		if(!$this->session->userdata('login')){
+
+			redirect('http://portalsenac.am.senac.br/');
+
+		}
 
 	}
 
@@ -23,7 +30,7 @@ class Admin extends CI_Controller{
 			$crud->set_relation('id_suporte','usuarios','nome');
 			$crud->set_relation('situacao_id','situacao','nome');	
 			$crud->set_relation('prioridade_id','prioridade','nome');	
-			$crud->set_relation('patrimonio_id','db_gde.equipamento_equi','equi_descricao');
+		
 			$crud->set_relation('sistemas_id','sistemas','nome');
 			$crud->set_relation('usuario_id','db_base.usuario_usu','usu_nomeusuario');
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
@@ -45,10 +52,10 @@ class Admin extends CI_Controller{
 				 ->display_as('sistemas_id','Nome do Sistema')
 				 ->display_as('patrimonio_id','Patrimônio');
 			$crud->order_by('situacao_id','desc');
-			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_equi');
+			
 			$crud->callback_field('data_solicitacao',array($this,'formatData'));
 			$crud->field_type('id','readonly');
-			$crud->unset_back_to_list();	 
+			//$crud->unset_back_to_list();	 
 			$crud->unset_print();
 			$crud->unset_add();
 			$crud->unset_delete();
@@ -191,6 +198,26 @@ class Admin extends CI_Controller{
 
 	}
 
+	public function cadastrarNoticia(){
+
+		try{
+
+			$crud = new grocery_CRUD();
+			$crud->set_crud_url_path(site_url('admin/cadastrarNoticia'));
+			$crud->set_theme('datatables');
+			$crud->set_table('noticia');			
+			$crud->columns('id','titulo','descricao');
+			
+			$output = $crud->render();
+
+			$this->template->load('home','templates/view_noticia',$output);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+
+		}
+	}
+
 
 	public function relatorio(){
 			$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
@@ -204,8 +231,10 @@ class Admin extends CI_Controller{
 		$tecnico  	= $this->input->post('tecnico');
 		$tipo     	= $this->input->post('tipo');
 		$situacao 	= $this->input->post('situacao');
-		$dataInicio = $this->input->post('dataInicio');
-		$dataFim 	= $this->input->post('dataFim');
+		$dataInicio = formatDataMysql($this->input->post('dataInicio'));
+		$dataFim 	= formatDataMysql($this->input->post('dataFim'));
+
+	
 
 		if($tecnico !="Todos"){
 
@@ -230,7 +259,7 @@ class Admin extends CI_Controller{
 
 		if($dataInicio != "" && $dataFim != ""){
 
-			$andData = " AND suporte.solicitacao.data_solicitacao >= '".$dataInicio."' AND  suporte.solicitacao.data_finalizacao >= ('".$dataFim."')";
+			$andData = " AND suporte.solicitacao.data_solicitacao >= '".$dataInicio."' AND  suporte.solicitacao.data_finalizacao <= ('".$dataFim."')";
 		}elseif($dataInicio != "" && $dataFim == ""){
 			$andData = " AND suporte.solicitacao.data_solicitacao >= '".$dataInicio."'";
 		}elseif($dataInicio == "" && $dataFim == ""){
@@ -243,6 +272,7 @@ class Admin extends CI_Controller{
 				suporte.usuarios.nome as suporteNome,
 				db_base.unidade_uni.uni_nomecompleto as localServico,
 				suporte.situacao.nome as situacao,
+				suporte.situacao.id as idSituacao,
 				db_base.usuario_usu.usu_loginusuario as nomeUsuario,
 				suporte.solicitacao.tipo,
 				suporte.solicitacao.data_solicitacao,
@@ -257,35 +287,62 @@ class Admin extends CI_Controller{
 		)->result();
 
 		$conteudo = "";
+		$chamado = 0;
+		$chamadoAberto = 0;
+		$chamadoFechado = 0;
+		$reg = 0;
 		foreach ($report as $value) {
-			
+			$reg++;
+			$chamado++;
+			if($value->idSituacao == 1){
+				$chamadoAberto++;
+			}
+
+			if($value->idSituacao == 3){
+				$chamadoFechado++;
+			}
+
+			($value->suporteNome == "") ? $value->suporteNome = "Em aberto" : $value->suporteNome;
+			($value->data_finalizacao == "") ? $value->data_finalizacao = "Em aberto" : formatDataBrasil($value->data_finalizacao);
+
 			$conteudo .= '
 							<tr>
-									<td>'.$value->id.'</td>
-									<td>'.$value->nomeUsuario.'</td>
-									<td>'.$value->localServico.'</td>
-									<td>'.$value->data_solicitacao.'</td>
-									<td>'.$value->data_finalizacao.'</td>
-									<td>'.$value->suporteNome.'</td>
-									<td>'.$value->situacao.'</td>
+									<td><center>'.$value->id.'</center></td>
+									<td><center>'.$value->nomeUsuario.'</center></td>
+									<td><center>'.$value->localServico.'</center></td>
+									<td><center>'.formatDataBrasil($value->data_solicitacao).'</center></td>
+									<td><center>'.$value->data_finalizacao.'</center></td>
+									<td><center>'.$value->suporteNome.'</center></td>
+									<td><center>'.$value->situacao.'</center></td>
 									
 								</tr>';
 		}
 		
 
 				$html =  '
+					<script type="text/javascript" src="'.base_url().'assets/js/jquery.min.js"></script>
+					<script type="text/javascript" src="'.base_url().'assets/js/custom.js"></script>
 					<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
 					<style> 
 						h4{
 							font-family: Arial;
 						}
+						table th{
+
+							border: 1px solid black;
+							border-collapse: collapse;
+
+						}table td{
+							border: 1px solid black;
+							border-collapse: collapse;
+						}
 					 </style>	
 				
 
-						<h4> Relatório - Sistema de Suporte </h4>
+						<center><h4> Relatório - Sistema de Suporte </h4></center>
 
 
-						<table style="height: 96px;font-family: Arial;" width="1000" border="1">
+						<center><table style="height: 96px;font-family: Arial;border: 1px solid black;" width="1000">
 								<tbody>
 								<tr>
 									<td><strong><center>Código</center></strong></td>
@@ -299,11 +356,21 @@ class Admin extends CI_Controller{
 								</tr>
 								'.$conteudo.'	
 								
-							
+								
 								</tbody>
 						</table>
+						</center>
+						<br>
 
+						<div style="margin: 0 auto; width: 1000px;font-family: Arial">
+						<strong>Quantidade de Registros : </strong>'.$reg.'<br>
+						<strong>Quantidade de Chamados : </strong> '.$chamado.' <br>
+						<strong>Quantidade de Chamados Abertos: </strong> '.$chamadoAberto.' <br>
+						<strong>Quantidade de Chamados Finalizados:</strong>  '.$chamadoFechado.' <br>
+						</div>
 
+						<br>
+						<center> <img src="'.base_url().'assets/images/print.png" style="cursor:pointer" class="imprimir"/> </center>
 
 					 ';
 
@@ -357,19 +424,18 @@ class Admin extends CI_Controller{
 			}
 
 			$msg = '
-				<div class="alert alert-success">
-					 <button type="button" class="close" data-dismiss="alert">×</button>
- 						Você assumiu este atendimento!
-				</div>';
- 				$this->session->set_flashdata('msg', $msg); 	
+				<script>
+					alert("Você assumiu este atendimento!");
+				</script>';
+ 				$this->session->set_flashdata('msg', $msg);
+			
 				redirect('admin/atendimentos/');
 		}catch(Exception $e){
 
 			$msg = '
-				<div class="alert alert-error">
-				<button type="button" class="close" data-dismiss="alert">×</button>
-  					'.$e->getMessage().'
-				</div>
+				<script>
+  					alert("'.$e->getMessage().'");
+				</script>
 			';
 			$this->session->set_flashdata('msg', $msg); 
 			redirect('admin/atendimentos/');
@@ -385,13 +451,14 @@ class Admin extends CI_Controller{
     	$this->solicitacao_model->update($primary_key,$dados);	
 
  		$msg = '
-				<div class="alert alert-success">
-					 <button type="button" class="close" data-dismiss="alert">×</button>
- 						Dados Atualizados! <a href="'.base_url().'admin/atendimentos/">Voltar para lista </a> 
-				</div>';
-
-		$this->session->set_flashdata('msg', $msg); 		
-    	redirect('admin/atendimentos/edit/'.$primary_key);
+				<script>
+ 						alert("Dados Atualizados!");
+						
+				</script>';
+		
+		$this->session->set_flashdata('msg', $msg); 
+		
+    	
 	}
 
 	/*CALLBACK EDIT SITUAÇÃO*/
