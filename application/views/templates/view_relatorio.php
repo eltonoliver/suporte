@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 9a7e751d8f9ecd1a6ea1ed710735a7c86eac2d2b
 
 <h4><center>Relatórios</center></h4>
 <br>
