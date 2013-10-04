@@ -1,18 +1,4 @@
-<?php 
 
-$atts = array(
-              'width'      => '800',
-              'height'     => '600',
-              'scrollbars' => 'yes',
-              'status'     => 'yes',
-              'resizable'  => 'yes',
-              'screenx'    => '0',
-              'screeny'    => '0'
-            );
-
-
-
- ?>
 <h4><center>Relatórios</center></h4>
 <br>
 <?php echo form_open('admin/gerarRelatorio','target="_blank"'); ?>
