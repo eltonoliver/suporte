@@ -79,8 +79,8 @@ class Home extends CI_Controller{
 			$crud->field_type('tipo', 'hidden',1);
 
 			/*UNIDADE*/
-			$crud->field_type('local_servico','dropdown',
-           					 array( $this->idUnidade => $this->nomeUnidade));
+			
+			$crud->field_type('local_servico', 'hidden', $this->idUnidade);
 			/*END UNIDADE*/
 			
 			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
@@ -141,8 +141,7 @@ class Home extends CI_Controller{
 			$crud->field_type('usuario_id', 'hidden', $this->sessionUsuario);
 			$crud->field_type('tipo', 'hidden',2);
 			/*UNIDADE*/
-			$crud->field_type('local_servico','dropdown',
-           					 array( $this->idUnidade => $this->nomeUnidade));
+			$crud->field_type('local_servico', 'hidden', $this->idUnidade);
 			/*END UNIDADE*/
 			$crud->required_fields('descricao_servico','sistemas_id');
 						
