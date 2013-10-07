@@ -327,8 +327,8 @@ class Home extends CI_Controller{
 	function delete_image($primary_key){
 	
 		$image = $this->db->get_where('solicitacao', array('id'=>$primary_key), 1)->row_array();
-		$path = '/assets/arquivos/anexo/solicitacao_sis/';
-		if(unlink($path.$image['name']))
+		$path = 'assets/arquivos/anexo/solicitacao_sis/';
+		if(unlink($path.$image['anexo']))
 			return true;
 		
 	}
