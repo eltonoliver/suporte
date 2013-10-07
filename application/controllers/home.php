@@ -207,9 +207,16 @@ class Home extends CI_Controller{
 		    $crud->callback_after_update(array($this, 'data_finalizacao_callback'));
 		    $crud->callback_before_delete(array($this,'delete_image'));
 		    $crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_sis');
+		    /*ACTION FINALIZAR SOLICITAÇÃO*/
+
+		    $crud->add_action('Finalizar', 'ui-icon ui-icon-circle-minus', 'home/finalizarChamado');	
+
+		    /*END ACTION*/
 		    $crud->unset_back_to_list();
-			$state = $crud->getState();
+			$state 		= $crud->getState();
     		$state_info = $crud->getStateInfo();
+
+
     		if($state == 'read'){
 
     			$idSolicitacao = $state_info->primary_key;
@@ -218,6 +225,7 @@ class Home extends CI_Controller{
     			foreach ($tipo as $value) {
         			if($value->tipo == 2){
         				
+
         				$crud->fields('id','descricao_servico','data_solicitacao','situacao_id','id_suporte','sistemas_id');        				
 
         			}else{
@@ -235,6 +243,7 @@ class Home extends CI_Controller{
         				if($situacao[0]->situacao_id != 3){
         				    $crud->edit_fields('id','descricao_servico','anexo','situacao_id');        				
         				 }else{
+
         				 	  $crud->field_type('descricao_servico', 'readonly');
         				 	  $crud->field_type('anexo', 'readonly');
         				 	  $crud->edit_fields('id','descricao_servico','anexo');
@@ -252,9 +261,11 @@ class Home extends CI_Controller{
         			}
         		}
     		}
+
 		
 			$crud->unset_add();
-			$crud->unset_print();	 
+			$crud->unset_print();	
+			$crud->unset_delete(); 
 			$output = $crud->render();			
 			
 			$this->template->load('home','templates/view_solicitacoes',$output);
@@ -267,6 +278,35 @@ class Home extends CI_Controller{
 
 	}
 
+
+	public function finalizarChamado($id = null){
+
+		try{
+
+			if(!$this->solicitacao_model->update($id , array('situacao_id' => 3))){
+
+				throw new Exception("Erro ao finalizar chamado!");
+						
+			}
+
+			$msg = '
+				<script>
+					alert("Atendimento Finalizado!");
+				</script>';
+ 			$this->session->set_flashdata('msg', $msg);
+			
+			redirect('home/minhas-solicitacoes/');
+
+		}catch(Exception $e){
+
+			$msg = '<script> alert("'.$e->getMessage().'"); </script>';
+ 			$this->session->set_flashdata('msg', $msg);
+
+			redirect('home/minhas-solicitacoes/');
+
+		}
+
+	}
 	
 
 	public function mensagem($id = null){
