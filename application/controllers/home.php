@@ -205,6 +205,7 @@ class Home extends CI_Controller{
 				 ->display_as('sistemas_id','Sistema');
 		    $crud->callback_field('data_solicitacao',array($this,'formatData'));
 		    $crud->callback_after_update(array($this, 'data_finalizacao_callback'));
+		    $crud->callback_before_delete(array($this,'delete_image'));
 		    $crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_sis');
 		    $crud->unset_back_to_list();
 			$state = $crud->getState();
@@ -319,6 +320,17 @@ class Home extends CI_Controller{
 	/*FORMATAÇÃO DAS DATAS*/
 	public function formatData($value, $primary_key = null){
 		return formatDataBrasil($value);
+	}
+
+	/*DELETAR A IMAGEM AO EXCLUIR A SOLICITAÇÃO*/
+
+	function delete_image($primary_key){
+	
+		$image = $this->db->get_where('solicitacao', array('id'=>$primary_key), 1)->row_array();
+		$path = '/assets/arquivos/anexo/solicitacao_sis/';
+		if(unlink($path.$image['name']))
+			return true;
+		
 	}
 
 	public function sair(){
