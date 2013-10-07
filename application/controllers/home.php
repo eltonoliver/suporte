@@ -256,8 +256,7 @@ class Home extends CI_Controller{
         				 	 $crud->field_type('descricao_servico', 'readonly');
         				 	 $crud->field_type('anexo', 'readonly');
         				 	 $crud->edit_fields('id','descricao_equi','anexo','descricao_servico');
-        				 }
-        				
+        				 }        				
         			}
         		}
     		}
