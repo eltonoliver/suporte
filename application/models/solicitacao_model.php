@@ -95,7 +95,12 @@ class Solicitacao_model extends CI_Model{
         	$this->db->select('equi_descricao');
         	return $this->db->get('db_gde.equipamento_equi')->result();
         }
-	    
+
+        public function getSituacao(){
+        	
+        	$this->db->select('situacao_id');
+        	return $this->db->get('solicitacao')->result();
+        }	    
 
 }
 ?>
