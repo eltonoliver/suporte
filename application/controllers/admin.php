@@ -227,7 +227,7 @@ class Admin extends CI_Controller{
 	}
 
 	public function gerarRelatorio(){
-		$this->output->enable_profiler('true');
+		
 		$nomeReport = "relatorio";
 
 		$tecnico  	= $this->input->post('tecnico');
