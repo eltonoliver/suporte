@@ -17,23 +17,15 @@
 			<?php }?>
 			<?php if(!$unset_delete || !$unset_edit || !$unset_read || !empty($actions)){?>
 			<td class='actions'>
-
 				<?php
 				if(!empty($row->action_urls)){
 					foreach($row->action_urls as $action_unique_id => $action_url){
 						$action = $actions[$action_unique_id];
-				?>		
-						<!--SE FOR O LABEL DO BTN FOR IGUAL A "Finalizar" ENTRA NESSA ALTERAÇÃO ABAIXO -->
-						<?php if($action->label == "Finalizar"){ ?>
+				?>
 						<a href="<?php echo $action_url; ?>" class="edit_button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button">
 							<span class="ui-button-icon-primary ui-icon <?php echo $action->css_class; ?> <?php echo $action_unique_id;?>"></span><span class="ui-button-text">&nbsp;<?php echo $action->label?></span>
 						</a>
-						<?php }else{ ?>
-						<a href="<?php echo $action_url; ?>" class="edit_button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button">
-							<span class="ui-button-icon-primary ui-icon <?php echo $action->css_class; ?> <?php echo $action_unique_id;?>"></span><span class="ui-button-text">&nbsp;<?php echo $action->label?></span>
-						</a>
-
-				<?php }}
+				<?php }
 				}
 				?>
 				<?php if(!$unset_read){?>
