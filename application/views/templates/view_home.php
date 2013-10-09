@@ -5,7 +5,7 @@
 			
 				<center>
 
-					<img src="<?php echo base_url(); ?>assets/images/logo-suporte.png" width="400"><br />
+					<img src="<?php echo base_url(); ?>assets/images/logo-suporte.png" width="200"><br />
 					<span class="logo-suporte"> Módulo de Solicitação de Serviços </span>	
 					<marquee>
 					<div id="div-noticia" >
@@ -34,7 +34,7 @@
 						
 
 					</div>
-					 </marquee>	
+					 </marquee>
 				</center>
 				
 			<?php echo br(15); ?>

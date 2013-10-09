@@ -50,7 +50,7 @@ class Admin extends CI_Controller{
 				 ->display_as('local_servico','Local do Serviço')
 				 ->display_as('prioridade_id','Prioridade')
 				 ->display_as('sistemas_id','Nome do Sistema')
-				 ->display_as('patrimonio_id','Patrimônio');
+				 ->display_as('patrimonio','Patrimônio');
 			$crud->order_by('situacao_id','desc');
 			
 			$crud->callback_field('data_solicitacao',array($this,'formatData'));
@@ -75,7 +75,7 @@ class Admin extends CI_Controller{
         				$crud->fields('id','descricao_servico','anexo','data_solicitacao','situacao_id','id_suporte','sistemas_id','usuario_id');        				
 
         			}else{
-        				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio_id','data_solicitacao','situacao_id','id_suporte','usuario_id');
+        				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio','data_solicitacao','situacao_id','id_suporte','usuario_id');
         			}
         		}
 
