@@ -285,7 +285,7 @@ class Home extends CI_Controller{
 
 		try{
 
-			if(!$this->solicitacao_model->update($id , array('situacao_id' => 3))){
+			if(!$this->solicitacao_model->update($id , array('situacao_id' => 3,'data_finalizacao' => date('Y-m-d') ))){
 
 				throw new Exception("Este chamado já foi finalizado!");
 						

@@ -17,6 +17,7 @@
   display: table;
   line-height: 0;
   content: "";
+  
 }
 
 .clearfix:after {

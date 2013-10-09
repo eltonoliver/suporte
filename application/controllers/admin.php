@@ -227,7 +227,7 @@ class Admin extends CI_Controller{
 	}
 
 	public function gerarRelatorio(){
-		
+		$this->output->enable_profiler('true');
 		$nomeReport = "relatorio";
 
 		$tecnico  	= $this->input->post('tecnico');
@@ -261,7 +261,7 @@ class Admin extends CI_Controller{
 
 		if($dataInicio != "" && $dataFim != ""){
 
-			$andData = " AND suporte.solicitacao.data_solicitacao >= '".$dataInicio."' AND  suporte.solicitacao.data_finalizacao <= ('".$dataFim."')";
+			$andData = " AND suporte.solicitacao.data_solicitacao >= '".$dataInicio."' AND  suporte.solicitacao.data_finalizacao <= '".$dataFim."'";
 		}elseif($dataInicio != "" && $dataFim == ""){
 			$andData = " AND suporte.solicitacao.data_solicitacao >= '".$dataInicio."'";
 		}elseif($dataInicio == "" && $dataFim == ""){
