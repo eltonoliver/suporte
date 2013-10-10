@@ -34,7 +34,7 @@ class Admin extends CI_Controller{
 			$crud->set_relation('sistemas_id','sistemas','nome');
 			$crud->set_relation('usuario_id','db_base.usuario_usu','usu_nomeusuario');
 			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
-			
+			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_sis');
 			$crud->columns('id','usuario_id','data_solicitacao','situacao_id','id_suporte','tipo');
 
 			$crud->callback_column('tipo',array($this,'tipo_callback'));
@@ -75,7 +75,7 @@ class Admin extends CI_Controller{
         				$crud->fields('id','descricao_servico','anexo','data_solicitacao','situacao_id','id_suporte','sistemas_id','usuario_id');        				
 
         			}else{
-        				$crud->fields('id','local_servico','anexo','descricao_equi','descricao_servico','patrimonio_id','data_solicitacao','situacao_id','id_suporte','usuario_id');
+        				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio_id','data_solicitacao','situacao_id','id_suporte','usuario_id');
         			}
         		}
 
