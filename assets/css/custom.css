@@ -87,3 +87,14 @@
     top: 11px;
     left: -6px;
 }
+#div-noticia{
+
+	
+	margin-top: 10px;
+}#div-noticia ul li{
+	
+	width: 200px;
+	float: left;
+	margin-left:10px;
+	list-style: none;
+}

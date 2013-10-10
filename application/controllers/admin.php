@@ -207,7 +207,9 @@ class Admin extends CI_Controller{
 			$crud->set_theme('datatables');
 			$crud->set_table('noticia');			
 			$crud->columns('id','titulo','descricao');
-			
+			$crud->fields('titulo','descricao');
+			$crud->required_fields('titulo','descricao');
+			$crud->callback_after_update(array($this, 'data_noticia'));
 			$output = $crud->render();
 
 			$this->template->load('home','templates/view_noticia',$output);
@@ -479,6 +481,13 @@ class Admin extends CI_Controller{
 	/*FORMATAÇÃO DAS DATAS*/
 	public function formatData($value, $primary_key = null){
 		return formatDataBrasil($value);
+	}
+
+
+	public function data_noticia($postArray) {
+		  	
+		  $postArray['data'] = date('Y-m-d h:i:s');
+		  return $postArray;
 	}
 
 

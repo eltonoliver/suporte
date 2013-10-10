@@ -128,6 +128,7 @@ class Home extends CI_Controller{
 			$crud->set_crud_url_path(site_url('home/solcicitacaoSistema'));			
 			$crud->set_theme('flexigrid');
 			$crud->set_table('solicitacao');
+
 			$crud->add_fields( 'sistemas_id','anexo','descricao_servico','local_servico','data_solicitacao','tipo','usuario_id');	
 			
 			$crud->set_relation('sistemas_id','sistemas','nome');
@@ -202,7 +203,8 @@ class Home extends CI_Controller{
 				 ->display_as('patrimonio','Patrimônio')
 				 ->display_as('descricao_servico','Descrição do Serviço')
 				 ->display_as('descricao_equi','Descrição do Equipamento')
-				 ->display_as('sistemas_id','Sistema');
+				 ->display_as('sistemas_id','Sistema')
+				 ->display_as('anexo','Anexo');
 		    $crud->callback_field('data_solicitacao',array($this,'formatData'));
 		    $crud->callback_after_update(array($this, 'data_finalizacao_callback'));
 		    $crud->callback_before_delete(array($this,'delete_image'));
@@ -226,7 +228,7 @@ class Home extends CI_Controller{
         			if($value->tipo == 2){
         				
 
-        				$crud->fields('id','descricao_servico','data_solicitacao','situacao_id','id_suporte','sistemas_id');        				
+        				$crud->fields('id','descricao_servico','anexo','data_solicitacao','situacao_id','id_suporte','sistemas_id');        				
 
         			}else{
         				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio','data_solicitacao','situacao_id','id_suporte');
