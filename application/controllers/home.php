@@ -263,6 +263,7 @@ class Home extends CI_Controller{
 
 		
 			$crud->unset_add();
+			$crud->unset_edit();
 			$crud->unset_print();	
 			$crud->unset_delete(); 
 			$output = $crud->render();			
