@@ -152,7 +152,7 @@ class Home extends CI_Controller{
 			/*Insere a data de solicitação automaticamente via callback*/
 		
 			$crud->callback_before_insert(array($this,'data_solicitacao_callback'));
-			$crud->callback_insert(array($this,'emailAbrirChamado'));
+			$crud->callback_after_insert(array($this,'emailAbrirChamado'));
 			$crud->set_lang_string('insert_success_message',
 			'Os dados foram armazenados no banco de dados
 				<script type="text/javascript">
