@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Admin extends CI_Controller{	
@@ -38,7 +37,6 @@ class Admin extends CI_Controller{
 			$crud->columns('id','usuario_id','data_solicitacao','situacao_id','id_suporte','tipo');
 
 			$crud->callback_column('tipo',array($this,'tipo_callback'));
-
 			
 			$crud->display_as('id','Código')
 				 ->display_as('id_suporte','Nome do Suporte')
@@ -98,7 +96,6 @@ class Admin extends CI_Controller{
     		$crud->callback_after_update(array($this, 'msgUpdate'));
     		//$crud->callback_column('Mensagem',array($this,'callback_forum'));
     		$crud->add_action('Assumir Atendimento', '', 'admin/assumirAtendimento','ui-icon ui-icon-circle-check');
-
     		
     		/*END ACTIONS*/	
 			
@@ -107,6 +104,7 @@ class Admin extends CI_Controller{
 			$this->template->load('home','templates/view_atendimento',$output);
 
 		}catch(Exception $e){
+
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 
 		}
@@ -122,8 +120,7 @@ class Admin extends CI_Controller{
 			$crud->set_theme('datatables');
 			$crud->set_table('usuarios');
 			$crud->columns('id','nome','login','email','status_id');
-			//$crud->add_fields('nome','login','cargo','email');
-			//$crud->edit_fields('nome','login','cargo','email');
+			
 			$crud->field_type('status_id', 'hidden', 1);
 
 			$crud->display_as('nome','Nome')
@@ -381,9 +378,6 @@ class Admin extends CI_Controller{
 
 		
 	}
-
-
-
 
 	public function tipo_callback($value,$row){
 		if($row->tipo == 1){
