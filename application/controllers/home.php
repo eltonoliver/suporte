@@ -121,11 +121,11 @@ class Home extends CI_Controller{
 
 	}
 
-	public function solcicitacaoSistema($id = null){
+	public function solicitacaoSistema($id = null){
 		try{
 			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
 			$crud = new grocery_CRUD();
-			$crud->set_crud_url_path(site_url('home/solcicitacaoSistema'));			
+			$crud->set_crud_url_path(site_url('home/solicitacaoSistema'));			
 			$crud->set_theme('flexigrid');
 			$crud->set_table('solicitacao');
 
