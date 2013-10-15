@@ -419,7 +419,6 @@ class Home extends CI_Controller{
 					$this->email->send();				
 
 		}catch(Exception $e){
-
 			
 			return $e->getMessage();
 		}
