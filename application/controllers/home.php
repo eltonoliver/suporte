@@ -150,8 +150,9 @@ class Home extends CI_Controller{
 			
 			$crud->unset_back_to_list();
 			/*Insere a data de solicitação automaticamente via callback*/
-			$crud->callback_after_insert(array($this,'emailAbrirChamado'));
+		
 			$crud->callback_before_insert(array($this,'data_solicitacao_callback'));
+			$crud->callback_insert(array($this,'emailAbrirChamado'));
 			$crud->set_lang_string('insert_success_message',
 			'Os dados foram armazenados no banco de dados
 				<script type="text/javascript">
@@ -367,22 +368,18 @@ class Home extends CI_Controller{
 	/*E-MAIL ENVIADO AO ABRIR CHAMADO DE USUÁRIO*/
 	public function emailAbrirChamado(){
 		try{
-
+					$this->load->library('email');
 					$mensagem = "Usuário : ".$_SESSION['sess_nomeusuario']." abriu uma solicitação ás ". date('h:i:s');
-					$emailGic = "eltonriaweb@gmail.com";
+					$emailGic = "eltonknoxville@hotmail.com";
 					$assunto = $_SESSION['sess_nomeusuario']." - Abertura de solicitação de serviço - ".date('d-m-Y');
-					$this->email->from($emailGic, 'Sistema Solicitação de Serviços:');					 
+					$this->email->from($emailGic, 'Sistema de Solicitação de Serviços');
+					$this->email->to($emailGic);				 
 								
 					$this->email->subject($assunto);
 					$this->email->message($emailGic." - ".$mensagem);	
 					
-					if(!$this->email->send()){
-
-						throw new Exception("Erro ao enviar e-mail");
-						
-					}
-
-					return true;
+					$this->email->send();
+				
 
 		}catch(Exception $e){
 
