@@ -50,13 +50,13 @@ $route['home/solicitacao-equipamento/delete/:num']					= "/home/solicitacaoEquip
 $route['home/solicitacao-equipamento/insert_validation']			= "/home/solicitacaoEquipamento/";
 
 /*ROTAS SOLICITACAO SISTEMAS*/
-$route['home/solicitacao-sistema/add'] 							= "/home/solcicitacaoSistema/";
-$route['home/solicitacao-sistema/insert'] 						= "/home/solcicitacaoSistema/";
-$route['home/solicitacao-sistema/edit'] 						= "/home/solcicitacaoSistema/";
-$route['home/solicitacao-sistema/upload_file/anexo'] 			= "/home/solcicitacaoSistema/";
-$route['home/solicitacao-sistema/delete_file/anexo/(:any)'] 	= "/home/solcicitacaoSistema/";
-$route['home/solicitacao-sistema/delete/:num']					= "/home/solcicitacaoSistema/";
-$route['home/solicitacao-sistema/insert_validation']			= "/home/solcicitacaoSistema/";
+$route['home/solicitacao-sistema/add'] 							= "/home/solicitacaoSistema/";
+$route['home/solicitacao-sistema/insert'] 						= "/home/solicitacaoSistema/";
+$route['home/solicitacao-sistema/edit'] 						= "/home/solicitacaoSistema/";
+$route['home/solicitacao-sistema/upload_file/anexo'] 			= "/home/solicitacaoSistema/";
+$route['home/solicitacao-sistema/delete_file/anexo/(:any)'] 	= "/home/solicitacaoSistema/";
+$route['home/solicitacao-sistema/delete/:num']					= "/home/solicitacaoSistema/";
+$route['home/solicitacao-sistema/insert_validation']			= "/home/solicitacaoSistema/";
 
 /*ROTAS MINHAS SOLICITACOES*/
 $route['home/minhas-solicitacoes']								= "/home/minhasSolicitacoes/";
