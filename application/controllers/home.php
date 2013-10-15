@@ -279,7 +279,6 @@ class Home extends CI_Controller{
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
 
-
 	}
 
 
@@ -289,8 +288,7 @@ class Home extends CI_Controller{
 
 			if(!$this->solicitacao_model->update($id , array('situacao_id' => 3,'data_finalizacao' => date('Y-m-d') ))){
 
-				throw new Exception("Este chamado já foi finalizado!");
-						
+				throw new Exception("Este chamado já foi finalizado!");						
 			}
 
 						   $this->db->where('id',$id); 	
@@ -324,31 +322,24 @@ class Home extends CI_Controller{
 
 				if(isset($email[0]->emus_email)){
 
-
 					$mensagem = "Seu chamado foi finalizado com sucesso, chamado de número ".$id;
 					$email 	  = $email[0]->emus_email;
 					$assunto  = $_SESSION['sess_nomeusuario']." - Finalização de chamado - ".date('d-m-Y');
 					$this->email->from($email, 'Sistema de Solicitação de Serviços');
-					$this->email->to($email);				 
-								
+					$this->email->to($email);								
 					$this->email->subject($assunto);
 					$this->email->message($emailGic." - ".$mensagem);	
 					
-					$this->email->send();		
+					$this->email->send();
 
-
-
-
-				}
-
-				  
+				}				  
 
 			$msg = '
 				<script>
 					alert("Atendimento Finalizado!");
 				</script>';
  			$this->session->set_flashdata('msg', $msg);
-			
+
 			redirect('home/minhas-solicitacoes/');
 
 		}catch(Exception $e){
@@ -357,14 +348,10 @@ class Home extends CI_Controller{
  			$this->session->set_flashdata('msg', $msg);
 
 			redirect('home/minhas-solicitacoes/');
-
 		}
+	}	
 
-	}
-	
-
-	public function mensagem($id = null){
-		
+	public function mensagem($id = null){		
 		try{
 			$crud = new grocery_CRUD();
 			$crud->set_table('forum');
@@ -375,7 +362,9 @@ class Home extends CI_Controller{
 			$output = $crud->render();
 			
 			$this->template->load('home','templates/view_mensagem',$output);
+
 		}catch(Exception $e){
+
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}		
 	}
@@ -398,7 +387,6 @@ class Home extends CI_Controller{
 		  $dados = array('data_finalizacao' => date('Y-m-d h:i:s') ); 
 		  return $this->solicitacao_model->update($primary_key,$dados);
 	}
-
 
 	public function mensagem_insert($postArray){		
 
@@ -438,9 +426,7 @@ class Home extends CI_Controller{
 
 
 	}
-
 	/*DELETAR A IMAGEM AO EXCLUIR A SOLICITAÇÃO*/
-
 	function delete_image($primary_key){
 	
 		$image = $this->db->get_where('solicitacao', array('id'=>$primary_key), 1)->row_array();
@@ -449,7 +435,7 @@ class Home extends CI_Controller{
 			return true;
 		
 	}
-
+	/*METODO SAIR*/
 	public function sair(){
 		session_destroy();	
 		$this->session->sess_destroy();
