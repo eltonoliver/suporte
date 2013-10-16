@@ -7,7 +7,7 @@
 
 					<img src="<?php echo base_url(); ?>assets/images/logo-suporte.png" width="200"><br />
 					<span class="logo-suporte"> Módulo de Solicitação de Serviços </span>	
-					<marquee>
+					<marquee direction="right" onmouseover="this.stop()" onmouseout="this.start()">
 					<div id="div-noticia" >
 							
 						<ul>

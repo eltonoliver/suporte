@@ -150,6 +150,7 @@ class Home extends CI_Controller{
 			
 			$crud->unset_back_to_list();
 			/*Insere a data de solicitação automaticamente via callback*/
+			$crud->callback_after_insert(array($this,'emailAbrirChamado'));
 			$crud->callback_before_insert(array($this,'data_solicitacao_callback'));
 			$crud->set_lang_string('insert_success_message',
 			'Os dados foram armazenados no banco de dados
@@ -362,6 +363,34 @@ class Home extends CI_Controller{
 	/*FORMATAÇÃO DAS DATAS*/
 	public function formatData($value, $primary_key = null){
 		return formatDataBrasil($value);
+	}
+	/*E-MAIL ENVIADO AO ABRIR CHAMADO DE USUÁRIO*/
+	public function emailAbrirChamado(){
+		try{
+
+					$mensagem = "Usuário : ".$_SESSION['sess_nomeusuario']." abriu uma solicitação ás ". date('h:i:s');
+					$emailGic = "eltonriaweb@gmail.com";
+					$assunto = $_SESSION['sess_nomeusuario']." - Abertura de solicitação de serviço - ".date('d-m-Y');
+					$this->email->from($emailGic, 'Sistema Solicitação de Serviços:');					 
+								
+					$this->email->subject($assunto);
+					$this->email->message($emailGic." - ".$mensagem);	
+					
+					if(!$this->email->send()){
+
+						throw new Exception("Erro ao enviar e-mail");
+						
+					}
+
+					return true;
+
+		}catch(Exception $e){
+
+			
+			return $e->getMessage();
+		}
+
+
 	}
 
 	/*DELETAR A IMAGEM AO EXCLUIR A SOLICITAÇÃO*/
