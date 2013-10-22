@@ -25,7 +25,7 @@ class Admin extends CI_Controller{
 			$crud->set_crud_url_path(site_url('admin/atendimentos'));
 			$crud->set_theme('datatables');
 			$crud->set_table('solicitacao');
-				 
+			
 			$crud->set_relation('id_suporte','usuarios','nome');
 			$crud->set_relation('situacao_id','situacao','nome');	
 			$crud->set_relation('prioridade_id','prioridade','nome');	
@@ -49,7 +49,7 @@ class Admin extends CI_Controller{
 				 ->display_as('prioridade_id','Prioridade')
 				 ->display_as('sistemas_id','Nome do Sistema')
 				 ->display_as('patrimonio','Patrimônio');
-			$crud->order_by('situacao_id','desc');
+			
 			
 			$crud->callback_field('data_solicitacao',array($this,'formatData'));
 			$crud->field_type('id','readonly');
@@ -98,7 +98,7 @@ class Admin extends CI_Controller{
     		$crud->add_action('Assumir Atendimento', '', 'admin/assumirAtendimento','ui-icon ui-icon-circle-check');
     		
     		/*END ACTIONS*/	
-			
+			$crud->order_by('situacao_id','desc'); 
 			$output = $crud->render();
 
 			$this->template->load('home','templates/view_atendimento',$output);
