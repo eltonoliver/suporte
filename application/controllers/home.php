@@ -83,7 +83,7 @@ class Home extends CI_Controller{
 			$crud->field_type('local_servico', 'hidden', $this->idUnidade);
 			/*END UNIDADE*/
 			
-			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
+			$crud->required_fields('descricao_equi','descricao_servico');
 			
 			$crud->set_subject('Solicitação - Equipamentos');
 			$crud->callback_after_insert(array($this,'emailAbrirChamado'));
@@ -448,10 +448,7 @@ class Home extends CI_Controller{
 					
 					
 					
-					';
-					
-					
-					
+					';				
 					
 					
 					$emailGic = "elton.oliveira@am.senac.br";
