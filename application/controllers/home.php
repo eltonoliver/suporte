@@ -407,9 +407,61 @@ class Home extends CI_Controller{
 	public function emailAbrirChamado($post_array,$primary_key){
 		try{
 					
-					$mensagem = "Usuário : ".$_SESSION['sess_nomeusuario']." abriu uma solicitação ás ". date('h:i:s');
+					
+					
+					$mensagem = '
+							
+							<html>
+							
+							<body>
+								<div style="text-align: center;">
+									<p style="text-align: left;">
+										<span class="header" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);"><strong>MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
+										Para isso utilize a ferramenta de suporte <span class="Object" id="OBJ_PREFIX_DWT153_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portalsenac.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://</a>portalsenac.am.senac.br</span><br />
+										___<em>_</em>_____________________________________________________________________________________________</span></p>
+									<p style="text-align: left;">
+										<span style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">O Usu&aacute;rio - ('.$_SESSION['sess_nomeusuario'].') Abriu um chamado.</span></p>
+									<ul style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">
+										<li style="text-align: left;">
+											Data de abertua : &nbsp;'.date('d/m/Y').'</li>
+											<li style="text-align: left;">
+											Nº : &nbsp;'.$primary_key.'</li>
+									</ul>
+									<p style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253); text-align: left;">
+										&nbsp;</p>
+									<hr style="width: 1883px; height: 1px; background-color: rgb(204, 204, 204); border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 16px;" />
+									<h1 style="font-family: \'Trebuchet MS\', Verdana, sans-serif; margin: 0px; font-size: 1.2em; background-color: rgb(253, 253, 253); text-align: left;">
+										<span class="Object" id="OBJ_PREFIX_DWT154_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a href="#" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">D</a>escri&ccedil;&atilde;o do Servi&ccedil;o:</span></h1>
+									<p style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253); text-align: left;">
+										'.strip_tags($post_array['descricao_servico']).'</p>
+									<hr style="width: 1883px; height: 1px; background-color: rgb(204, 204, 204); border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 16px;" />
+									<p style="text-align: left;">
+										<span class="footer" style="font-size: 0.8em; font-style: italic; font-family: Helvetica, Arial, sans-serif; background-color: rgb(253, 253, 253);"><strong>ESTA &Eacute; UMA MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
+										Voc&ecirc; recebeu este e-mail porque voc&ecirc; est&aacute; inscrito na lista de suporte da Equipe GIC.<br />
+										Para alterar suas configura&ccedil;&otilde;es por favor acess:&nbsp;<span class="Object" id="OBJ_PREFIX_DWT157_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portal.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://</a>portal.am.senac.br</span>.</span></p>
+								</div>
+								<p>
+									&nbsp;</p>
+							</body>
+						</html>			
+					
+					
+					
+					
+					';
+					
+					
+					
+					
+					
 					$emailGic = "elton.oliveira@am.senac.br";
-					$assunto = $_SESSION['sess_nomeusuario']." - Abertura de solicitação de serviço - ".date('d-m-Y');
+					$assunto = $_SESSION['sess_nomeusuario']." - Abertura de  - ".date('d-m-Y');
+					$config['charset'] = 'utf-8';
+
+					$config['wordwrap'] = TRUE;
+					$config['mailtype'] = 'html';
+					$this->email->initialize($config);
+
 					$this->email->from($emailGic, 'Sistema de Solicitação de Serviços');
 					$this->email->to($emailGic);				 
 								
@@ -422,8 +474,8 @@ class Home extends CI_Controller{
 			
 			return $e->getMessage();
 		}
-
-
+			
+		return $post_array;
 	}
 	/*DELETAR A IMAGEM AO EXCLUIR A SOLICITAÇÃO*/
 	function delete_image($primary_key){
