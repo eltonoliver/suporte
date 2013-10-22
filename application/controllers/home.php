@@ -86,7 +86,7 @@ class Home extends CI_Controller{
 			$crud->required_fields('descricao_equi','descricao_servico','patrimonio');
 			
 			$crud->set_subject('Solicitação - Equipamentos');
-			
+			$crud->callback_after_insert(array($this,'emailAbrirChamado'));
 			$crud->unset_back_to_list();
 			/*Insere a data de solicitação automaticamente via callback*/
 			$crud->callback_before_insert(array($this,'data_solicitacao_callback'));
@@ -404,7 +404,7 @@ class Home extends CI_Controller{
 		return formatDataBrasil($value);
 	}
 	/*E-MAIL ENVIADO AO ABRIR CHAMADO DE USUÁRIO*/
-	public function emailAbrirChamado(){
+	public function emailAbrirChamado($post_array,$primary_key){
 		try{
 					
 					$mensagem = "Usuário : ".$_SESSION['sess_nomeusuario']." abriu uma solicitação ás ". date('h:i:s');
