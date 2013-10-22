@@ -84,11 +84,11 @@
                         <ul class="dropdown-menu">
 
                           <li>
-                            <a href="<?php echo base_url(); ?>home/solicitacao-equipamento/add">Problema Em Equipamento de Informática</a>
+                            <a href="<?php echo base_url(); ?>home/solicitacao-equipamento/add">Solicitação Em Equipamentos de Informática</a>
                           </li>
 
                           <li>
-                            <a href="<?php echo base_url(); ?>home/solicitacao-sistema/add">Problema Em Sistema da Instituição</a>
+                            <a href="<?php echo base_url(); ?>home/solicitacao-sistema/add">Solicitação Em Sistemas da Instituição</a>
                           </li>
 
 
