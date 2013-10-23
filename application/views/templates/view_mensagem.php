@@ -26,10 +26,11 @@ var ajax_relation_url = 'http://localhost/suportehome/mensagem/ajax_relation';
 
   <?php echo $this->session->flashdata('msg'); ?> 
 
-<form action="<?php echo base_url(); ?>home/mensagem/insert" method="post">
+<form action="admin/mensagem/insert" method="post">
 
 	<textarea id="field-mensagem" name="mensagem" class="texteditor" style="margin: 0px 0px 10px; width: 1184px; height: 53px;"></textarea><br>
-	<input id="field-data" type="hidden" name="data" value="<?php echo date('Y-m-d h:i:s'); ?>" />
+	<input id="field-data" type="hidden" name="data" value="<?php echo date('d/m/Y'); ?>" />
+	<input id="field-data" type="hidden" name="hora" value="<?php echo date('h:i:s'); ?>" /> 
 	<input id="field-suporte_id" type="hidden" name="suporte_id" value="" />
 	<input id="field-usuario_id" type="hidden" name="usuario_id" value="<?php echo $dados[0]->usuario_id ?>" />
 	<input id="field-solicitacao_id" type="hidden" name="solicitacao_id" value="<?php echo $dados[0]->id; ?>" />
