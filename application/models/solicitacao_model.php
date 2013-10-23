@@ -51,18 +51,16 @@ class Solicitacao_model extends CI_Model{
 
 	    }
 
-
-
 	    public function addForum($dados = null){
-	        	
+	        			
 	        	return $this->db->insert('forum', $dados);
 	    		 
 	    }
 	    
 
 	    public function getForum($id = null){
-	    		   $this->db->where('solicitacao_id',$id);   	
-	    		   $this->db->where('usuario_id', $this->session->userdata('usuario_id'));
+	    		   $this->db->order_by("id", "desc"); 	
+	    		   $this->db->where('solicitacao_id',$id);    		  
 	    	return $this->db->get('forum')->result();
 
 	    }

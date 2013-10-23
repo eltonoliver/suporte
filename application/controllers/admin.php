@@ -238,16 +238,16 @@ class Admin extends CI_Controller{
 
 			}
 
-			$msg = "Mensagem enviada!";
+			$msg = '<div class="alert alert-success">Mensagem enviada! <button type="button" class="close" data-dismiss="alert">×</button></div>';
 
-			$this->session->set_flashdata('msg',$msg);
+			$this->session->set_flashdata('mensagem',$msg);
 			redirect("admin/atendimentos/read/".$idSolicitacao);
 
 		
 		}catch(Exception $e){
 
-			$msg = $e->getMessage();
-			$this->session->set_flashdata('msg',$msg);
+			$msg = '<div class="alert alert-error">'.$e->getMessage().'<button type="button" class="close" data-dismiss="alert">×</button></div>';
+			$this->session->set_flashdata('mensagem',$msg);
 			redirect("admin/atendimentos/read/".$idSolicitacao);
 
 		}	

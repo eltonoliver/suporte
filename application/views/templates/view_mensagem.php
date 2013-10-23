@@ -48,6 +48,24 @@ var ajax_relation_url = 'http://localhost/suportehome/mensagem/ajax_relation';
  <?php foreach ($mensagens as $value){  ?>
 	<div class="alert alert-info">
 
+	<?php 
+		$nomeUser = "";
+		$this->db->where('id',$value->usuario_id);
+		$user = $this->db->get('usuarios')->result();
+
+		
+		if(!isset($user[0]->nome)){
+
+			$this->db->where('usu_codusuario',$value->usuario_id);
+		    $user = $this->db->get('db_base.usuario_usu')->result();
+		    $nomeUser = $user[0]->usu_nomeusuario;
+		}else{
+
+			 $nomeUser = $user[0]->nome;
+		}
+
+	?>	
+
 	 <strong>Atualizado Por </strong> : <?php echo $value->usuario_id; ?> há 2 Dias.
 		<br>
 		<strong>Mensagem :</strong><p> <?php echo $value->mensagem;  ?></p> 

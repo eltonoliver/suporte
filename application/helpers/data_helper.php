@@ -147,6 +147,28 @@
 			  return toSystemDate($data);
 	}
 
+	function diasPostagem($data = null){
+		// Calcula a diferença em segundos entre as datas
+		$diferenca = strtotime(date('Y-m-d')) - strtotime($data);
+
+		//Calcula a diferença em dias
+		$dias = floor($diferenca / (60 * 60 * 24));
+
+		switch($dias)
+		{
+		case 0:
+		   return 'Hoje.'; 
+		break;
+		case 1:
+		   return 'feita Ontem.'; 
+		break;
+		   default:
+		return "feita há $dias dias atrás.";
+		   break;
+		  }
+	}
+
+
 
 
 ?>

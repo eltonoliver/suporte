@@ -18,7 +18,7 @@ class Home extends CI_Controller{
 		$this->load->model('solicitacao_model');
 		//SIMULACAO DO ID DO USUÁRIO
 		
-		$_SESSION['sess_codusuario'] 	= 3;
+		$_SESSION['sess_codusuario'] 	= 1;
 		$_SESSION['sess_nomeusuario'] 	= "ELTON OLIVEIRA";
 		$_SESSION['sess_codunidade'] 	= 22;
 		$_SESSION['sess_unidade'] 		= "CFP - LILI BENCHIMOL";

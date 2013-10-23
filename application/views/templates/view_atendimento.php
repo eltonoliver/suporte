@@ -7,6 +7,8 @@ echo $output;
 
 ?>
 
+
+
 <?php 
 
 /*****************************************
@@ -17,9 +19,49 @@ echo $output;
 	$idSolicitacao  =  $this->uri->rsegment(4);
 
 	if($controller == 'atendimentos' && $action == 'read'){
+
+
 ?>
+
+<?php 
+
+		/*LISTA MENSAGEM*/
+		$mensagens = $this->solicitacao_model->getForum($idSolicitacao);		
+
+
+?>
+ <?php foreach ($mensagens as $value){  ?>
+
+  	<?php 
+		$nomeUser = "";
+		$this->db->where('id',$value->usuario_id);
+		$user = $this->db->get('usuarios')->result();
+
+		
+		if(!isset($user[0]->nome)){
+
+			$this->db->where('usu_codusuario',$value->usuario_id);
+		    $user = $this->db->get('db_base.usuario_usu')->result();
+		    $nomeUser = $user[0]->usu_nomeusuario;
+		}else{
+
+			 $nomeUser = $user[0]->nome;
+		}
+
+	?>	
+	<br><div class="alert alert-info">
+
+	 <strong>Atualizado Por </strong> : <?php echo $nomeUser; ?> - <?php echo diasPostagem( $value->data ); ?>
+		<br>
+		<strong>Mensagem :</strong><p> <?php echo $value->mensagem;  ?></p> 
+	</div>
+
+<?php } ?>
+
+
+
 	<br>
-	<?php echo $this->session->flashdata('msg'); ?>
+	<?php echo $this->session->flashdata('mensagem'); ?>
 	<center><h4> Chat Suporte </h4></center>
 
 	<form action="<?php echo base_url(); ?>admin/cadastrarMensagem/" method="post">
@@ -33,3 +75,4 @@ echo $output;
 	</form>
 
 <?php } ?>
+
