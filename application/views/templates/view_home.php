@@ -2,7 +2,37 @@
 		
 	<div class="row">
 		<div class="span12">
-			
+		 <!-- CHAMADOS ABERTOS E MENSGENS -->	
+		  <?php 
+				  	
+				  		$this->db->where('usuario_id',$this->session->userdata('usuario_id'));
+				  		$this->db->where('situacao_id',1);				  		
+				  		$this->db->get('solicitacao')->result();
+						$contaReg = $this->db->affected_rows();
+
+						if($contaReg > 1){
+
+							$msg = "Você tem ".$contaReg." chamados em aberto,";
+						}else{
+
+							$msg = "Você tem ".$contaReg." chamado em aberto,";
+						}
+
+						
+
+		   ?>
+		   <?php if($contaReg > 0){ ?>
+			<div class="alert alert-error">
+  				<button type="button" class="close" data-dismiss="alert">×</button>
+				  <center><h4> Aviso! </h4></center>
+				 
+				  	<p><a href="<?php echo base_url(); ?>home/minhas-solicitacoes/"><?php echo $msg; ?> caso já tenha sido atendido favor clicar em finalizar.</a> </p>
+
+
+				 
+			</div>
+			<?php } ?>
+		 <!-- FIM CHAMADOS  -->	
 				<center>
 
 					<img src="<?php echo base_url(); ?>assets/images/logo-suporte.png" width="200"><br />

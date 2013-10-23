@@ -51,7 +51,7 @@ echo $output;
 	?>	
 	<br><div class="alert alert-info">
 
-	 <strong>Atualizado Por </strong> : <?php echo $nomeUser; ?> - <?php echo diasPostagem( $value->data ); ?>
+	 <strong>Atualizado Por </strong> : <?php echo $nomeUser; ?> - <strong> <?php echo diasPostagem( $value->data ); ?></strong>
 		<br>
 		<strong>Mensagem :</strong><p> <?php echo $value->mensagem;  ?></p> 
 	</div>
