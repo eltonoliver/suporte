@@ -76,7 +76,7 @@ class Admin extends CI_Controller{
         				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio','data_solicitacao','situacao_id','id_suporte','usuario_id');
         			}
         		}
-        		
+
     		}elseif($state == 'edit'){
     				$idSolicitacao = $state_info->primary_key;
     			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
@@ -216,6 +216,42 @@ class Admin extends CI_Controller{
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 
 		}
+	}
+
+
+	public function cadastrarMensagem(){
+		try{
+			$idSolicitacao =  $this->input->post('solicitacao_id');
+			$dados = array(
+
+				'mensagem' 		 => $this->input->post('mensagem'),
+				'data'	  		 => $this->input->post('data'),
+				'usuario_id'	 => $this->input->post('suporte_id'),
+				'solicitacao_id' => $idSolicitacao
+
+
+				);
+
+			if(!$this->solicitacao_model->addForum($dados)){
+
+				throw new Exception("Erro ao inserir mensagem");				
+
+			}
+
+			$msg = "Mensagem enviada!";
+
+			$this->session->set_flashdata('msg',$msg);
+			redirect("admin/atendimentos/read/".$idSolicitacao);
+
+		
+		}catch(Exception $e){
+
+			$msg = $e->getMessage();
+			$this->session->set_flashdata('msg',$msg);
+			redirect("admin/atendimentos/read/".$idSolicitacao);
+
+		}	
+
 	}
 
 
