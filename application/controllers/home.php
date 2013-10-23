@@ -270,6 +270,7 @@ class Home extends CI_Controller{
 			$crud->unset_edit();
 			$crud->unset_print();	
 			$crud->unset_delete(); 
+		//	$crud->order_by('situacao_id','desc');
 			$output = $crud->render();			
 			
 			$this->template->load('home','templates/view_solicitacoes',$output);
