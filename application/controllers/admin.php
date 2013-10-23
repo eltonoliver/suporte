@@ -76,7 +76,7 @@ class Admin extends CI_Controller{
         				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio','data_solicitacao','situacao_id','id_suporte','usuario_id');
         			}
         		}
-
+        		
     		}elseif($state == 'edit'){
     				$idSolicitacao = $state_info->primary_key;
     			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
@@ -98,7 +98,8 @@ class Admin extends CI_Controller{
     		$crud->add_action('Assumir Atendimento', '', 'admin/assumirAtendimento','ui-icon ui-icon-circle-check');
     		
     		/*END ACTIONS*/	
-			$crud->order_by('situacao_id','desc'); 
+			$crud->order_by('id','desc');
+			
 			$output = $crud->render();
 
 			$this->template->load('home','templates/view_atendimento',$output);
