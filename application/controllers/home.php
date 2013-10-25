@@ -199,7 +199,7 @@ class Home extends CI_Controller{
 						
 			$crud->display_as('id','Código')
 				 ->display_as('situacao_id','Situação')
-				 ->display_as('id_suporte','Nome do Suporte')
+				 ->display_as('id_suporte','Técnico')
 				 ->display_as('data_solicitacao','Data de Solicitação')
 				 ->display_as('local_servico','Local do Serviço')
 				 ->display_as('patrimonio','Patrimônio')
@@ -284,6 +284,7 @@ class Home extends CI_Controller{
 
 
 	public function finalizarChamado($id = null){
+		/*INICIO*/
 
 		echo $id;
 	}	
@@ -310,7 +311,7 @@ class Home extends CI_Controller{
 	/*
 	*@method - data_solicitacao_callback 
 	*Esse método so podera ser utilizado caso o campo esteja como invisible
-	*@return retorna um array modificado
+	*@return retorna um array modificado   
 	*/
 
 	public function data_solicitacao_callback($postArray) {

@@ -25,11 +25,11 @@
 	require_once BASEPATH.'core/CodeIgniter.php';
 
 
-/*$CI =& get_instance();
+$CI =& get_instance();
 
 $CI->load->database();
 
-$query = $CI->db->get('usuarios')->result();
+/*$query = $CI->db->get('usuarios')->result();
 
 foreach ($query as  $value) {
 	print_r($value);
@@ -62,11 +62,40 @@ foreach ($query as  $value) {
 				if(!empty($row->action_urls)){
 					foreach($row->action_urls as $action_unique_id => $action_url){
 						$action = $actions[$action_unique_id];
-				?>
-						<a href="<?php echo $action_url; ?>" class="edit_button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button">
-							<span class="ui-button-icon-primary ui-icon <?php echo $action->css_class; ?> <?php echo $action_unique_id;?>"></span><span class="ui-button-text">&nbsp;<?php echo $action->label?></span>
-						</a>
-				<?php }
+
+				?>		<!--ACTIONS -->
+					<?php 
+					       /**
+					       *VERIFICA SE ESTÁ NO CONTROLLER MINHAS-SOLICITACOES PARA INSERIR AS REGRAS ABAIXO
+					       *SE ÑENHUM TÉCNICO ESTIVER ASSUMINDO O ATENDIMENTO , O USUÁRIUO NÃO VAI PODER FINALIZAR
+					       *O CHAMADO.
+					       */
+			        	   $controller  =  $CI->uri->segment(2);
+
+	   						if($controller == "minhas-solicitacoes"){
+				     			    $newUrl = explode('/', $action_url);
+									
+									$idChamado = $newUrl[6];
+
+									$CI->db->where('id', $idChamado);
+									$query = $CI->db->get('solicitacao')->result();
+
+									$idSuporte = $query[0]->id_suporte;
+						
+			         ?>
+					 <?php if(isset($idSuporte)){ ?>
+							<a href="<?php echo $action_url; ?>" class="edit_button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button">
+								<span class="ui-button-icon-primary ui-icon <?php echo $action->css_class; ?> <?php echo $action_unique_id;?>"></span><span class="ui-button-text">&nbsp;<?php echo $action->label?></span>
+							</a>
+					 <?php } ?>	
+
+					<?php }else{ /*LISTA NORMALMENTE*/ ?>			
+
+							<a href="<?php echo $action_url; ?>" class="edit_button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button">
+								<span class="ui-button-icon-primary ui-icon <?php echo $action->css_class; ?> <?php echo $action_unique_id;?>"></span><span class="ui-button-text">&nbsp;<?php echo $action->label?></span>
+							</a>
+							<!--END ACTIONS -->
+				<?php }}/*FECHA CHAVE DO ACTION*/
 				}
 				?>
 				<?php if(!$unset_read){?>
