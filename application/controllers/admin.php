@@ -25,7 +25,7 @@ class Admin extends CI_Controller{
 			$crud->set_crud_url_path(site_url('admin/atendimentos'));
 			$crud->set_theme('datatables');
 			$crud->set_table('solicitacao');
-			
+			$crud->where('situacao_id', 1);
 			$crud->set_relation('id_suporte','usuarios','nome');
 			$crud->set_relation('situacao_id','situacao','nome');	
 			$crud->set_relation('prioridade_id','prioridade','nome');	
@@ -110,6 +110,87 @@ class Admin extends CI_Controller{
 
 		}
 	}
+
+	public function historicoAtendimento(){
+
+
+		try{	
+			
+			$crud = new grocery_CRUD();
+			$crud->set_theme('datatables');
+			$crud->set_table('solicitacao');
+			$crud->where('situacao_id', 3);
+			$crud->set_relation('id_suporte','usuarios','nome');
+			$crud->set_relation('situacao_id','situacao','nome');	
+			$crud->set_relation('prioridade_id','prioridade','nome');	
+		
+			$crud->set_relation('sistemas_id','sistemas','nome');
+			$crud->set_relation('usuario_id','db_base.usuario_usu','usu_nomeusuario');
+			$crud->set_relation('local_servico','db_base.unidade_uni','uni_nomecompleto');
+			$crud->set_field_upload('anexo','assets/arquivos/anexo/solicitacao_sis');
+			$crud->columns('id','usuario_id','data_solicitacao','situacao_id','id_suporte','tipo');
+
+			$crud->callback_column('tipo',array($this,'tipo_callback'));
+			
+			$crud->display_as('id','Código')
+				 ->display_as('id_suporte','Nome do Suporte')
+				 ->display_as('situacao_id','Situação')
+				 ->display_as('data_solicitacao','Data de Solicitação')
+				 ->display_as('usuario_id','Nome do usuário')
+				 ->display_as('descricao_equi','Descrição do Equipamento')
+				 ->display_as('descricao_servico','Descrição do Serviço')
+				 ->display_as('local_servico','Local do Serviço')
+				 ->display_as('prioridade_id','Prioridade')
+				 ->display_as('sistemas_id','Nome do Sistema')
+				 ->display_as('patrimonio','Patrimônio');
+			
+			
+			$crud->callback_field('data_solicitacao',array($this,'formatData'));
+			$crud->field_type('id','readonly');
+			//$crud->unset_back_to_list();	 
+			$crud->unset_print();
+			$crud->unset_add();
+			$crud->unset_edit();
+			$crud->unset_delete();
+			
+			/*STATE*/
+			
+			$state = $crud->getState();
+    		$state_info = $crud->getStateInfo();
+    		if($state == 'read'){
+
+    			$idSolicitacao = $state_info->primary_key;
+    			$tipo = $this->solicitacao_model->getTipoSolicitacao($idSolicitacao);
+
+    			foreach ($tipo as $value) {
+        			if($value->tipo == 2){
+        				
+        				$crud->fields('id','descricao_servico','anexo','data_solicitacao','situacao_id','id_suporte','sistemas_id','usuario_id');        				
+
+        			}else{
+        				$crud->fields('id','local_servico','descricao_equi','descricao_servico','patrimonio','data_solicitacao','situacao_id','id_suporte','usuario_id');
+        			}
+        		}
+
+    		}
+    		/*END STATE*/    	
+    		
+    		/*END ACTIONS*/	
+			$crud->order_by('id','desc');
+			
+			$output = $crud->render();
+
+			$this->template->load('home','templates/view_historico',$output);
+
+		}catch(Exception $e){
+
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+
+		}
+	}	
+
+
+	
 
 	/*CADASTRAR USUÁRIOS*/
 
