@@ -63,6 +63,7 @@
 		<input id="field-data" type="hidden" name="data" value="<?php echo date('Y-m-d'); ?>" />
 		<input id="field-suporte_id" type="hidden" name="suporte_id" value="<?php echo $this->session->userdata('usuario_id'); ?>" />		
 		<input id="field-solicitacao_id" type="hidden" name="solicitacao_id" value="<?php echo $idSolicitacao; ?>" />
+		<input id="field-solicitacao_id" type="hidden" name="idmensagem" value="2" />
 		<center><button id="button-save"  class="btn btn-warning" style="width:300px;font-size:16px;"> Enviar  </button></center>
 
 	</form>

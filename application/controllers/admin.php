@@ -303,6 +303,7 @@ class Admin extends CI_Controller{
 	public function cadastrarMensagem(){
 		try{
 			$idSolicitacao =  $this->input->post('solicitacao_id');
+			$id 		   =  $this->input->post('suporte_id'); 	
 			$dados = array(
 
 				'mensagem' 		 => $this->input->post('mensagem'),
@@ -318,6 +319,121 @@ class Admin extends CI_Controller{
 				throw new Exception("Erro ao inserir mensagem");				
 
 			}
+			/*ENVIAR EMAIL*/
+			$mensagem = $this->input->post('idmensagem');
+			if($mensagem === 1){
+					//enviar mensagem do usuario para o técnico
+
+					$this->db->where('id', $id);
+					$this->db->select('email');
+					$emailSuporte = $this->db->get('usuarios')->result();
+
+					$mensagem = '
+							
+							<html>
+							
+							<body>
+								<div style="text-align: center;">
+									<p style="text-align: left;">
+										<span class="header" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);"><strong>MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
+										Para isso utilize a ferramenta de suporte <span class="Object" id="OBJ_PREFIX_DWT153_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portalsenac.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://</a>portalsenac.am.senac.br</span><br />
+										___<em>_</em>_____________________________________________________________________________________________</span></p>
+									<p style="text-align: left;">
+										<span style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">O Usu&aacute;rio - ('.$_SESSION['sess_nomeusuario'].') Fez uma atualização no chamado Nº.'.$idSolicitacao.'</span></p>
+									
+										<span class="footer" style="font-size: 0.8em; font-style: italic; font-family: Helvetica, Arial, sans-serif; background-color: rgb(253, 253, 253);"><strong>ESTA &Eacute; UMA MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
+										Voc&ecirc; recebeu este e-mail porque voc&ecirc; est&aacute; inscrito na lista de suporte da Equipe GIC.<br />
+										Para alterar suas configura&ccedil;&otilde;es por favor acess:&nbsp;<span class="Object" id="OBJ_PREFIX_DWT157_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portal.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://</a>portal.am.senac.br</span>.</span></p>
+								</div>
+								<p>
+									&nbsp;</p>
+							</body>
+						</html>	
+					
+					
+					
+					';				
+					
+					
+					$emailSuporte = $emailSuporte;
+					$assunto = $_SESSION['sess_nomeusuario']." - Atualização no chamado  - ".date('d-m-Y');
+					$config['charset'] = 'utf-8';
+
+					$config['wordwrap'] = TRUE;
+					$config['mailtype'] = 'html';
+					$this->email->initialize($config);
+
+					$this->email->from($emailSuporte, 'Sistema de Solicitação de Serviços');
+					$this->email->to($emailSuporte);				 
+								
+					$this->email->subject($assunto);
+					$this->email->message($mensagem);	
+					
+					$this->email->send();
+
+
+			}else{
+
+								$this->db->where('emus_codusuario',$id);
+		    	$user 	   =	$this->db->get('db_base.emailusuario_emus')->result();
+		    	$emailUser = 	$user[0]->emus_email;
+
+
+		    	//enviar mensagem do usuario para o técnico
+
+					$this->db->where('id', $id);
+					$this->db->select('email');
+					$emailSuporte = $this->db->get('usuarios')->result();
+
+					$mensagem = '
+							
+							<html>
+							
+							<body>
+								<div style="text-align: center;">
+									<p style="text-align: left;">
+										<span class="header" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);"><strong>MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
+										Para isso utilize a ferramenta de suporte <span class="Object" id="OBJ_PREFIX_DWT153_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portalsenac.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://portalsenac.am.senac.br</a></span><br />
+										___<em>_</em>_____________________________________________________________________________________________</span></p>
+									<p style="text-align: left;">
+										<span style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">O Técnico - ('.$_SESSION['sess_nomeusuario'].') Fez uma atualização no chamado Nº.'.$idSolicitacao.', favor verificar no Sistema de Solicitação GIC</span></p>
+									
+										<span class="footer" style="font-size: 0.8em; font-style: italic; font-family: Helvetica, Arial, sans-serif; background-color: rgb(253, 253, 253);"><strong>ESTA &Eacute; UMA MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
+										Voc&ecirc; recebeu este e-mail porque voc&ecirc; est&aacute; inscrito na lista de suporte da Equipe GIC.<br />
+										Para alterar suas configura&ccedil;&otilde;es por favor acess:&nbsp;<span class="Object" id="OBJ_PREFIX_DWT157_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portal.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://portal.am.senac.br</a></span>.</span></p>
+								</div>
+								<p>
+									&nbsp;</p>
+							</body>
+						</html>	
+					
+					
+					
+					';				
+					
+					
+					$emailUser = $emailUser;
+					$assunto = "Atualização no chamado  - ".date('d-m-Y');
+					$config['charset'] = 'utf-8';
+
+					$config['wordwrap'] = TRUE;
+					$config['mailtype'] = 'html';
+					$this->email->initialize($config);
+
+					$this->email->from($emailUser, 'Sistema de Solicitação de Serviços');
+					$this->email->to($emailUser);				 
+								
+					$this->email->subject($assunto);
+					$this->email->message($mensagem);	
+					
+					$this->email->send();
+
+				//suporte para o usuário
+			}
+
+			/*END ENVIAR E-MAIL*/
+
+
 
 			$msg = '<div class="alert alert-success">Mensagem enviada! <button type="button" class="close" data-dismiss="alert">×</button></div>';
 
