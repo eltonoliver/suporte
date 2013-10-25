@@ -81,9 +81,10 @@ foreach ($query as  $value) {
 									$query = $CI->db->get('solicitacao')->result();
 
 									$idSuporte = $query[0]->id_suporte;
+									$situacao_id = $query[0]->situacao_id;
 						
 			         ?>
-					 <?php if(isset($idSuporte)){ ?>
+					 <?php if(isset($idSuporte) && $situacao_id != 3){ ?>
 							<a href="<?php echo $action_url; ?>" class="edit_button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button">
 								<span class="ui-button-icon-primary ui-icon <?php echo $action->css_class; ?> <?php echo $action_unique_id;?>"></span><span class="ui-button-text">&nbsp;<?php echo $action->label?></span>
 							</a>
