@@ -537,6 +537,83 @@ class Admin extends CI_Controller{
 				
 			}
 
+
+			$this->db->where('id',$id);
+			$this->db->select('usuario_id');
+			$idUser = $this->db->get('solicitacao')->result();
+
+
+
+			$this->db->where('emus_codusuario',$idUser[0]->usuario_id);
+		    $user = $this->db->get('db_base.emailusuario_emus')->result();
+		    $emailUser = $user[0]->emus_email;
+
+
+		    		        $this->db->where('id', $this->session->userdata('suporte_id'));
+		    			    $this->db->select('nome');
+		    $suporte     =  $this->db->get('usuarios')->result();
+		    $nomeSuporte =  $suporte[0]->nome;
+
+
+
+					$mensagem = '
+							
+							<html>
+							
+							<body>
+								<div style="text-align: center;">
+									<p style="text-align: left;">
+										<span class="header" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);"><strong>MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
+										Para isso utilize a ferramenta de suporte <span class="Object" id="OBJ_PREFIX_DWT153_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portalsenac.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://</a>portalsenac.am.senac.br</span><br />
+										___<em>_</em>_____________________________________________________________________________________________</span></p>
+									<p style="text-align: left;">
+										<span style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">O Técnico - ('.$nomeSuporte.') Assumiu seu chamado.</span></p>
+									<ul style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">
+										<li style="text-align: left;">
+											Data : &nbsp;'.date('d/m/Y').'</li>
+											<li style="text-align: left;">
+											Nº : &nbsp;'.$id.'</li>
+									</ul>
+								
+										<span class="footer" style="font-size: 0.8em; font-style: italic; font-family: Helvetica, Arial, sans-serif; background-color: rgb(253, 253, 253);"><strong>ESTA &Eacute; UMA MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
+										Voc&ecirc; recebeu este e-mail porque voc&ecirc; est&aacute; inscrito na lista de suporte da Equipe GIC.<br />
+										Para alterar suas configura&ccedil;&otilde;es por favor acess:&nbsp;<span class="Object" id="OBJ_PREFIX_DWT157_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portal.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://portal.am.senac.br</a></span>.</span></p>
+								</div>
+								<p>
+									&nbsp;</p>
+							</body>
+						</html>			
+					
+					
+					
+					
+					';				
+					
+					
+					$email = $emailUser;
+					$assunto ="Chamado Nº ".$id;
+					$config['charset'] = 'utf-8';
+
+					$config['wordwrap'] = TRUE;
+					$config['mailtype'] = 'html';
+					$this->email->initialize($config);
+
+					$this->email->from($email, 'Sistema de Solicitação de Serviços');
+					$this->email->to($email);				 
+								
+					$this->email->subject($assunto);
+					$this->email->message($mensagem);	
+					
+					$this->email->send();
+
+
+
+
+
+
+
+
+
 			$msg = '
 				<script>
 					alert("Você assumiu este atendimento!");
