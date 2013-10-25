@@ -26,7 +26,7 @@
   				<button type="button" class="close" data-dismiss="alert">×</button>
 				  <center><h4> Aviso! </h4></center>
 				 
-				  	<p><a href="<?php echo base_url(); ?>home/minhas-solicitacoes/"><?php echo $msg; ?> caso já tenha sido atendido favor clicar em finalizar.</a> </p>
+				  	<p><a href="<?php echo base_url(); ?>home/minhas-solicitacoes/" style="color:#b94a6c"><?php echo $msg; ?> caso já tenha sido atendido favor clicar em finalizar.</a> </p>
 
 
 				 
