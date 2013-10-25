@@ -284,9 +284,90 @@ class Home extends CI_Controller{
 
 
 	public function finalizarChamado($id = null){
-		/*INICIO*/
+		try{
 
-		echo $id;
+			
+			if(!$this->solicitacao_model->update($id , array('situacao_id' => 3,'data_finalizacao' => date('Y-m-d') ))){
+
+				throw new Exception("Este chamado já foi finalizado!");						
+			}
+
+						   $this->db->where('id',$id); 	
+						   $this->db->select('id_suporte');
+			$suporteResp = $this->db->get('solicitacao')->result();
+
+			 			   $this->db->where('id',$suporteResp[0]->id_suporte); 	
+						   $this->db->select('email');
+			$emailSuporte = $this->db->get('usuarios')->result();
+
+			$mensagem = '
+							
+							<html>
+							
+							<body>
+								<div style="text-align: center;">
+									<p style="text-align: left;">
+										<span class="header" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);"><strong>MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
+										Para isso utilize a ferramenta de suporte <span class="Object" id="OBJ_PREFIX_DWT153_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portalsenac.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://portalsenac.am.senac.br</a></span><br />
+										___<em>_</em>_____________________________________________________________________________________________</span></p>
+									<p style="text-align: left;">
+										<span style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">O Usu&aacute;rio - ('.$_SESSION['sess_nomeusuario'].') Fechou um chamado.</span></p>
+									<ul style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">
+										<li style="text-align: left;">
+											Data de Finalização : &nbsp;'.date('d/m/Y').'</li>
+											<li style="text-align: left;">
+											Nº : &nbsp;'.$id.'</li>
+									</ul>
+									
+										<span class="footer" style="font-size: 0.8em; font-style: italic; font-family: Helvetica, Arial, sans-serif; background-color: rgb(253, 253, 253);"><strong>ESTA &Eacute; UMA MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
+										Voc&ecirc; recebeu este e-mail porque voc&ecirc; est&aacute; inscrito na lista de suporte da Equipe GIC.<br />
+										Para alterar suas configura&ccedil;&otilde;es por favor acess:&nbsp;<span class="Object" id="OBJ_PREFIX_DWT157_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portal.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://</a>portal.am.senac.br</span>.</span></p>
+								</div>
+								<p>
+									&nbsp;</p>
+							</body>
+						</html>				
+					
+					';				
+					
+					
+					$emailGic = $emailSuporte[0]->email;
+					$assunto = $_SESSION['sess_nomeusuario']." - Finalização do chamado - ".date('d-m-Y');
+					$config['charset'] = 'utf-8';
+
+					$config['wordwrap'] = TRUE;
+					$config['mailtype'] = 'html';
+					$this->email->initialize($config);
+
+					$this->email->from($emailGic, 'Sistema de Solicitação de Serviços');
+					$this->email->to($emailGic);				 
+								
+					$this->email->subject($assunto);
+					$this->email->message($mensagem);	
+					
+					$this->email->send();
+
+					$msg = '
+							<script>
+								alert("Atendimento Finalizado!");
+							</script>';
+ 			$this->session->set_flashdata('msg', $msg);
+
+			redirect('home/minhas-solicitacoes/');
+	
+
+		}catch(Exception $e){
+
+			
+			$msg = '<script> alert("'.$e->getMessage().'"); </script>';
+ 			$this->session->set_flashdata('msg', $msg);
+
+			redirect('home/minhas-solicitacoes/');
+
+
+		}
+
+		
 	}	
 
 	public function mensagem($id = null){		
