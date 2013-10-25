@@ -285,71 +285,7 @@ class Home extends CI_Controller{
 
 	public function finalizarChamado($id = null){
 
-		try{
-
-			if(!$this->solicitacao_model->update($id , array('situacao_id' => 3,'data_finalizacao' => date('Y-m-d') ))){
-
-				throw new Exception("Este chamado já foi finalizado!");						
-			}
-
-						   $this->db->where('id',$id); 	
-						   $this->db->select('id_suporte');
-			$suporteResp = $this->db->get('solicitacao')->result();
-
-			if(isset($suporteResp[0]->id_suporte)){
-
-					$mensagem = "Usuário : ".$_SESSION['sess_nomeusuario']." Finalizou o chamado de Nº ".$id." ás " .date('h:i:s');
-					$emailGic = "elton.oliveira@am.senac.br";
-					$assunto = $_SESSION['sess_nomeusuario']." - Finalização de chamado - ".date('d-m-Y');
-					$this->email->from($emailGic, 'Sistema de Solicitação de Serviços');
-					$this->email->to($emailGic);				 
-								
-					$this->email->subject($assunto);
-					$this->email->message($emailGic." - ".$mensagem);	
-					
-					$this->email->send();				
-
-			}
-
-
-						  $this->db->where('id',$id); 	
-						  $this->db->select('usuario_id');
-			$idUsuario =  $this->db->get('solicitacao')->result();
-
-
-				 		 $this->db->where('emus_codusuario', $idUsuario[0]->usuario_id);
-						 $this->db->select('emus_email');	
-				$email = $this->db->get('db_base.emailusuario_emus')->result();
-
-				if(isset($email[0]->emus_email)){
-
-					$mensagem = "Seu chamado foi finalizado com sucesso, chamado de número ".$id;
-					$email 	  = $email[0]->emus_email;
-					$assunto  = $_SESSION['sess_nomeusuario']." - Finalização de chamado - ".date('d-m-Y');
-					$this->email->from($email, 'Sistema de Solicitação de Serviços');
-					$this->email->to($email);								
-					$this->email->subject($assunto);
-					$this->email->message($emailGic." - ".$mensagem);	
-					
-					$this->email->send();
-
-				}				  
-
-			$msg = '
-				<script>
-					alert("Atendimento Finalizado!");
-				</script>';
- 			$this->session->set_flashdata('msg', $msg);
-
-			redirect('home/minhas-solicitacoes/');
-
-		}catch(Exception $e){
-
-			$msg = '<script> alert("'.$e->getMessage().'"); </script>';
- 			$this->session->set_flashdata('msg', $msg);
-
-			redirect('home/minhas-solicitacoes/');
-		}
+		echo $id;
 	}	
 
 	public function mensagem($id = null){		
@@ -464,7 +400,7 @@ class Home extends CI_Controller{
 					$this->email->to($emailGic);				 
 								
 					$this->email->subject($assunto);
-					$this->email->message($emailGic." - ".$mensagem);	
+					$this->email->message($mensagem);	
 					
 					$this->email->send();				
 
