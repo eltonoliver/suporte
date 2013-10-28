@@ -17,7 +17,6 @@ class Admin extends CI_Controller{
 
 	}
 
-
 	
 	public function atendimentos($id = null){
 
@@ -42,7 +41,7 @@ class Admin extends CI_Controller{
 
 			
 			$crud->display_as('id','Código')
-				 ->display_as('id_suporte','Nome do Suporte')
+				 ->display_as('id_suporte','Técnico')
 				 ->display_as('situacao_id','Situação')
 				 ->display_as('data_solicitacao','Data de Solicitação')
 				 ->display_as('usuario_id','Nome do usuário')
@@ -358,7 +357,7 @@ class Admin extends CI_Controller{
 									<td><strong><center>Local do Serviço</center></strong></td>
 									<td><strong><center>Data Solicitação</center></strong></td>
 									<td><strong><center>Data Finalização</center></strong></td>
-									<td><strong><center>Nome do Suporte</center></strong></td>
+									<td><strong><center>Técnico</center></strong></td>
 									<td><strong><center>Situação</center></strong></td>
 									
 								</tr>
@@ -411,7 +410,7 @@ class Admin extends CI_Controller{
 			$crud->callback_column('tipo',array($this,'tipo_callback'));
 			
 			$crud->display_as('id','Código')
-				 ->display_as('id_suporte','Nome do Suporte')
+				 ->display_as('id_suporte','Técnico')
 				 ->display_as('situacao_id','Situação')
 				 ->display_as('data_solicitacao','Data de Solicitação')
 				 ->display_as('usuario_id','Nome do usuário')
@@ -471,6 +470,7 @@ class Admin extends CI_Controller{
 
 
 	public function cadastrarMensagem(){
+		
 		try{
 			$idSolicitacao =  $this->input->post('solicitacao_id');
 			$id 		   =  $this->input->post('suporte_id'); 	
@@ -492,7 +492,7 @@ class Admin extends CI_Controller{
 			/*ENVIAR EMAIL*/
 			$mensagem = $this->input->post('idmensagem');
 			if($mensagem == 1){
-					//enviar mensagem do usuario para o técnico
+					//enviar mensagem do técnico para o usuário
 
 					$this->db->where('id', $this->session->userdata('suporte_id'));
 					$this->db->select('email');
@@ -518,9 +518,7 @@ class Admin extends CI_Controller{
 								<p>
 									&nbsp;</p>
 							</body>
-						</html>	
-					
-					
+						</html>				
 					
 					';				
 					
@@ -564,7 +562,7 @@ class Admin extends CI_Controller{
 										Para isso utilize a ferramenta de suporte <span class="Object" id="OBJ_PREFIX_DWT153_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portalsenac.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://portalsenac.am.senac.br</a></span><br />
 										___<em>_</em>_____________________________________________________________________________________________</span></p>
 									<p style="text-align: left;">
-										<span style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">O Usuário - ('.$this->session->userdata('login').') Fez uma atualização no chamado Nº.'.$idSolicitacao.', favor verificar no módulo de Solicitação GIC</span></p>
+										<span style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">O Técnico - ('.$this->session->userdata('login').') Fez uma atualização no chamado Nº.'.$idSolicitacao.', favor verificar no módulo de Solicitação GIC</span></p>
 									
 										<span class="footer" style="font-size: 0.8em; font-style: italic; font-family: Helvetica, Arial, sans-serif; background-color: rgb(253, 253, 253);"><strong>ESTA &Eacute; UMA MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
 										Voc&ecirc; recebeu este e-mail porque voc&ecirc; est&aacute; inscrito na lista de suporte da Equipe GIC.<br />
@@ -795,9 +793,6 @@ class Admin extends CI_Controller{
 		  $postArray['data'] = date('Y-m-d h:i:s');
 		  return $postArray;
 	}
-
-
-
  
 
 
