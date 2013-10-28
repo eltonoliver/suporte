@@ -50,6 +50,7 @@ class Home extends CI_Controller{
 	}
 	
 	public function home_sisten(){
+	
 		$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
 		$this->template->load('home','templates/view_home',$output);
 	}
@@ -61,7 +62,7 @@ class Home extends CI_Controller{
 			$crud = new grocery_CRUD();
 			$crud->set_crud_url_path(site_url('home/solicitacaoEquipamento'));			
 			$crud->set_theme('flexigrid');
-			$crud->set_table('solicitacao');	
+			$crud->set_table('solicitacao');
 			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
 					
 			
@@ -86,10 +87,11 @@ class Home extends CI_Controller{
 			$crud->required_fields('descricao_equi','descricao_servico');
 			
 			$crud->set_subject('Solicitação - Equipamentos');
-			$crud->callback_after_insert(array($this,'emailAbrirChamado'));
+			
 			$crud->unset_back_to_list();
 			/*Insere a data de solicitação automaticamente via callback*/
 			$crud->callback_before_insert(array($this,'data_solicitacao_callback'));
+			$crud->callback_after_insert(array($this,'emailAbrirChamado'));
 			$crud->set_lang_string('insert_success_message',
 									'Os dados foram armazenados no banco de dados
 										<script type="text/javascript">
@@ -122,7 +124,7 @@ class Home extends CI_Controller{
 	}
 
 	public function solicitacaoSistema($id = null){
-		try{
+				try{
 			/*set_relation('capodatabela','tabela_relacionada','chave estrangeira')*/
 			$crud = new grocery_CRUD();
 			$crud->set_crud_url_path(site_url('home/solicitacaoSistema'));			
@@ -270,7 +272,6 @@ class Home extends CI_Controller{
 			$crud->unset_edit();
 			$crud->unset_print();	
 			$crud->unset_delete(); 
-		//	$crud->order_by('situacao_id','desc');
 			$output = $crud->render();			
 			
 			$this->template->load('home','templates/view_solicitacoes',$output);
@@ -279,6 +280,7 @@ class Home extends CI_Controller{
 
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
+
 
 	}
 
@@ -368,31 +370,14 @@ class Home extends CI_Controller{
 		}
 
 		
-	}	
-
-	public function mensagem($id = null){		
-		try{
-			$crud = new grocery_CRUD();
-			$crud->set_table('forum');
-
-			$crud->set_crud_url_path(site_url('home/mensagem'));
-			$crud->set_theme('datatables');
-			 $crud->callback_after_insert(array($this, 'mensagem_insert'));
-			$output = $crud->render();
-			
-			$this->template->load('home','templates/view_mensagem',$output);
-
-		}catch(Exception $e){
-
-			show_error($e->getMessage().' --- '.$e->getTraceAsString());
-		}		
 	}
+	
 
 	
 	/*
 	*@method - data_solicitacao_callback 
 	*Esse método so podera ser utilizado caso o campo esteja como invisible
-	*@return retorna um array modificado   
+	*@return retorna um array modificado
 	*/
 
 	public function data_solicitacao_callback($postArray) {
@@ -406,6 +391,7 @@ class Home extends CI_Controller{
 		  $dados = array('data_finalizacao' => date('Y-m-d h:i:s') ); 
 		  return $this->solicitacao_model->update($primary_key,$dados);
 	}
+
 
 	public function mensagem_insert($postArray){		
 
@@ -422,7 +408,18 @@ class Home extends CI_Controller{
 	public function formatData($value, $primary_key = null){
 		return formatDataBrasil($value);
 	}
-	/*E-MAIL ENVIADO AO ABRIR CHAMADO DE USUÁRIO*/
+
+	/*DELETAR A IMAGEM AO EXCLUIR A SOLICITAÇÃO*/
+
+	function delete_image($primary_key){
+	
+		$image = $this->db->get_where('solicitacao', array('id'=>$primary_key), 1)->row_array();
+		$path = 'assets/arquivos/anexo/solicitacao_sis/';
+		if(unlink($path.$image['anexo']))
+			return true;
+		
+	}
+	
 	public function emailAbrirChamado($post_array,$primary_key){
 		try{
 					
@@ -431,43 +428,41 @@ class Home extends CI_Controller{
 					$mensagem = '
 							
 							<html>
-							
-							<body>
-								<div style="text-align: center;">
-									<p style="text-align: left;">
-										<span class="header" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);"><strong>MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
-										Para isso utilize a ferramenta de suporte <span class="Object" id="OBJ_PREFIX_DWT153_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portalsenac.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://</a>portalsenac.am.senac.br</span><br />
-										___<em>_</em>_____________________________________________________________________________________________</span></p>
-									<p style="text-align: left;">
-										<span style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">O Usu&aacute;rio - ('.$_SESSION['sess_nomeusuario'].') Abriu um chamado.</span></p>
-									<ul style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">
-										<li style="text-align: left;">
-											Data de abertua : &nbsp;'.date('d/m/Y').'</li>
+	
+								<body>
+									<div style="text-align: center;">
+										<p style="text-align: left;">
+											<span class="header" style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);"><strong>MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
+											Para isso utilize a ferramenta de suporte <span class="Object" id="OBJ_PREFIX_DWT153_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portalsenac.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://</a>portalsenac.am.senac.br</span><br />
+											___<em>_</em>_____________________________________________________________________________________________</span></p>
+										<p style="text-align: left;">
+											<span style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">O Usu&aacute;rio - ('.$_SESSION['sess_nomeusuario'].') Abriu um chamado.</span></p>
+										<ul style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253);">
 											<li style="text-align: left;">
-											Nº : &nbsp;'.$primary_key.'</li>
-									</ul>
-									<p style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253); text-align: left;">
+												Data de abertua : &nbsp;'.date('d/m/Y').'</li>
+												<li style="text-align: left;">
+												Nº : &nbsp;'.$primary_key.'</li>
+										</ul>
+										<p style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253); text-align: left;">
+											&nbsp;</p>
+										<hr style="width: 1883px; height: 1px; background-color: rgb(204, 204, 204); border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 16px;" />
+										<h1 style="font-family: \'Trebuchet MS\', Verdana, sans-serif; margin: 0px; font-size: 1.2em; background-color: rgb(253, 253, 253); text-align: left;">
+											<span class="Object" id="OBJ_PREFIX_DWT154_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a href="#" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">D</a>escri&ccedil;&atilde;o do Servi&ccedil;o:</span></h1>
+										<p style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253); text-align: left;">
+											'.strip_tags($post_array['descricao_servico']).'</p>
+										<hr style="width: 1883px; height: 1px; background-color: rgb(204, 204, 204); border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 16px;" />
+										<p style="text-align: left;">
+											<span class="footer" style="font-size: 0.8em; font-style: italic; font-family: Helvetica, Arial, sans-serif; background-color: rgb(253, 253, 253);"><strong>ESTA &Eacute; UMA MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
+											Voc&ecirc; recebeu este e-mail porque voc&ecirc; est&aacute; inscrito na lista de suporte da Equipe GIC.<br />
+											Para alterar suas configura&ccedil;&otilde;es por favor acess:&nbsp;<span class="Object" id="OBJ_PREFIX_DWT157_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portalsenac.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://portalsenac.am.senac.br</span></a>.</span></p>
+									</div>
+									<p>
 										&nbsp;</p>
-									<hr style="width: 1883px; height: 1px; background-color: rgb(204, 204, 204); border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 16px;" />
-									<h1 style="font-family: \'Trebuchet MS\', Verdana, sans-serif; margin: 0px; font-size: 1.2em; background-color: rgb(253, 253, 253); text-align: left;">
-										<span class="Object" id="OBJ_PREFIX_DWT154_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a href="#" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">D</a>escri&ccedil;&atilde;o do Servi&ccedil;o:</span></h1>
-									<p style="font-family: Helvetica, Arial, sans-serif; font-size: 16px; background-color: rgb(253, 253, 253); text-align: left;">
-										'.strip_tags($post_array['descricao_servico']).'</p>
-									<hr style="width: 1883px; height: 1px; background-color: rgb(204, 204, 204); border: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 16px;" />
-									<p style="text-align: left;">
-										<span class="footer" style="font-size: 0.8em; font-style: italic; font-family: Helvetica, Arial, sans-serif; background-color: rgb(253, 253, 253);"><strong>ESTA &Eacute; UMA MENSAGEM AUTOM&Aacute;TICA. POR FAVOR, N&Atilde;O RESPONDA ESSE E-MAIL.</strong><br />
-										Voc&ecirc; recebeu este e-mail porque voc&ecirc; est&aacute; inscrito na lista de suporte da Equipe GIC.<br />
-										Para alterar suas configura&ccedil;&otilde;es por favor acess:&nbsp;<span class="Object" id="OBJ_PREFIX_DWT157_com_zimbra_url" style="color: rgb(51, 102, 153); cursor: pointer;"><a class="external" href="http://portal.am.senac.br" style="color: rgb(51, 102, 153); text-decoration: none; cursor: pointer;" target="_blank">http://</a>portal.am.senac.br</span>.</span></p>
-								</div>
-								<p>
-									&nbsp;</p>
-							</body>
-						</html>			
+								</body>
+							</html>
 					
+					';		
 					
-					
-					
-					';				
 					
 					
 					$emailGic = "elton.oliveira@am.senac.br";
@@ -493,20 +488,10 @@ class Home extends CI_Controller{
 			
 		return $post_array;
 	}
-	/*DELETAR A IMAGEM AO EXCLUIR A SOLICITAÇÃO*/
-	function delete_image($primary_key){
-	
-		$image = $this->db->get_where('solicitacao', array('id'=>$primary_key), 1)->row_array();
-		$path = 'assets/arquivos/anexo/solicitacao_sis/';
-		if(unlink($path.$image['anexo']))
-			return true;
-		
-	}
-	/*METODO SAIR*/
 	public function sair(){
-		session_destroy();	
-		$this->session->sess_destroy();
-		redirect('http://portalsenac.am.senac.br');
+		//session_destroy();	
+		//$this->session->sess_destroy();
+		redirect('http://portalsenac.am.senac.br/portal_senac/control_base_vermodulos/control_base_vermodulos.php');
 
 	}
 
