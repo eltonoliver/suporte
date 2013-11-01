@@ -117,6 +117,9 @@
                             <a href="<?php echo base_url(); ?>admin/atendimentos">Atendimentos</a>
                           </li>
                           <li>
+                            <a href="<?php echo base_url(); ?>admin/meusAtendimentos">Meus Atendimentos</a>
+                          </li>
+                          <li>
                             <a href="<?php echo base_url(); ?>admin/historicoAtendimento">Histórico de Atendimentos</a>
                           </li>
                           <li>

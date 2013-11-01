@@ -13,7 +13,7 @@ echo $output;
 	$action     	=  $this->uri->rsegment(3);
 	$idSolicitacao  =  $this->uri->rsegment(4);
 
-	if($controller == 'atendimentos' && $action == 'read'){
+	if($controller == 'meusAtendimentos' && $action == 'read'){
 
 ?>
 <?php
